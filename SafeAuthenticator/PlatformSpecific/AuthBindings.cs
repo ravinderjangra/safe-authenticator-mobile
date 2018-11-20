@@ -23,12 +23,12 @@ namespace SafeAuthenticator.Native {
 #endif
 
     public bool IsMockBuild() {
-      var ret = IsMockBuildNative();
+      var ret = AuthIsMockNative();
       return ret;
     }
 
-    [DllImport(DllName, EntryPoint = "is_mock_build")]
-    private static extern bool IsMockBuildNative();
+    [DllImport(DllName, EntryPoint = "auth_is_mock")]
+    private static extern bool AuthIsMockNative();
 
     [DllImport(DllName, EntryPoint = "create_acc")]
     private static extern void CreateAccNative(
@@ -148,16 +148,16 @@ namespace SafeAuthenticator.Native {
 
     [DllImport(DllName, EntryPoint = "auth_decode_ipc_msg")]
     private static extern void AuthDecodeIpcMsgNative(
-      IntPtr auth,
-      [MarshalAs(UnmanagedType.LPStr)] string msg,
-      IntPtr userData,
-      UIntAuthReqCb oAuth,
-      UIntContainersReqCb oContainers,
-      UIntByteListCb oUnregistered,
-      UIntShareMDataReqMetadataResponseCb oShareMData,
-      FfiResultStringCb oErr);
+        IntPtr auth, 
+        [MarshalAs(UnmanagedType.LPStr)] string msg, 
+        IntPtr userData, 
+        UIntAuthReqCb oAuth, 
+        UIntContainersReqCb oContainers, 
+        UIntByteListCb oUnregistered,
+        UIntShareMDataReqMetadataResponseListCb oShareMData, 
+        FfiResultStringCb oErr);
 
-    public Task<string> EncodeShareMDataRespAsync(IntPtr auth, ref ShareMDataReq req, uint reqId, bool isGranted) {
+      public Task<string> EncodeShareMDataRespAsync(IntPtr auth, ref ShareMDataReq req, uint reqId, bool isGranted) {
       var reqNative = req.ToNative();
       var (ret, userData) = BindingUtils.PrepareTask<string>();
       EncodeShareMDataRespNative(auth, ref reqNative, reqId, isGranted, userData, DelegateOnFfiResultStringCb);
@@ -364,7 +364,7 @@ namespace SafeAuthenticator.Native {
 
     private delegate void UIntContainersReqCb(IntPtr userData, uint reqId, IntPtr req);
 
-    private delegate void UIntShareMDataReqMetadataResponseCb(IntPtr userData, uint reqId, IntPtr req, IntPtr metadata);
-  }
+    private delegate void UIntShareMDataReqMetadataResponseListCb(IntPtr userData, uint reqId, IntPtr req, IntPtr metadataPtr, UIntPtr metadataLen);
+    }
 }
 #endif

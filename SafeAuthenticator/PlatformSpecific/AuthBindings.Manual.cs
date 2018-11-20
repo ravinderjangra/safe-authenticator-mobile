@@ -81,21 +81,23 @@ namespace SafeAuthenticator.Native {
     private static readonly UIntContainersReqCb DelegateOnDecodeIpcReqContainersCb = OnDecodeIpcReqContainersCb;
 
 #if __IOS__
-    [MonoPInvokeCallback(typeof(UIntShareMDataReqMetadataResponseCb))]
+    [MonoPInvokeCallback(typeof(UIntShareMDataReqMetadataResponseListCb))]
 #endif
-    private static void OnDecodeIpcReqShareMDataCb(IntPtr userData, uint reqId, IntPtr authReq, IntPtr metadata) {
-      var tcs = BindingUtils.FromHandlePtr<TaskCompletionSource<IpcReq>>(userData);
-      var shareMdReq = new ShareMDataReq(Marshal.PtrToStructure<ShareMDataReqNative>(authReq));
-      var metadataResponse = Marshal.PtrToStructure<MetadataResponse>(metadata);
-      tcs.SetResult(new ShareMDataIpcReq(reqId, shareMdReq, metadataResponse));
+
+        private static void OnDecodeIpcReqShareMDataCb(IntPtr userData, uint reqId, IntPtr authReq, IntPtr metadataPtr, UIntPtr metadataLen)
+    {
+        var tcs = BindingUtils.FromHandlePtr<TaskCompletionSource<IpcReq>>(userData);
+        var shareMdReq = new ShareMDataReq(Marshal.PtrToStructure<ShareMDataReqNative>(authReq));
+        var metadataResponseList = BindingUtils.CopyToObjectList<MetadataResponse>(metadataPtr, (int)metadataLen);
+        tcs.SetResult(new ShareMDataIpcReq(reqId, shareMdReq, metadataResponseList));
     }
 
-    private static readonly UIntShareMDataReqMetadataResponseCb DelegateOnDecodeIpcReqShareMDataCb = OnDecodeIpcReqShareMDataCb;
+    private static readonly UIntShareMDataReqMetadataResponseListCb DelegateOnDecodeIpcReqShareMDataCb = OnDecodeIpcReqShareMDataCb;
 
 #if __IOS__
     [MonoPInvokeCallback(typeof(UIntByteListCb))]
 #endif
-    private static void OnDecodeIpcReqUnregisteredCb(IntPtr userData, uint reqId, IntPtr extraData, UIntPtr size) {
+        private static void OnDecodeIpcReqUnregisteredCb(IntPtr userData, uint reqId, IntPtr extraData, UIntPtr size) {
       var tcs = BindingUtils.FromHandlePtr<TaskCompletionSource<IpcReq>>(userData);
       tcs.SetResult(new UnregisteredIpcReq(reqId, extraData, (ulong)size));
     }

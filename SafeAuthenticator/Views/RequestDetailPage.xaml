@@ -137,11 +137,27 @@
                     <DataTemplate>
                         <ViewCell>
                             <Frame HasShadow="False" Margin="5" Padding="5" BackgroundColor="Transparent" >
-                                <StackLayout BackgroundColor="Transparent"> 
+                                <StackLayout BackgroundColor="Transparent">
                                     <Label>
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="Name: " FontAttributes="Bold"/>
+                                                <Span Text="{Binding MetaName}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Description: " FontAttributes="Bold"/>
+                                                <Span Text="{Binding MetaDescription}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="XOR Name: " FontAttributes="Bold"/>
                                                 <Span Text="{Binding Name, Converter={StaticResource ByteArraytoHexString}}" />
                                             </FormattedString>
                                         </Label.FormattedText>

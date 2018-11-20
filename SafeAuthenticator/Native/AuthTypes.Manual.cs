@@ -47,15 +47,15 @@ namespace SafeAuthenticator.Native {
   [PublicAPI]
   public class ShareMDataIpcReq : IpcReq
   {
-    public MetadataResponse MetadataResponse;
+    public List<MetadataResponse> MetadataResponse;
     public uint ReqId;
     public ShareMDataReq ShareMDataReq;
 
-    public ShareMDataIpcReq(uint reqId, ShareMDataReq shareMDataReq, MetadataResponse metadataResponse)
+    public ShareMDataIpcReq(uint reqId, ShareMDataReq shareMDataReq, List<MetadataResponse> metadataResponseList)
     {
       ReqId = reqId;
       ShareMDataReq = shareMDataReq;
-      MetadataResponse = metadataResponse;
+      MetadataResponse = metadataResponseList;
     }
   }
 
