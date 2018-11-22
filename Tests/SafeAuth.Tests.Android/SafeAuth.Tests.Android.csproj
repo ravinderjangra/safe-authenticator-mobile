@@ -82,7 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidNativeLibrary Include="lib\armeabi-v7a\libsafe_authenticator.so" />
-    <AndroidNativeLibrary Include="lib\x86\libsafe_authenticator.so" />
+    <AndroidNativeLibrary Include="lib\x86_64\libsafe_authenticator.so" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>

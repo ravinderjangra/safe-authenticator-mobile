@@ -90,7 +90,7 @@
       <Link>Assets\log.toml</Link>
     </AndroidAsset>
     <None Include="app.config" />
-    <AndroidNativeLibrary Include="lib\x86\libsafe_authenticator.so" />
+    <AndroidNativeLibrary Include="lib\x86_64\libsafe_authenticator.so" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
