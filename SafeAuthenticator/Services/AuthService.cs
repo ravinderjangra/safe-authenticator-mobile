@@ -242,30 +242,48 @@ namespace SafeAuthenticator.Services
 
         private async Task SendResponseBack(IpcReq req, bool isGranted)
         {
-            string encodedRsp;
-            var formattedRsp = string.Empty;
-            var requestType = req.GetType();
-            if (requestType == typeof(AuthIpcReq))
+            try
             {
-                var authReq = req as AuthIpcReq;
-                encodedRsp = await _authenticator.EncodeAuthRespAsync(authReq, isGranted);
-                formattedRsp = UrlFormat.Format(authReq?.AuthReq.App.Id, encodedRsp, false);
-            }
-            else if (requestType == typeof(ContainersIpcReq))
-            {
-                var containerReq = req as ContainersIpcReq;
-                encodedRsp = await _authenticator.EncodeContainersRespAsync(containerReq, isGranted);
-                formattedRsp = UrlFormat.Format(containerReq?.ContainersReq.App.Id, encodedRsp, false);
-            }
-            else if (requestType == typeof(ShareMDataIpcReq))
-            {
-                var mDataShareReq = req as ShareMDataIpcReq;
-                encodedRsp = await _authenticator.EncodeShareMdataRespAsync(mDataShareReq, isGranted);
-                formattedRsp = UrlFormat.Format(mDataShareReq?.ShareMDataReq.App.Id, encodedRsp, false);
-            }
+                string encodedRsp;
+                var formattedRsp = string.Empty;
+                var requestType = req.GetType();
+                if (requestType == typeof(AuthIpcReq))
+                {
+                    var authReq = req as AuthIpcReq;
+                    encodedRsp = await _authenticator.EncodeAuthRespAsync(authReq, isGranted);
+                    formattedRsp = UrlFormat.Format(authReq?.AuthReq.App.Id, encodedRsp, false);
+                }
+                else if (requestType == typeof(ContainersIpcReq))
+                {
+                    var containerReq = req as ContainersIpcReq;
+                    encodedRsp = await _authenticator.EncodeContainersRespAsync(containerReq, isGranted);
+                    formattedRsp = UrlFormat.Format(containerReq?.ContainersReq.App.Id, encodedRsp, false);
+                }
+                else if (requestType == typeof(ShareMDataIpcReq))
+                {
+                    var mDataShareReq = req as ShareMDataIpcReq;
+                    encodedRsp = await _authenticator.EncodeShareMdataRespAsync(mDataShareReq, isGranted);
+                    formattedRsp = UrlFormat.Format(mDataShareReq?.ShareMDataReq.App.Id, encodedRsp, false);
+                }
 
-            Debug.WriteLine($"Encoded Rsp to app: {formattedRsp}");
-            Device.BeginInvokeOnMainThread(() => { Device.OpenUri(new Uri(formattedRsp)); });
+                Debug.WriteLine($"Encoded Rsp to app: {formattedRsp}");
+                Device.BeginInvokeOnMainThread(() => { Device.OpenUri(new Uri(formattedRsp)); });
+            }
+            catch (FfiException ex)
+            {
+                if (ex.ErrorCode == -206)
+                {
+                    await Application.Current.MainPage.DisplayAlert("ShareMData Request", "Request Denied", "OK");
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
         }
 
         private async Task InitLoggingAsync()

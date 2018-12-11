@@ -1,6 +1,6 @@
 using System.Linq;
 
-var ANDROID_X86 = "android-x86";
+var ANDROID_X86_64 = "android-x86_64";
 var ANDROID_ARMEABI_V7A = "android-armeabiv7a";
 var LibTypes = new string[] {
     "-mock",
@@ -8,7 +8,7 @@ var LibTypes = new string[] {
 };
 
 var ANDROID_ARCHITECTURES = new string[] {
-    ANDROID_X86,
+    ANDROID_X86_64,
     ANDROID_ARMEABI_V7A
 };
 
@@ -30,7 +30,7 @@ enum Environment
 // --------------------------------------------------------------------------------
 // Native lib directory
 // --------------------------------------------------------------------------------
-var TAG = "6be5558";
+var TAG = "0.9.0";
 var nativeLibDirectory = Directory(string.Concat(System.IO.Path.GetTempPath(), "nativeauthlibs"));
 var androidLibDirectory = Directory("../SafeAuthenticator.Android/lib/");
 var iosLibDirectory = Directory("../SafeAuthenticator.iOS/Native References/");
@@ -139,16 +139,19 @@ Task("UnZip-Libs")
                     var platformOutputDirectory = new StringBuilder();
                     platformOutputDirectory.Append(outputDirectory);
 
-                    if (target.Equals(ANDROID_X86))
-                        platformOutputDirectory.Append("/x86");
+                    if (target.Equals(ANDROID_X86_64))
+                        platformOutputDirectory.Append("/x86_64");
                     else if (target.Equals(ANDROID_ARMEABI_V7A))
                         platformOutputDirectory.Append("/armeabi-v7a");
 
                     Unzip(zip, platformOutputDirectory.ToString());
-                    if (target.Equals(ANDROID_X86) || target.Equals(ANDROID_ARMEABI_V7A))
+                    if (target.Equals(ANDROID_X86_64) || target.Equals(ANDROID_ARMEABI_V7A))
                     {
-                        var aFilePath = platformOutputDirectory.ToString() + "/libsafe_authenticator.a";
-                        DeleteFile(aFilePath);
+                        var aFilePath = File(platformOutputDirectory.ToString() + "/libsafe_authenticator.a");
+                        if(FileExists(aFilePath))
+                        {
+                            DeleteFile(aFilePath);
+                        }                    
                     }
                 }
             }

@@ -25,9 +25,9 @@ namespace SafeAuthenticator.ViewModels
 
         public ObservableRangeCollection<MDataModel> MData { get; set; }
 
-        readonly AuthIpcReq _authReq;
-        readonly ShareMDataIpcReq _shareMdReq;
-        readonly ContainersIpcReq _containerReq;
+        private readonly AuthIpcReq _authReq;
+        private readonly ShareMDataIpcReq _shareMdReq;
+        private readonly ContainersIpcReq _containerReq;
 
         public RequestDetailViewModel(IpcReq req)
         {
@@ -94,19 +94,25 @@ namespace SafeAuthenticator.ViewModels
         {
             AppInfo = _shareMdReq.ShareMDataReq.App;
             MData = _shareMdReq.ShareMDataReq.MData.Select(
-                x => new MDataModel
-                {
-                    Access = new PermissionSetModel
-                    {
-                        Read = x.Perms.Read,
-                        Insert = x.Perms.Insert,
-                        Update = x.Perms.Update,
-                        Delete = x.Perms.Delete,
-                        ManagePermissions = x.Perms.ManagePermissions
-                    },
-                    Name = x.Name,
-                    TypeTag = x.TypeTag
-                }).ToObservableRangeCollection();
+              x => new MDataModel
+              {
+                  Access = new PermissionSetModel
+                  {
+                      Read = x.Perms.Read,
+                      Insert = x.Perms.Insert,
+                      Update = x.Perms.Update,
+                      Delete = x.Perms.Delete,
+                      ManagePermissions = x.Perms.ManagePermissions
+                  },
+                  Name = x.Name,
+                  TypeTag = x.TypeTag
+              }).ToObservableRangeCollection();
+
+            for (int i = 0; i < MData.Count(); i++)
+            {
+                MData[i].MetaName = _shareMdReq.MetadataResponse[i].Name;
+                MData[i].MetaDescription = _shareMdReq.MetadataResponse[i].Description;
+            }
         }
     }
 }

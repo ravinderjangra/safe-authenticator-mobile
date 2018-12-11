@@ -420,32 +420,32 @@ namespace SafeAuthenticator.Native
     [PublicAPI]
     public struct MDataKey
     {
-        public List<byte> Val;
+        public List<byte> Key;
 
         public MDataKey(MDataKeyNative native)
         {
-            Val = BindingUtils.CopyToByteList(native.ValPtr, (int)native.ValLen);
+            Key = BindingUtils.CopyToByteList(native.KeyPtr, (int)native.KeyLen);
         }
 
         public MDataKeyNative ToNative()
         {
             return new MDataKeyNative()
             {
-                ValPtr = BindingUtils.CopyFromByteList(Val),
-                ValLen = (UIntPtr)(Val?.Count ?? 0)
+                KeyPtr = BindingUtils.CopyFromByteList(Key),
+                KeyLen = (UIntPtr)(Key?.Count ?? 0)
             };
         }
     }
 
     public struct MDataKeyNative
     {
-        internal IntPtr ValPtr;
-        internal UIntPtr ValLen;
+        internal IntPtr KeyPtr;
+        internal UIntPtr KeyLen;
 
         // ReSharper disable once UnusedMember.Global
         public void Free()
         {
-            BindingUtils.FreeList(ref ValPtr, ref ValLen);
+            BindingUtils.FreeList(ref KeyPtr, ref KeyLen);
         }
     }
 

@@ -37,6 +37,10 @@ namespace SafeAuthenticator.Models
 
         public byte[] Name { get; set; }
 
+        public string MetaName { get; set; }
+
+        public string MetaDescription { get; set; }
+
         [PublicAPI]
         public PermissionSetModel Access { get; set; }
     }

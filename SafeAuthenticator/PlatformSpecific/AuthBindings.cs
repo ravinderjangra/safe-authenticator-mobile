@@ -25,12 +25,12 @@ namespace SafeAuthenticator.Native
 
         public bool IsMockBuild()
         {
-            var ret = IsMockBuildNative();
+            var ret = AuthIsMockNative();
             return ret;
         }
 
-        [DllImport(DllName, EntryPoint = "is_mock_build")]
-        private static extern bool IsMockBuildNative();
+        [DllImport(DllName, EntryPoint = "auth_is_mock")]
+        private static extern bool AuthIsMockNative();
 
         [DllImport(DllName, EntryPoint = "create_acc")]
         private static extern void CreateAccNative(
@@ -165,7 +165,7 @@ namespace SafeAuthenticator.Native
             UIntAuthReqCb oAuth,
             UIntContainersReqCb oContainers,
             UIntByteListCb oUnregistered,
-            UIntShareMDataReqMetadataResponseCb oShareMData,
+            UIntShareMDataReqMetadataResponseListCb oShareMData,
             FfiResultStringCb oErr);
 
         public Task<string> EncodeShareMDataRespAsync(IntPtr auth, ref ShareMDataReq req, uint reqId, bool isGranted)
@@ -392,7 +392,7 @@ namespace SafeAuthenticator.Native
 
         private delegate void UIntContainersReqCb(IntPtr userData, uint reqId, IntPtr req);
 
-        private delegate void UIntShareMDataReqMetadataResponseCb(IntPtr userData, uint reqId, IntPtr req, IntPtr metadata);
+        private delegate void UIntShareMDataReqMetadataResponseListCb(IntPtr userData, uint reqId, IntPtr req, IntPtr metadataPtr, UIntPtr metadataLen);
     }
 }
 #endif
