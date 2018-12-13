@@ -54,8 +54,16 @@
             </Label>
             <BoxView HeightRequest="1" BackgroundColor="Black" HorizontalOptions="FillAndExpand" />
 
-            <Label Text="Containers Permissions Requested" FontSize="Medium" IsVisible="{Binding IsMDataRequest, Converter={StaticResource InverseBoolean}}" />
-            <ListView x:Name="RequestListView" HasUnevenRows="True" ItemsSource="{Binding Containers}" BackgroundColor="Transparent" IsVisible="{Binding IsMDataRequest, Converter={StaticResource InverseBoolean}}" ItemTapped="Unselect_Item">
+            <Label Text="Containers Permissions Requested" FontSize="Medium" IsVisible="{Binding IsMDataRequest, Converter={StaticResource InverseBoolean}}">
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label"
+                             Binding="{Binding Source={x:Reference ContainersListView}, Path=ItemsSource.Count}" 
+                             Value="0">
+                        <Setter Property="Text" Value="No container permission requested" />
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+            <ListView x:Name="ContainersListView" HasUnevenRows="True" ItemsSource="{Binding Containers}" BackgroundColor="Transparent" IsVisible="{Binding IsMDataRequest, Converter={StaticResource InverseBoolean}}" ItemTapped="Unselect_Item">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
