@@ -7,57 +7,83 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:authViewModels="clr-namespace:SafeAuthenticator.ViewModels;assembly=SafeAuthenticator"
              xmlns:behaviour="clr-namespace:SafeAuthenticator.Controls.Behaviour"
+             xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
              d:DataContext="{d:DesignInstance Type=authViewModels:AppInfoViewModel, IsDesignTimeCreatable=False}"
-             x:Class="SafeAuthenticator.Views.AppInfoPage" Title="{Binding AppModelInfo.AppName}">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Revoke" Command="{Binding RevokeAppCommand}" />
-    </ContentPage.ToolbarItems>
+             x:Class="SafeAuthenticator.Views.AppInfoPage" 
+             Title="App Info"
+             Padding="16">
+
     <ContentPage.Content>
-        <StackLayout Margin="15,0,15,0">
-            <StackLayout Orientation="Horizontal" Padding="5,15,5,5">
-                <Label Text="Id" FontSize="18" TextColor="DarkGray" Margin="0,0,10,0" />
-                <Label Text="{Binding AppModelInfo.AppId}" FontSize="18" LineBreakMode="TailTruncation" />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal" Padding="5,5,5,5">
-                <Label Text="Vendor" FontSize="18" TextColor="DarkGray" Margin="0,0,10,0" />
-                <Label Text="{Binding AppModelInfo.AppVendor}" FontSize="18" LineBreakMode="TailTruncation" />
-            </StackLayout>
-            <StackLayout HeightRequest="1" BackgroundColor="DarkGray" />
-            <Label Text="Containers" FontSize="18" LineBreakMode="TailTruncation" Margin="5,5,5,0" TextColor="DarkGray" />
-            <ListView ItemsSource="{Binding AppModelInfo.Containers}"
-                      VerticalOptions="FillAndExpand"
-                      HasUnevenRows="True"
+        <StackLayout Spacing="10">
+
+            <Grid Padding="0" 
+            Margin="0,15,0,0"
+            VerticalOptions="CenterAndExpand" 
+            RowSpacing="10" 
+            ColumnSpacing="15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackLayout Spacing="0"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand">
+
+                    <Label Text="{Binding AppModelInfo.AppName}"
+                    TextColor="Black" 
+                    FontSize="Medium"
+                    FontAttributes="Bold"/>
+
+                    <Label Text="{Binding AppModelInfo.AppVendor}"
+                    TextColor="#8b8b8b" 
+                    FontSize="12"/>
+                </StackLayout>
+
+                <Button
+                Grid.RowSpan="2" 
+                Grid.Column="1" 
+                Text="REVOKE"
+                TextColor="#555555"    
+                VerticalOptions="Center"
+                HorizontalOptions="End"
+                HeightRequest="35"                    
+                BackgroundColor="#C2C1C1"
+                Command="{Binding RevokeAppCommand}"/>
+            </Grid>
+
+            <ListView HasUnevenRows="True" 
+                      SeparatorVisibility="None"
+                      ItemsSource="{Binding AppModelInfo.Containers}"
                       IsPullToRefreshEnabled="False"
-                      Margin="5,0,5,0"
                       CachingStrategy="RecycleElement">
+                
                 <ListView.Behaviors>
                     <behaviour:ListViewNoSelectionBehavior />
                 </ListView.Behaviors>
+
+                <ListView.Header>
+                    <Label Text="Permissions granted" 
+                           FontSize="14" 
+                           TextColor="Black"/>
+                </ListView.Header>
+
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <StackLayout VerticalOptions="FillAndExpand">
-                                <Label Text="{Binding ContainerName}" FontSize="16" LineBreakMode="TailTruncation"
-                                       Margin="0,10,0,10" />
-                                <Label Text="Read" FontSize="14" TextColor="LightGray"
-                                       IsVisible="{Binding Access.Read}" />
-                                <Label Text="Insert" FontSize="14" TextColor="LightGray"
-                                       IsVisible="{Binding Access.Insert}" />
-                                <Label Text="Update" FontSize="14" TextColor="LightGray"
-                                       IsVisible="{Binding Access.Update}" />
-                                <Label Text="Delete" FontSize="14" TextColor="LightGray"
-                                       IsVisible="{Binding Access.Delete}" />
-                                <Label Text="ManagePermissions" FontSize="14" TextColor="LightGray"
-                                       IsVisible="{Binding Access.ManagePermissions}" />
-                                <Label HeightRequest="0,0,0,10" />
-                            </StackLayout>
-                        </ViewCell>
+                        <controls:ContainerView/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
+
                 <ListView.Footer>
-                    <StackLayout Orientation="Horizontal" BackgroundColor="LightGray">
-                        <Label Margin="20" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
-                               Text="No Containers." TextColor="Gray"
+                    <StackLayout Orientation="Horizontal">
+                        <Label Margin="20" 
+                               VerticalOptions="CenterAndExpand" 
+                               HorizontalOptions="CenterAndExpand"
+                               Text="No containers."
                                IsVisible="{Binding AppModelInfo.Containers.Count, Converter={StaticResource IsCollectionEmptyConverter}}" />
                     </StackLayout>
                 </ListView.Footer>

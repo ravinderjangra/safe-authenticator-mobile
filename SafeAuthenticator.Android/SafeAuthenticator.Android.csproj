@@ -76,6 +76,8 @@
       <Link>Helpers\AuthBindings.Manual.cs</Link>
     </Compile>
     <Compile Include="Helpers\FileOps.cs" />
+    <Compile Include="Helpers\FontExtensions.cs" />
+    <Compile Include="Helpers\MaterialEntryRenderer.cs" />
     <Compile Include="Helpers\PaddedEntryRenderer.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -126,9 +128,6 @@
     <AndroidResource Include="Resources\drawable\show_pass.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\auth_start.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\hide_pass.png" />
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +137,9 @@
     <PackageReference Include="Acr.UserDialogs">
       <Version>7.0.1</Version>
     </PackageReference>
+    <PackageReference Include="CarouselView.FormsPlugin">
+      <Version>5.2.0</Version>
+    </PackageReference>
     <PackageReference Include="JetBrains.Annotations">
       <Version>11.1.0</Version>
     </PackageReference>
@@ -146,6 +148,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Bcl.Build">
       <Version>1.0.21</Version>
+    </PackageReference>
+    <PackageReference Include="Rg.Plugins.Popup">
+      <Version>1.1.5.180</Version>
     </PackageReference>
     <PackageReference Include="Splat">
       <Version>2.0.0</Version>
@@ -208,6 +213,17 @@
   <Import Project="$(MSBuildThisFileDirectory)..\CodeStyles.targets" />
   <ItemGroup>
     <Content Include="..\stylecop.json" Link="stylecop.json" />
+    <AndroidResource Include="Resources\drawable\authLogo.png" />
+    <AndroidResource Include="Resources\drawable\HidePasswordIcon.png" />
+    <AndroidResource Include="Resources\drawable\music.png" />
+    <AndroidResource Include="Resources\drawable\ShowPasswordIcon.png" />
+    <AndroidResource Include="Resources\drawable\documents.png" />
+    <AndroidResource Include="Resources\drawable\downloads.png" />
+    <AndroidResource Include="Resources\drawable\pictures.png" />
+    <AndroidResource Include="Resources\drawable\publicNames.png" />
+    <AndroidResource Include="Resources\drawable\videos.png" />
+    <AndroidResource Include="Resources\drawable\publicContainer.png" />
+    <AndroidResource Include="Resources\drawable\settingsIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="CheckNativeLibs" BeforeTargets="PrepareForBuild">

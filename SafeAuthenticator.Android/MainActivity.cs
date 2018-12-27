@@ -8,6 +8,7 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Widget;
+using CarouselView.FormsPlugin.Android;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Services;
 using Xamarin.Forms;
@@ -89,11 +90,13 @@ namespace SafeAuthenticator.Droid
             AndroidEnvironment.UnhandledExceptionRaiser += AndroidEnvOnUnhandledExceptionRaiser;
 
             base.OnCreate(bundle);
+            Rg.Plugins.Popup.Popup.Init(this, bundle);
             Forms.Init(this, bundle);
 
             DisplayCrashReport();
 
             UserDialogs.Init(this);
+            CarouselViewRenderer.Init();
             LoadApplication(new App());
 
             if (Intent?.Data != null)

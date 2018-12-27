@@ -1,52 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+<Application xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:converters="clr-namespace:SafeAuthenticator.Controls.Converters"
              x:Class="SafeAuthenticator.App">
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="Primary">#5593d7</Color>
-            <Color x:Key="PrimaryDark">#5593d7</Color>
-            <Color x:Key="Accent">#96d1ff</Color>
-            <Color x:Key="LightBackgroundColor">#FAFAFA</Color>
-            <Color x:Key="DarkBackgroundColor">#C0C0C0</Color>
-            <Color x:Key="MediumGrayTextColor">#4d4d4d</Color>
-            <Color x:Key="LightTextColor">#999999</Color>
+            <Color x:Key="Primary">#0074e4</Color>
+            <Color x:Key="LightBackgroundColor">#ffffff</Color>
+            <Color x:Key="DarkBackgroundColor">#000000</Color>
 
-            <Color x:Key="ButtonNormal">#5791cd</Color>
-            <Color x:Key="ButtonDisabled">#8aa5c0</Color>
+            <!--<Color x:Key="PrimaryDark">#5593d7</Color>
+            <Color x:Key="Accent">#96d1ff</Color>
+            <Color x:Key="MediumGrayTextColor">#4d4d4d</Color>
+            <Color x:Key="LightTextColor">#999999</Color>-->
+
+            <Color x:Key="ButtonNormal">#0074e4</Color>
+            <Color x:Key="ButtonDisabled">#c2c1c1</Color>
             <OnPlatform x:TypeArguments="system:Double" x:Key="ButtonHeightRequest">
                 <OnPlatform.Platforms>
                     <On Platform="iOS" Value="45" />
-                    <On Platform="Android" Value="50" />
+                    <On Platform="Android" Value="40" />
                 </OnPlatform.Platforms>
             </OnPlatform>
-            <OnPlatform x:TypeArguments="system:Double" x:Key="EntryHeightRequest">
+            <!--<OnPlatform x:TypeArguments="system:Double" x:Key="EntryHeightRequest">
                 <OnPlatform.Platforms>
                     <On Platform="iOS" Value="40" />
-                    <On Platform="Android" Value="45" />
+                    <On Platform="Android" Value="56" />
                 </OnPlatform.Platforms>
-            </OnPlatform>
+            </OnPlatform>-->
 
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
-                <Setter Property="BarTextColor" Value="White" />
+                <Setter Property="BarTextColor" Value="{StaticResource  LightBackgroundColor}" />
             </Style>
             <Style TargetType="Button">
                 <Setter Property="HeightRequest" Value="{StaticResource ButtonHeightRequest}" />
-                <Setter Property="FontSize" Value="20" />
-                <Setter Property="BackgroundColor" Value="{StaticResource ButtonNormal}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="BackgroundColor" Value="{StaticResource ButtonNormal}"/>
+                <Setter Property="TextColor" Value="{StaticResource LightBackgroundColor}"/>
+                <Setter Property="CornerRadius" Value="5"/>
                 <Style.Triggers>
                     <Trigger TargetType="Button" Property="IsEnabled" Value="False">
                         <Setter Property="BackgroundColor" Value="{StaticResource ButtonDisabled}" />
                     </Trigger>
                 </Style.Triggers>
             </Style>
-            <Style TargetType="Entry">
+            <!--<Style TargetType="Entry">
                 <Setter Property="HeightRequest" Value="{StaticResource EntryHeightRequest}" />
-                <Setter Property="FontSize" Value="20" />
-                <Setter Property="HorizontalTextAlignment" Value="Center" />
+            </Style>-->
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource DarkBackgroundColor}" />
             </Style>
             <OnPlatform x:TypeArguments="x:Int32" x:Key="PasswordEntryImageColumn">
                 <OnPlatform.Platforms>
@@ -86,6 +91,10 @@
             </OnPlatform>
             <converters:IsCollectionEmptyConverter x:Key="IsCollectionEmptyConverter" />
             <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+            <converters:FormatTitleConverter x:Key="FormatTitleConverter" />
+            <converters:FormatContainerNameConverter x:Key="FormatContainerNameConverter" />
+            <converters:ContainerNameToImageConverter x:Key="ContainerNameToImageConverter" />
+            <converters:FormatContainerPermissionsConverter x:Key="FormatContainerPermissionsConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

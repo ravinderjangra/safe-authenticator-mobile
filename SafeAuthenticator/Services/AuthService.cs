@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
+using Rg.Plugins.Popup.Extensions;
+using Rg.Plugins.Popup.Services;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
@@ -224,7 +226,12 @@ namespace SafeAuthenticator.Services
                             var args = e as ResponseEventArgs;
                             await SendResponseBack(decodeResult, args.Response);
                         };
-                        await Application.Current.MainPage.Navigation.PushModalAsync(requestPage);
+
+                        // await Application.Current.MainPage.Navigation.PushModalAsync(requestPage);
+
+                        await Application.Current.MainPage.Navigation.PushPopupAsync(requestPage);
+
+                        // PopupNavigation.Instance.PushAsync(requestPage);
                     }
                 }
             }

@@ -12,6 +12,7 @@ namespace SafeAuthenticator.Helpers
     internal static class Utilities
     {
         private static ZxcvbnEstimator _estimator;
+        private static Random _random;
 
         internal static ObservableRangeCollection<T> ToObservableRangeCollection<T>(this IEnumerable<T> source)
         {
@@ -68,6 +69,27 @@ namespace SafeAuthenticator.Helpers
                     return error.Message;
             }
         }
+
+        internal static string GetRandomColor()
+        {
+            if (_random == null)
+                _random = new Random();
+            var colors = new List<string>
+            {
+                "#EF5350",
+                "#7E57C2",
+                "#29B6F6",
+                "#66BB6A",
+                "#FFEE58",
+                "#FF7043",
+                "#42A5F5",
+                "#EC407A",
+                "#AB47BC",
+                "#26A69A"
+            };
+            return colors[_random.Next(colors.Count)];
+        }
+
         #region Encoding Extensions
 
         public static string ToUtfString(this List<byte> input)

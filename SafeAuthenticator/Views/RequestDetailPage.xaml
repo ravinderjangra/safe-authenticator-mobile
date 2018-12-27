@@ -1,17 +1,90 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SafeAuthenticator.Views.RequestDetailPage" 
-    xmlns:converters="clr-namespace:SafeAuthenticator.Controls.Converters">
-    <ContentPage.Resources>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SafeAuthenticator.Views.RequestDetailPage" 
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                 xmlns:controls="clr-namespace:SafeAuthenticator.Controls">
+
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+
+    <StackLayout VerticalOptions="Center" 
+                 Padding="20,0"
+                 HorizontalOptions="FillAndExpand"
+                 HeightRequest="300">
+
+        <Frame Padding="0" 
+               BackgroundColor="White">
+
+            <StackLayout Spacing="10" 
+                         Padding="16">
+                <Label Text = "{Binding AppName, StringFormat=' {0:F0} is requesting access'}"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center"
+                       WidthRequest="200"
+                       FontSize="14"/>
+                
+                <Label IsVisible="{Binding AppContainerRequest}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="App Container Requested: "/>
+                            <Span Text="{Binding AppContainerRequest}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <ListView x:Name="ContainersListView" 
+                          HasUnevenRows="True" 
+                          SeparatorVisibility="None"
+                          ItemsSource="{Binding Containers}"
+                          ItemTapped="Unselect_Item">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <controls:ContainerView/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <StackLayout Orientation="Horizontal">
+
+                    <Button Text="DENY" 
+                            HorizontalOptions="EndAndExpand"
+                            BackgroundColor="Transparent"
+                            TextColor="{StaticResource Primary}"
+                            Clicked="Send_Response"
+                            x:Name="DenyButton"/>
+
+                    <Button Text="ALLOW" 
+                            HorizontalOptions="End" 
+                            BackgroundColor="{StaticResource Primary}"
+                            Clicked="Send_Response"
+                            x:Name="AllowButton"/>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</pages:PopupPage>
+
+<!--<ContentPage.Resources>
         <ResourceDictionary>
             <converters:InverseBooleanConverter x:Key="InverseBoolean" />
             <converters:ByteArraytoHexStringConverter x:Key="ByteArraytoHexString" />
         </ResourceDictionary>
-    </ContentPage.Resources>
+    </ContentPage.Resources>-->
 
-    <ContentPage.Content>
-        <StackLayout Padding="10,20,10,10">
+<!--<StackLayout Padding="10,20,10,10">
             <Label Text="{Binding PageTitle}" 
                    FontSize="Large" 
                    HorizontalTextAlignment="Center"/>
@@ -215,6 +288,4 @@
                 <Button x:Name="DenyButton" Text="Deny" Clicked="Send_Response" HorizontalOptions="FillAndExpand" HeightRequest="50" TextColor="White" />
                 <Button x:Name="AllowButton" Text="Allow" Clicked="Send_Response" HorizontalOptions="FillAndExpand" HeightRequest="50" TextColor="White" />
             </StackLayout>
-        </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+        </StackLayout>-->

@@ -18,6 +18,8 @@ namespace SafeAuthenticator.Models
 
         public string AppId => AppInfo.Id;
 
+        public string CircleColor { get; set; }
+
         [PublicAPI]
         public ObservableRangeCollection<ContainerPermissionsModel> Containers { get; }
 
@@ -37,6 +39,7 @@ namespace SafeAuthenticator.Models
                     },
                     ContainerName = x.ContName
                 }).ToObservableRangeCollection();
+            CircleColor = Utilities.GetRandomColor();
         }
 
         public int CompareTo(object obj)
