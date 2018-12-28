@@ -3,22 +3,30 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
+             xmlns:behaviour="clr-namespace:SafeAuthenticator.Controls.Behaviour"
              x:Class="SafeAuthenticator.Views.HomePage"
              Title="SAFE Authenticator">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Settings" Icon="settingsIcon" />
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
-        <StackLayout Spacing="10"
-                     Padding="16">
+        <StackLayout Spacing="10">
             
-            <ListView x:Name="AccountsView" 
+            <ListView x:Name="AccountsListView" 
                       HasUnevenRows="True" 
                       SeparatorVisibility="None"
                       ItemsSource="{Binding Apps}"
                       RefreshCommand="{Binding RefreshAccountsCommand}"
                       IsPullToRefreshEnabled="True"
                       IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
-                      controls:ItemTappedAttached.Command="{Binding AccountSelectedCommand}"
+                      SelectedItem="{Binding SelectedRegisteredAccount}"
                       CachingStrategy="RecycleElement">
+
+                <ListView.Behaviors>
+                    <behaviour:ListViewNoSelectionBehavior />
+                </ListView.Behaviors>
 
                 <ListView.ItemTemplate>
                     <DataTemplate>

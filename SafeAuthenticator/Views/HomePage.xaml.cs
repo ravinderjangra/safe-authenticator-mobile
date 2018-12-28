@@ -38,6 +38,7 @@ namespace SafeAuthenticator.Views
                     Navigation.InsertPageBefore(new LoginPage(), this);
                     await Navigation.PopAsync();
                 });
+
             MessagingCenter.Subscribe<HomeViewModel, RegisteredAppModel>(
                 this,
                 MessengerConstants.NavAppInfoPage,
@@ -48,9 +49,7 @@ namespace SafeAuthenticator.Views
                         MessageCenterUnsubscribe();
                         return;
                     }
-
                     await Navigation.PushAsync(new AppInfoPage(appInfo));
-                    AccountsView.SelectedItem = null;
                 });
         }
 

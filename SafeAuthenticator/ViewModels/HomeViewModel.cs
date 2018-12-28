@@ -22,6 +22,25 @@ namespace SafeAuthenticator.ViewModels
             private set => SetProperty(ref _isRefreshing, value);
         }
 
+        private RegisteredAppModel _selectedRegisteredAccount;
+
+        public RegisteredAppModel SelectedRegisteredAccount
+        {
+            get
+            {
+                return _selectedRegisteredAccount;
+            }
+
+            set
+            {
+                if (value != null)
+                {
+                    OnAccountSelected(value);
+                    SetProperty(ref _selectedRegisteredAccount, value);
+                }
+            }
+        }
+
         public ICommand RefreshAccountsCommand { get; }
 
         public ICommand AccountSelectedCommand { get; }

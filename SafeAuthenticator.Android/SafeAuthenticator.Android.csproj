@@ -214,9 +214,7 @@
   <ItemGroup>
     <Content Include="..\stylecop.json" Link="stylecop.json" />
     <AndroidResource Include="Resources\drawable\authLogo.png" />
-    <AndroidResource Include="Resources\drawable\HidePasswordIcon.png" />
     <AndroidResource Include="Resources\drawable\music.png" />
-    <AndroidResource Include="Resources\drawable\ShowPasswordIcon.png" />
     <AndroidResource Include="Resources\drawable\documents.png" />
     <AndroidResource Include="Resources\drawable\downloads.png" />
     <AndroidResource Include="Resources\drawable\pictures.png" />
