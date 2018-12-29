@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels"
+             x:Class="SafeAuthenticator.Views.SettingsPage"
+             BackgroundColor="White"
+             Title="Settings">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="defaultstyle" TargetType="Label" >
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+            <Style x:Key="titlestyle" TargetType="Label">
+                <Setter Property="TextColor" Value="#0074E4" />
+                <Setter Property="FontSize" Value="Medium" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.BindingContext>
+        <viewModels:SettingsViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="15">
+
+                <StackLayout Padding="16, 10" Spacing="15">
+                    <Label Text="Account"  Style="{StaticResource titlestyle}" />
+                    <StackLayout>
+                        <Label Text="Account Status" Style="{StaticResource defaultstyle}"   />
+                        <Label Text="430/1000" TextColor="#C1C1C1"  />
+                    </StackLayout>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Auto Reconnect"
+                               Style="{StaticResource defaultstyle}"
+                               VerticalOptions="Center"/>
+                        <Switch  OnColor="#0074E4"
+                                 Grid.Column="1"
+                                 HorizontalOptions="End"
+                                 VerticalOptions="Center"/>
+                    </Grid>
+                </StackLayout>
+
+                <BoxView HeightRequest="0.5" Color="DarkGray" />
+
+                <StackLayout Padding="16, 0" Spacing="15">
+
+                    <Label Text="Help" Style="{StaticResource titlestyle}" />
+                    <Label Text="FAQs" Style="{StaticResource defaultstyle}" />
+                    <Label Text="Privacy statement" Style="{StaticResource defaultstyle}" />
+                    <StackLayout>
+                        <Label Text="Application version" Style="{StaticResource defaultstyle}" />
+                        <Label Text="0.1.0" TextColor="#C1C1C1" HorizontalOptions="Start" />
+                    </StackLayout>
+                </StackLayout>
+
+                <BoxView HeightRequest="0.5" Color="DarkGray" />
+
+                <Label Text="Logout" FontSize="Medium" TextColor="#D94A3D" Margin="16, 0"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -52,11 +52,24 @@ namespace SafeAuthenticator.Views
                     await Navigation.PushAsync(new AppInfoPage(appInfo));
                     AccountsView.SelectedItem = null;
                 });
+            MessagingCenter.Subscribe<HomeViewModel>(
+                this,
+                MessengerConstants.NavSettingsPage,
+                async sender =>
+                {
+                    if (!App.IsPageValid(this))
+                    {
+                        MessageCenterUnsubscribe();
+                        return;
+                    }
+                    await Navigation.PushAsync(new SettingsPage());
+                });
         }
 
         public void MessageCenterUnsubscribe()
         {
             MessagingCenter.Unsubscribe<HomeViewModel>(this, MessengerConstants.NavLoginPage);
+            MessagingCenter.Unsubscribe<HomeViewModel>(this, MessengerConstants.NavSettingsPage);
             MessagingCenter.Unsubscribe<HomeViewModel, RegisteredAppModel>(this, MessengerConstants.NavAppInfoPage);
         }
     }

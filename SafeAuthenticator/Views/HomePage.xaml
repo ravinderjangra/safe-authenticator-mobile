@@ -6,10 +6,15 @@
              x:Class="SafeAuthenticator.Views.HomePage"
              Title="SAFE Authenticator">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="settingsIcon"
+                     Command="{Binding SettingsCommand}"/>
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
         <StackLayout Spacing="10"
                      Padding="16">
-            
+
             <ListView x:Name="AccountsView" 
                       HasUnevenRows="True" 
                       SeparatorVisibility="None"
