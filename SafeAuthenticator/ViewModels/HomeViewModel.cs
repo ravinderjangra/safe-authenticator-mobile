@@ -13,8 +13,6 @@ namespace SafeAuthenticator.ViewModels
 
         public ICommand RefreshAccountsCommand { get; }
 
-        public ICommand AccountSelectedCommand { get; }
-
         public ICommand SettingsCommand { get; }
 
         public ObservableRangeCollection<RegisteredAppModel> Apps { get; set; }

@@ -8,15 +8,15 @@
     
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style x:Key="defaultstyle" TargetType="Label" >
+            <Style x:Key="DefaultStyle" TargetType="Label" >
                 <Setter Property="TextColor" Value="Black" />
                 <Setter Property="FontSize" Value="14" />
             </Style>
-            <Style x:Key="titlestyle" TargetType="Label">
+            <Style x:Key="TitleStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="#0074E4" />
                 <Setter Property="FontSize" Value="Medium" />
             </Style>
-            <Style x:Key="logoutstyle" TargetType="Label">
+            <Style x:Key="LogoutStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="#D94A3D" />
                 <Setter Property="FontSize" Value="Medium" />
             </Style>
@@ -34,10 +34,10 @@
                 <StackLayout Padding="16, 10" 
                              Spacing="15">
                     <Label Text="Account"
-                           Style="{StaticResource titlestyle}" />
+                           Style="{StaticResource TitleStyle}" />
                     <StackLayout>
                         <Label Text="Account Status" 
-                               Style="{StaticResource defaultstyle}"   />
+                               Style="{StaticResource DefaultStyle}"   />
                         <Label Text="{Binding AccountStorageInfo}" 
                                TextColor="#C1C1C1"
                                LineBreakMode="TailTruncation"/>
@@ -52,7 +52,7 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Label Text="Auto Reconnect"
-                               Style="{StaticResource defaultstyle}"
+                               Style="{StaticResource DefaultStyle}"
                                VerticalOptions="Center"/>
                         <Switch  OnColor="#0074E4"
                                  Grid.Column="1"
@@ -67,14 +67,14 @@
                 <StackLayout Padding="16, 0" Spacing="15">
 
                     <Label Text="Help" 
-                           Style="{StaticResource titlestyle}" />
+                           Style="{StaticResource TitleStyle}" />
                     <Label Text="FAQs" 
-                           Style="{StaticResource defaultstyle}" />
+                           Style="{StaticResource DefaultStyle}" />
                     <Label Text="Privacy statement" 
-                           Style="{StaticResource defaultstyle}" />
+                           Style="{StaticResource DefaultStyle}" />
                     <StackLayout>
                         <Label Text="Application version" 
-                               Style="{StaticResource defaultstyle}" />
+                               Style="{StaticResource DefaultStyle}" />
                         <Label Text="0.1.0" 
                                TextColor="#C1C1C1" 
                                HorizontalOptions="Start" />
@@ -86,7 +86,7 @@
 
                 <StackLayout Padding="16, 0" Spacing="15">
                     <Label Text="Logout" 
-                           Style="{StaticResource logoutstyle}" >
+                           Style="{StaticResource LogoutStyle}" >
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1" 
                                                   Command="{Binding LogoutCommand}"/>

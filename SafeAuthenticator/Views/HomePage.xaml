@@ -10,14 +10,14 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="settingsIcon"
                      Command="{Binding SettingsCommand}"
-                     Text="Settings"/>
+                     Text="Settings" />
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Content>
         <StackLayout Spacing="10">
 
-            <ListView x:Name="AccountsListView" 
-                      HasUnevenRows="True" 
+            <ListView x:Name="AccountsListView"
+                      HasUnevenRows="True"
                       SeparatorVisibility="None"
                       ItemsSource="{Binding Apps}"
                       RefreshCommand="{Binding RefreshAccountsCommand}"
@@ -32,14 +32,14 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <controls:RegisteredAppView/>
+                        <controls:RegisteredAppView />
                     </DataTemplate>
                 </ListView.ItemTemplate>
 
                 <ListView.Footer>
                     <StackLayout Orientation="Horizontal">
-                        <Label Margin="20" 
-                               VerticalOptions="CenterAndExpand" 
+                        <Label Margin="20"
+                               VerticalOptions="CenterAndExpand"
                                HorizontalOptions="CenterAndExpand"
                                Text="No apps have been authorised yet."
                                IsVisible="{Binding Apps.Count, Converter={StaticResource IsCollectionEmptyConverter}}" />
@@ -49,4 +49,3 @@
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
-    

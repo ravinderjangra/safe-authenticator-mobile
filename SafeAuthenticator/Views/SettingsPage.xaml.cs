@@ -1,5 +1,4 @@
-﻿using System;
-using SafeAuthenticator.Helpers;
+﻿using SafeAuthenticator.Helpers;
 using SafeAuthenticator.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

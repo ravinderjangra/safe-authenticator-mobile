@@ -7,21 +7,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:behaviour="clr-namespace:SafeAuthenticator.Controls.Behaviour"
              xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
-             d:DataContext="{d:DesignInstance Type=authViewModels:AppInfoViewModel, IsDesignTimeCreatable=False}"
-             x:Class="SafeAuthenticator.Views.AppInfoPage" 
+             xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels;assembly=SafeAuthenticator"
+             d:DataContext="{d:DesignInstance Type=viewModels:AppInfoViewModel, IsDesignTimeCreatable=False}"
+             x:Class="SafeAuthenticator.Views.AppInfoPage"
              Title="App Info"
              Padding="16">
 
     <ContentPage.Content>
         <StackLayout Spacing="20">
 
-            <Grid RowSpacing="10" 
-                  VerticalOptions="CenterAndExpand" 
+            <Grid RowSpacing="10"
+                  VerticalOptions="CenterAndExpand"
                   ColumnSpacing="15">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
 
                 <StackLayout Spacing="0"
@@ -29,26 +30,26 @@
                              HorizontalOptions="FillAndExpand">
 
                     <Label Text="{Binding AppModelInfo.AppName}"
-                           TextColor="Black" 
+                           TextColor="Black"
                            FontSize="Medium"
-                           FontAttributes="Bold"/>
+                           FontAttributes="Bold" />
 
                     <Label Text="{Binding AppModelInfo.AppVendor}"
-                           TextColor="#8b8b8b" 
-                           FontSize="12"/>
+                           TextColor="#8b8b8b"
+                           FontSize="12" />
                 </StackLayout>
 
-                <Button Grid.Column="1" 
+                <Button Grid.Column="1"
                         Text="REVOKE"
-                        TextColor="#666666"    
+                        TextColor="#666666"
                         HorizontalOptions="End"
-                        HeightRequest="35"                    
+                        HeightRequest="35"
                         BackgroundColor="#DDDDDD"
                         Padding="0"
-                        Command="{Binding RevokeAppCommand}"/>
+                        Command="{Binding RevokeAppCommand}" />
             </Grid>
 
-            <ListView HasUnevenRows="True" 
+            <ListView HasUnevenRows="True"
                       Margin="0, 10"
                       SeparatorVisibility="None"
                       ItemsSource="{Binding AppModelInfo.Containers}"
@@ -60,22 +61,22 @@
                 </ListView.Behaviors>
 
                 <ListView.Header>
-                    <Label Text="Permissions granted" 
+                    <Label Text="Permissions granted"
                            FontAttributes="Bold"
-                           FontSize="14" 
-                           TextColor="Black"/>
+                           FontSize="14"
+                           TextColor="Black" />
                 </ListView.Header>
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <controls:ContainerView/>
+                        <controls:ContainerView />
                     </DataTemplate>
                 </ListView.ItemTemplate>
 
                 <ListView.Footer>
                     <StackLayout Orientation="Horizontal">
-                        <Label Margin="20" 
-                               VerticalOptions="CenterAndExpand" 
+                        <Label Margin="20"
+                               VerticalOptions="CenterAndExpand"
                                HorizontalOptions="CenterAndExpand"
                                Text="No containers."
                                IsVisible="{Binding AppModelInfo.Containers.Count, Converter={StaticResource IsCollectionEmptyConverter}}" />

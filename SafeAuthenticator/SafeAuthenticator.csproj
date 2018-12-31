@@ -37,9 +37,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Controls\AuthorisationPopup.xaml.cs">
-      <DependentUpon>AuthorisationPopup.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>

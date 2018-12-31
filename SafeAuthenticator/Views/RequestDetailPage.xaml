@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
-                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SafeAuthenticator.Views.RequestDetailPage" 
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 x:Class="SafeAuthenticator.Views.RequestDetailPage"
                  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
                  xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
                  xmlns:behaviour="clr-namespace:SafeAuthenticator.Controls.Behaviour"
@@ -17,32 +18,32 @@
             DurationOut="300"
             EasingIn="SinOut"
             EasingOut="SinIn"
-            HasBackgroundAnimation="True"/>
+            HasBackgroundAnimation="True" />
     </pages:PopupPage.Animation>
 
-    <StackLayout VerticalOptions="Center" 
+    <StackLayout VerticalOptions="Center"
                  Padding="20,0"
                  HorizontalOptions="FillAndExpand"
                  HeightRequest="300">
 
-        <Frame Padding="0" 
+        <Frame Padding="0"
                BackgroundColor="White">
 
-            <StackLayout Spacing="10" 
+            <StackLayout Spacing="10"
                          Padding="16">
                 <Label HorizontalTextAlignment="Center"
                        HorizontalOptions="Center"
                        Margin="20, 0">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="{Binding AppName}" FontSize="14"/>
-                            <Span Text="\nis requesting access" FontSize="12"/>
+                            <Span Text="{Binding AppName}" FontSize="14" />
+                            <Span Text="\nis requesting access" FontSize="12" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
 
-                <ListView x:Name="ContainersListView" 
-                          HasUnevenRows="True" 
+                <ListView x:Name="ContainersListView"
+                          HasUnevenRows="True"
                           SeparatorVisibility="None"
                           ItemsSource="{Binding Containers}">
 
@@ -52,26 +53,27 @@
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <controls:ContainerView/>
+                            <controls:ContainerView />
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
 
                 <StackLayout Orientation="Horizontal">
 
-                    <Button Text="DENY" 
+                    <Button Text="DENY"
                             HorizontalOptions="EndAndExpand"
                             BackgroundColor="Transparent"
                             TextColor="{StaticResource Primary}"
                             Clicked="Send_Response"
-                            x:Name="DenyButton"/>
+                            x:Name="DenyButton" />
 
-                    <Button Text="ALLOW" 
-                            HorizontalOptions="End" 
+                    <Button Text="ALLOW"
+                            HorizontalOptions="End"
                             BackgroundColor="{StaticResource Primary}"
                             Clicked="Send_Response"
-                            x:Name="AllowButton"/>
+                            x:Name="AllowButton" />
                 </StackLayout>
+
             </StackLayout>
         </Frame>
     </StackLayout>

@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels;assembly=SafeAuthenticator"
@@ -11,52 +12,53 @@
     <ContentPage.BindingContext>
         <viewModels:LoginViewModel />
     </ContentPage.BindingContext>
+
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
                 <StackLayout VerticalOptions="CenterAndExpand"
                              Spacing="10">
-                    <Image Source="authLogo.png" 
+                    <Image Source="authLogo"
                            Aspect="AspectFit"
-                           HeightRequest="86" 
-                           WidthRequest="86" 
-                           HorizontalOptions="Center"/>
+                           HeightRequest="86"
+                           WidthRequest="86"
+                           HorizontalOptions="Center" />
 
                     <Label Text="SAFE Authenticator"
                            HorizontalOptions="Center"
                            FontAttributes="Bold"
-                           Margin="0,10,0,0"/>
+                           Margin="0,10,0,0" />
 
-                    <controls:MaterialEntry Placeholder="Account Secret" 
+                    <controls:MaterialEntry Placeholder="Account Secret"
                                             IsPassword="True"
                                             ErrorDisplay="None"
                                             Margin="0,30,0,0"
                                             FontSize="14"
-                                            Text="{Binding AcctSecret}"/>
+                                            Text="{Binding AccountSecret}" />
 
-                    <controls:MaterialEntry Placeholder="Account Password" 
+                    <controls:MaterialEntry Placeholder="Account Password"
                                             IsPassword="True"
                                             ErrorDisplay="None"
                                             FontSize="14"
-                                            Text="{Binding AcctPassword}"/>
-                    
+                                            Text="{Binding AccountPassword}" />
+
                     <Button Text="LOGIN"
                             Command="{Binding LoginCommand}"
-                            Margin="0,15,0,0"/>
+                            Margin="0,15,0,0" />
 
                     <Button Text="CREATE ACCOUNT"
                             HorizontalOptions="Center"
                             BackgroundColor="Transparent"
                             TextColor="{StaticResource Primary}"
-                            Command="{Binding CreateAcctCommand}"
-                            Margin="0,10,0,0"/>
-                    
+                            Command="{Binding CreateAccountCommand}"
+                            Margin="0,10,0,0" />
+
                 </StackLayout>
 
                 <Label Text="Need any help?"
                        HorizontalOptions="Center"
                        VerticalOptions="End"
-                       FontAttributes="Bold"/>
+                       FontAttributes="Bold" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

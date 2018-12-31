@@ -15,7 +15,7 @@ namespace SafeAuthenticator.ViewModels
 
         public string AppId => AppInfo.Id;
 
-        public bool AppContainerRequest { get; set; }
+        public bool IsAppContainerRequest { get; set; }
 
         public string PageTitle { get; set; }
 
@@ -86,7 +86,7 @@ namespace SafeAuthenticator.ViewModels
                 });
             }
 
-            AppContainerRequest = _authReq.AuthReq.AppContainer;
+            IsAppContainerRequest = _authReq.AuthReq.AppContainer;
         }
 
         private void ProcessContainerRequestData()
