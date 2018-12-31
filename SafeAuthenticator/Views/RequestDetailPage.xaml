@@ -6,7 +6,8 @@
                  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
                  xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
                  xmlns:behaviour="clr-namespace:SafeAuthenticator.Controls.Behaviour"
-                 xmlns:controls="clr-namespace:SafeAuthenticator.Controls">
+                 xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
+                 xmlns:converters="clr-namespace:SafeAuthenticator.Controls.Converters;assembly=SafeAuthenticator">
 
     <pages:PopupPage.Animation>
         <animations:ScaleAnimation
@@ -20,6 +21,12 @@
             EasingOut="SinIn"
             HasBackgroundAnimation="True" />
     </pages:PopupPage.Animation>
+
+    <pages:PopupPage.Resources>
+        <ResourceDictionary>
+            <converters:InverseBooleanConverter x:Key="InverseBoolean" />
+        </ResourceDictionary>
+    </pages:PopupPage.Resources>
 
     <StackLayout VerticalOptions="Center"
                  Padding="20,0"
@@ -37,14 +44,15 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="{Binding AppName}" FontSize="14" />
-                            <Span Text="\nis requesting access" FontSize="12" />
+                            <Span Text="&#10;is requesting access" FontSize="12" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
 
-                <ListView x:Name="ContainersListView"
+                <ListView x:Name="ContainerPermissionListView"
                           HasUnevenRows="True"
                           SeparatorVisibility="None"
+                          IsVisible="{Binding IsMDataRequest, Converter={StaticResource InverseBoolean}}" 
                           ItemsSource="{Binding Containers}">
 
                     <ListView.Behaviors>
@@ -53,7 +61,24 @@
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <controls:ContainerView />
+                            <controls:ContainerPermissionViewCell />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <ListView x:Name="MDataPermissionListView"
+                          HasUnevenRows="True"
+                          SeparatorVisibility="None"
+                          IsVisible="{Binding IsMDataRequest}"
+                          ItemsSource="{Binding MData}">
+
+                    <ListView.Behaviors>
+                        <behaviour:ListViewNoSelectionBehavior />
+                    </ListView.Behaviors>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <controls:ContainerPermissionViewCell />
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

@@ -4,9 +4,9 @@ using Xamarin.Forms.Xaml;
 namespace SafeAuthenticator.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class RegisteredAppView : ViewCell
+    public partial class MDataPermissionViewCell : ViewCell
     {
-        public RegisteredAppView()
+        public MDataPermissionViewCell()
         {
             InitializeComponent();
         }

@@ -34,7 +34,7 @@
                                        FontSize="16" />
 
                                 <Label
-                                    Text="In order to create an account, you need to achieve trust level 1 on the SAFE netowrk forum." />
+                                    Text="In order to create an account, you need to achieve trust level 1 on the SAFE network forum." />
 
                                 <Button Text="CLAIM INVITATION TOKEN"
                                         Margin="0,20,0,0"

@@ -69,7 +69,7 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <controls:ContainerView />
+                        <controls:ContainerPermissionViewCell />
                     </DataTemplate>
                 </ListView.ItemTemplate>
 

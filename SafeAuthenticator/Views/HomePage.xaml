@@ -32,7 +32,7 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <controls:RegisteredAppView />
+                        <controls:RegisteredAppViewCell />
                     </DataTemplate>
                 </ListView.ItemTemplate>
 

@@ -2,9 +2,10 @@
 
 <ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-          x:Class="SafeAuthenticator.Controls.ContainerView">
+          x:Class="SafeAuthenticator.Controls.ContainerPermissionViewCell">
 
     <Grid Padding="0"
+
           Margin="0,15,0,0"
           VerticalOptions="CenterAndExpand"
           RowSpacing="10"
