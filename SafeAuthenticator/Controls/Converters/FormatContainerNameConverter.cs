@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Globalization;
-using System.Linq;
 using Xamarin.Forms;
 
 namespace SafeAuthenticator.Controls.Converters
 {
-    class FormatContainerNameConverter : IValueConverter
+    internal class FormatContainerNameConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            // if (targetType != typeof(string))
-            // {
-            //    throw new InvalidOperationException("The target must be a string");
-            // }
             var text = value.ToString();
             return text == "App Container" ?
                 "App's own container" :

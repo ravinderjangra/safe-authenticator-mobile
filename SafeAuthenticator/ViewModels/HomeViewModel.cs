@@ -56,6 +56,11 @@ namespace SafeAuthenticator.ViewModels
             MessagingCenter.Subscribe<AppInfoViewModel>(this, MessengerConstants.RefreshHomePage, (sender) => { OnRefreshAccounts(); });
         }
 
+        ~HomeViewModel()
+        {
+            MessagingCenter.Unsubscribe<AppInfoViewModel>(this, MessengerConstants.RefreshHomePage);
+        }
+
         private void OnAccountSelected(RegisteredAppModel appModelInfo)
         {
             MessagingCenter.Send(this, MessengerConstants.NavAppInfoPage, appModelInfo);

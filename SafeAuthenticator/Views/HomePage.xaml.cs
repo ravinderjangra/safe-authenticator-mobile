@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using SafeAuthenticator.Helpers;
+﻿using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.ViewModels;
 using Xamarin.Forms;
@@ -36,6 +35,7 @@ namespace SafeAuthenticator.Views
                     }
                     await Navigation.PushAsync(new AppInfoPage(appInfo));
                 });
+
             MessagingCenter.Subscribe<HomeViewModel>(
                 this,
                 MessengerConstants.NavSettingsPage,

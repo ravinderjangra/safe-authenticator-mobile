@@ -83,7 +83,6 @@ namespace SafeAuthenticator.Helpers
                 "#7E57C2",
                 "#29B6F6",
                 "#66BB6A",
-                "#FFEE58",
                 "#FF7043",
                 "#42A5F5",
                 "#EC407A",
