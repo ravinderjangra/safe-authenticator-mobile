@@ -73,7 +73,7 @@ namespace SafeAuthenticator.ViewModels
         {
             try
             {
-                using (UserDialogs.Instance.Loading("Loading"))
+                using (UserDialogs.Instance.Loading("Logging in"))
                 {
                     await Authenticator.LoginAsync(AccountSecret, AccountPassword);
                     MessagingCenter.Send(this, MessengerConstants.NavHomePage);

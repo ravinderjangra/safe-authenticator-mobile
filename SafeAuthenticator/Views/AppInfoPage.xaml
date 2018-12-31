@@ -41,11 +41,12 @@
 
                 <Button Grid.Column="1"
                         Text="REVOKE"
-                        TextColor="#666666"
+                        TextColor="#1C1C1C"
                         HorizontalOptions="End"
-                        HeightRequest="35"
-                        BackgroundColor="#DDDDDD"
-                        Padding="0"
+                        HeightRequest="40"
+                        BackgroundColor="#D6D7D7"
+                        FontAttributes="Bold"
+                        Padding="5"
                         Command="{Binding RevokeAppCommand}" />
             </Grid>
 
