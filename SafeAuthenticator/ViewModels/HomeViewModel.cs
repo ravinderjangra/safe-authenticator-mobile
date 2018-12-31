@@ -47,7 +47,6 @@ namespace SafeAuthenticator.ViewModels
             IsRefreshing = false;
             Apps = new ObservableRangeCollection<RegisteredAppModel>();
             RefreshAccountsCommand = new Command(OnRefreshAccounts);
-            AccountSelectedCommand = new Command<RegisteredAppModel>(OnAccountSelected);
             SettingsCommand = new Command(OnSettings);
             Device.BeginInvokeOnMainThread(OnRefreshAccounts);
 
