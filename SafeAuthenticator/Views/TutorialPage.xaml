@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+             x:Class="SafeAuthenticator.Views.TutorialPage"
+             NavigationPage.HasNavigationBar="False"
+             Padding="20">
+
+    <ContentPage.Content>
+        <StackLayout Spacing="10">
+            <cv:CarouselViewControl 
+                ShowArrows="False"
+                ShowIndicators="False" 
+                IsSwipeEnabled="False"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                PositionSelectedCommand="{Binding CarouselPageChangeCommand}"
+                Position="{Binding CarouselPagePosition}">
+                <cv:CarouselViewControl.ItemsSource>
+                    <x:Array Type="{x:Type View}">
+
+                        <!-- Tutorial Page1 -->
+                        <StackLayout Spacing="16">
+                            <StackLayout HorizontalOptions="CenterAndExpand" 
+                                         VerticalOptions="CenterAndExpand">
+                                <Image Source="authLogo" 
+                                       HeightRequest="120"
+                                       WidthRequest="120"/>
+
+                                <Label Text="What is the SAFE Authenticator?"
+                                       FontAttributes="Bold"
+                                       HorizontalTextAlignment="Start"
+                                       Margin="0,100,0,0"/>
+
+                                <Label Text="The Authenticator enables users to securely authenticate themselves onto the SAFE Network and protects network login credentials from apps"
+                                       HorizontalTextAlignment="Start"/>
+                            </StackLayout>
+                        </StackLayout>
+
+
+                        <!-- Tutorial Page2 -->
+                        <StackLayout Spacing="20">
+                            <StackLayout HorizontalOptions="CenterAndExpand" 
+                                         VerticalOptions="CenterAndExpand">
+
+                                <Label Text="Manage authorisation requests"
+                                       FontAttributes="Bold"
+                                       HorizontalTextAlignment="Center"/>
+
+                                <Label Text="Review and grant permissions to apps" 
+                                       HorizontalTextAlignment="Center"/>
+
+                                <Image Source="tutorial1"/>
+                            </StackLayout>
+                        </StackLayout>
+
+
+                        <!-- Tutorial Page3 -->
+                        <StackLayout Spacing="20">
+                            <StackLayout HorizontalOptions="CenterAndExpand" 
+                                         VerticalOptions="CenterAndExpand">
+
+                                <Label Text="Manage authorisation requests"
+                                       FontAttributes="Bold"
+                                       HorizontalTextAlignment="Center"/>
+
+                                <Label Text="View all authorised apps and their permissions" 
+                                       HorizontalTextAlignment="Center"/>
+
+                                <Image Source="tutorial2"/>
+                            </StackLayout>
+                        </StackLayout>
+
+                    </x:Array>
+                </cv:CarouselViewControl.ItemsSource>
+            </cv:CarouselViewControl>
+
+            <StackLayout>
+                <Button Text="CONTINUE"/>
+
+                <Button Text="SKIP" 
+                        HorizontalOptions="Center"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource Primary}"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
