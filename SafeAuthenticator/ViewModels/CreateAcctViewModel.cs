@@ -131,6 +131,8 @@ namespace SafeAuthenticator.ViewModels
 
         public ICommand ClipboardPasteCommand { get; }
 
+        public ICommand OpenForumLinkCommand { get; }
+
         public CreateAcctViewModel()
         {
             Authenticator.PropertyChanged += (s, e) =>
@@ -148,6 +150,10 @@ namespace SafeAuthenticator.ViewModels
             CarouselPageChangeCommand = new Command(CarouselPageChange);
             ClaimTokenCommand = new Command(OnClaimToken);
             ClipboardPasteCommand = new Command(async () => await OnClipboardPasteAsync());
+            OpenForumLinkCommand = new Command(() =>
+            {
+                Device.OpenUri(new Uri(@"https://safenetforum.org/t/trust-level-1-basic-user-requirements/15200"));
+            });
         }
 
         private bool CanExecute()
