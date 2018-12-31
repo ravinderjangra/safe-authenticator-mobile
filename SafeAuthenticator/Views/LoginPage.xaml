@@ -45,6 +45,7 @@
                             Margin="0,15,0,0"/>
 
                     <Button Text="CREATE ACCOUNT"
+                            HorizontalOptions="Center"
                             BackgroundColor="Transparent"
                             TextColor="{StaticResource Primary}"
                             Command="{Binding CreateAcctCommand}"

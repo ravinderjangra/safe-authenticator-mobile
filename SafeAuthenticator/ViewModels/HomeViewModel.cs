@@ -9,10 +9,7 @@ namespace SafeAuthenticator.ViewModels
 {
     internal class HomeViewModel : BaseViewModel
     {
-        private string _accountStorageInfo;
         private bool _isRefreshing;
-
-        public ICommand LogoutCommand { get; }
 
         public ICommand RefreshAccountsCommand { get; }
 
@@ -28,10 +25,23 @@ namespace SafeAuthenticator.ViewModels
             private set => SetProperty(ref _isRefreshing, value);
         }
 
-        public string AccountStorageInfo
+        private RegisteredAppModel _selectedRegisteredAccount;
+
+        public RegisteredAppModel SelectedRegisteredAccount
         {
-            get => _accountStorageInfo;
-            set => SetProperty(ref _accountStorageInfo, value);
+            get
+            {
+                return _selectedRegisteredAccount;
+            }
+
+            set
+            {
+                if (value != null)
+                {
+                    OnAccountSelected(value);
+                    SetProperty(ref _selectedRegisteredAccount, value);
+                }
+            }
         }
 
         public HomeViewModel()
@@ -40,7 +50,6 @@ namespace SafeAuthenticator.ViewModels
             Apps = new ObservableRangeCollection<RegisteredAppModel>();
             RefreshAccountsCommand = new Command(OnRefreshAccounts);
             AccountSelectedCommand = new Command<RegisteredAppModel>(OnAccountSelected);
-            LogoutCommand = new Command(OnLogout);
             SettingsCommand = new Command(OnSettings);
             Device.BeginInvokeOnMainThread(OnRefreshAccounts);
 
@@ -50,12 +59,6 @@ namespace SafeAuthenticator.ViewModels
         private void OnAccountSelected(RegisteredAppModel appModelInfo)
         {
             MessagingCenter.Send(this, MessengerConstants.NavAppInfoPage, appModelInfo);
-        }
-
-        private async void OnLogout()
-        {
-            await Authenticator.LogoutAsync();
-            MessagingCenter.Send(this, MessengerConstants.NavLoginPage);
         }
 
         private void OnSettings()
@@ -71,8 +74,6 @@ namespace SafeAuthenticator.ViewModels
                 var registeredApps = await Authenticator.GetRegisteredAppsAsync();
                 Apps.ReplaceRange(registeredApps);
                 Apps.Sort();
-                var acctStorageTuple = await Authenticator.GetAccountInfoAsync();
-                AccountStorageInfo = $"{acctStorageTuple.Item1} / {acctStorageTuple.Item2}";
             }
             catch (FfiException ex)
             {

@@ -24,6 +24,8 @@ namespace SafeAuthenticator.Services
         private readonly SemaphoreSlim _reconnectSemaphore = new SemaphoreSlim(1, 1);
         private Authenticator _authenticator;
         private bool _isLogInitialised;
+        private string _secret;
+        private string _password;
 
         public string AuthenticationReq { get; set; }
 
@@ -50,7 +52,11 @@ namespace SafeAuthenticator.Services
 
             set
             {
-                if (value == false)
+                if (value == true)
+                {
+                    StoreCredentials();
+                }
+                else
                 {
                     CredentialCache.Delete();
                 }
@@ -129,10 +135,8 @@ namespace SafeAuthenticator.Services
         internal async Task CreateAccountAsync(string location, string password, string invitation)
         {
             _authenticator = await Authenticator.CreateAccountAsync(location, password, invitation);
-            if (AuthReconnect)
-            {
-                await CredentialCache.Store(location, password);
-            }
+            _secret = location;
+            _password = password;
         }
 
         internal async Task<string> RevokeAppAsync(string appId)
@@ -304,10 +308,8 @@ namespace SafeAuthenticator.Services
         internal async Task LoginAsync(string location, string password)
         {
             _authenticator = await Authenticator.LoginAsync(location, password);
-            if (AuthReconnect)
-            {
-                await CredentialCache.Store(location, password);
-            }
+            _secret = location;
+            _password = password;
         }
 
         internal async Task LogoutAsync()
@@ -338,6 +340,11 @@ namespace SafeAuthenticator.Services
 
                     await CheckAndReconnect();
                 });
+        }
+
+        private async void StoreCredentials()
+        {
+            await CredentialCache.Store(_secret, _password);
         }
     }
 }

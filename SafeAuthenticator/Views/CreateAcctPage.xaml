@@ -18,8 +18,10 @@
             <cv:CarouselViewControl
                 ShowArrows="False"
                 ShowIndicators="False"
+                IsSwipeEnabled="False"
                 HeightRequest="300"
-                x:Name="CreateAccountCarousel"
+                PositionSelectedCommand="{Binding CarouselPageChangeCommand}"
+                Position="{Binding CarouselPagePosition}"
                 Margin="0,40,0,0">
                 <cv:CarouselViewControl.ItemsSource>
                     <x:Array Type="{x:Type View}">
@@ -34,19 +36,31 @@
                                 <Label Text="In order to create an account, you need to achieve trust level 1 on the SAFE netowrk forum."/>
 
                                 <Button Text="CLAIM INVITATION TOKEN" 
-                                        Margin="0,20,0,0"/>
+                                        Margin="0,20,0,0"
+                                        Command="{Binding ClaimTokenCommand}"/>
 
                                 <Label Text="OR" 
-                                   FontSize="Medium"
-                                   HorizontalOptions="Center" 
-                                   HorizontalTextAlignment="Center"
-                                   TextColor="{StaticResource DarkBackgroundColor}"
-                                   Margin="0,20,0,0"/>
+                                           FontSize="Medium"
+                                           HorizontalOptions="Center" 
+                                           HorizontalTextAlignment="Center"
+                                           TextColor="{StaticResource DarkBackgroundColor}"
+                                           Margin="0,20,0,0"/>
+                                
+                                <StackLayout Orientation="Horizontal"
+                                            Margin="0,20,0,0">
 
-                                <Entry Placeholder="Invitation token"
-                                       Text="{Binding Invitation}"
-                                       Margin="0,20,0,0"
-                                       HorizontalTextAlignment="Start"/>
+                                    <Entry Placeholder="Invitation token"
+                                           Text="{Binding Invitation}"
+                                           HorizontalTextAlignment="Start"
+                                           HorizontalOptions="FillAndExpand"/>
+
+                                    <ImageButton Source="clipboardPaste"
+                                                 HeightRequest="30"
+                                                 WidthRequest="30"
+                                                 Margin="0,0,0,5"
+                                                 BackgroundColor="Transparent"
+                                                 Command="{Binding ClipboardPasteCommand}"/>
+                                </StackLayout>
                             </StackLayout>
                         </StackLayout>
 
@@ -70,7 +84,7 @@
                                                     IsPassword="True" 
                                                     Text="{Binding ConfirmAcctSecret}"
                                                     FontSize="14"
-                                                    ErrorDisplay="None"/>
+                                                    ErrorText="{Binding AcctSecretErrorMsg}"/>
                         </StackLayout>
 
 
@@ -93,23 +107,23 @@
                                                     IsPassword="True"
                                                     Text="{Binding ConfirmAcctPassword}"
                                                     FontSize="14"
-                                                    ErrorDisplay="None"/>
+                                                    ErrorText="{Binding AcctPasswordErrorMsg}"/>
                         </StackLayout>
 
                     </x:Array>
                 </cv:CarouselViewControl.ItemsSource>
             </cv:CarouselViewControl>
             <Button Text="CONTINUE" 
-                    BorderRadius="5" 
-                    x:Name="ContinueButton"
-                    VerticalOptions="StartAndExpand"
-                    Margin="0,20,0,0"/>
-            
+                    Margin="0,20,0,0"
+                    Command="{Binding CarouselContinueCommand}"/>
+
             <Button Text="Back"                      
                     HorizontalOptions="Center" 
-                    IsVisible="False"
-                    x:Name="CarouselBackButton"
-                    Margin="0,10,0,0"/>
+                    Margin="0,10,0,0"
+                    Command="{Binding CarouselBackCommand}"
+                    IsVisible="{Binding IsBackButtonVisible}"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource Primary}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

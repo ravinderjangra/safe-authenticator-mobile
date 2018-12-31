@@ -207,16 +207,14 @@
       <Version>0.11.0-preview</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>3.3.0.967583</Version>
+      <Version>3.4.0.1008975</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildThisFileDirectory)..\CodeStyles.targets" />
   <ItemGroup>
     <Content Include="..\stylecop.json" Link="stylecop.json" />
     <AndroidResource Include="Resources\drawable\authLogo.png" />
-    <AndroidResource Include="Resources\drawable\HidePasswordIcon.png" />
     <AndroidResource Include="Resources\drawable\music.png" />
-    <AndroidResource Include="Resources\drawable\ShowPasswordIcon.png" />
     <AndroidResource Include="Resources\drawable\documents.png" />
     <AndroidResource Include="Resources\drawable\downloads.png" />
     <AndroidResource Include="Resources\drawable\pictures.png" />
@@ -224,6 +222,7 @@
     <AndroidResource Include="Resources\drawable\videos.png" />
     <AndroidResource Include="Resources\drawable\publicContainer.png" />
     <AndroidResource Include="Resources\drawable\settingsIcon.png" />
+    <AndroidResource Include="Resources\drawable\clipboardPaste.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="CheckNativeLibs" BeforeTargets="PrepareForBuild">

@@ -27,11 +27,16 @@
         <ScrollView>
             <StackLayout Spacing="15">
 
-                <StackLayout Padding="16, 10" Spacing="15">
-                    <Label Text="Account"  Style="{StaticResource titlestyle}" />
+                <StackLayout Padding="16, 10" 
+                             Spacing="15">
+                    <Label Text="Account"
+                           Style="{StaticResource titlestyle}" />
                     <StackLayout>
-                        <Label Text="Account Status" Style="{StaticResource defaultstyle}"   />
-                        <Label Text="430/1000" TextColor="#C1C1C1"  />
+                        <Label Text="Account Status" 
+                               Style="{StaticResource defaultstyle}"   />
+                        <Label Text="{Binding AccountStorageInfo}" 
+                               TextColor="#C1C1C1"
+                               LineBreakMode="TailTruncation"/>
                     </StackLayout>
 
                     <Grid>
@@ -48,7 +53,8 @@
                         <Switch  OnColor="#0074E4"
                                  Grid.Column="1"
                                  HorizontalOptions="End"
-                                 VerticalOptions="Center"/>
+                                 VerticalOptions="Center"
+                                 IsToggled="{Binding AuthReconnect}"/>
                     </Grid>
                 </StackLayout>
 
@@ -56,18 +62,29 @@
 
                 <StackLayout Padding="16, 0" Spacing="15">
 
-                    <Label Text="Help" Style="{StaticResource titlestyle}" />
-                    <Label Text="FAQs" Style="{StaticResource defaultstyle}" />
-                    <Label Text="Privacy statement" Style="{StaticResource defaultstyle}" />
+                    <Label Text="Help" 
+                           Style="{StaticResource titlestyle}" />
+                    <Label Text="FAQs" 
+                           Style="{StaticResource defaultstyle}" />
+                    <Label Text="Privacy statement" 
+                           Style="{StaticResource defaultstyle}" />
                     <StackLayout>
-                        <Label Text="Application version" Style="{StaticResource defaultstyle}" />
-                        <Label Text="0.1.0" TextColor="#C1C1C1" HorizontalOptions="Start" />
+                        <Label Text="Application version" 
+                               Style="{StaticResource defaultstyle}" />
+                        <Label Text="0.1.0" 
+                               TextColor="#C1C1C1" 
+                               HorizontalOptions="Start" />
                     </StackLayout>
                 </StackLayout>
 
-                <BoxView HeightRequest="0.5" Color="DarkGray" />
+                <BoxView HeightRequest="0.5" 
+                         Color="DarkGray" />
 
-                <Label Text="Logout" FontSize="Medium" TextColor="#D94A3D" Margin="16, 0"/>
+                <Button Text="Logout" 
+                        TextColor="#D94A3D"
+                        BackgroundColor="Transparent"
+                        Command="{Binding LogoutCommand}"
+                        HorizontalOptions="Start"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

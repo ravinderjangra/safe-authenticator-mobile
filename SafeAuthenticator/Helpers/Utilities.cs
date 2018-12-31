@@ -25,25 +25,28 @@ namespace SafeAuthenticator.Helpers
             return result;
         }
 
-        internal static (double, double, string) StrengthChecker(string data)
+        internal static StrengthIndicator StrengthChecker(string data)
         {
             if (_estimator == null)
                 _estimator = new ZxcvbnEstimator();
-            if (string.IsNullOrEmpty(data))
-                return (0, 0, string.Empty);
-            string strength = null;
-            var result = _estimator.EstimateStrength(data);
-            var calc = Math.Log(result.Guesses) / Math.Log(10);
-            if (calc < AppConstants.AccStrengthVeryWeak)
-                strength = "VERY_WEAK";
-            else if (calc < AppConstants.AccStrengthWeak)
-                strength = "WEAK";
-            else if (calc < AppConstants.AccStrengthSomeWhatSecure)
-                strength = "SOMEWHAT_SECURE";
-            else if (calc >= AppConstants.AccStrengthSomeWhatSecure)
-                strength = "SECURE";
-            double percentage = Math.Round(Math.Min((calc / 16) * 100, 100));
-            return (calc, percentage, strength);
+
+            var strengthIndicator = new StrengthIndicator();
+
+            if (!string.IsNullOrEmpty(data))
+            {
+                var result = _estimator.EstimateStrength(data);
+                strengthIndicator.Guesses = Math.Log(result.Guesses) / Math.Log(10);
+                if (strengthIndicator.Guesses < AppConstants.AccStrengthVeryWeak)
+                    strengthIndicator.Strength = "VERY_WEAK";
+                else if (strengthIndicator.Guesses < AppConstants.AccStrengthWeak)
+                    strengthIndicator.Strength = "WEAK";
+                else if (strengthIndicator.Guesses < AppConstants.AccStrengthSomeWhatSecure)
+                    strengthIndicator.Strength = "SOMEWHAT_SECURE";
+                else if (strengthIndicator.Guesses >= AppConstants.AccStrengthSomeWhatSecure)
+                    strengthIndicator.Strength = "SECURE";
+                strengthIndicator.Percentage = Math.Round(Math.Min((strengthIndicator.Guesses / 16) * 100, 100));
+            }
+            return strengthIndicator;
         }
 
         internal static string GetErrorMessage(FfiException error)
