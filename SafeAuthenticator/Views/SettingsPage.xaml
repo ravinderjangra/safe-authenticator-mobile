@@ -16,6 +16,10 @@
                 <Setter Property="TextColor" Value="#0074E4" />
                 <Setter Property="FontSize" Value="Medium" />
             </Style>
+            <Style x:Key="logoutstyle" TargetType="Label">
+                <Setter Property="TextColor" Value="#D94A3D" />
+                <Setter Property="FontSize" Value="Medium" />
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     
@@ -80,11 +84,15 @@
                 <BoxView HeightRequest="0.5" 
                          Color="DarkGray" />
 
-                <Button Text="Logout" 
-                        TextColor="#D94A3D"
-                        BackgroundColor="Transparent"
-                        Command="{Binding LogoutCommand}"
-                        HorizontalOptions="Start"/>
+                <StackLayout Padding="16, 0" Spacing="15">
+                    <Label Text="Logout" 
+                           Style="{StaticResource logoutstyle}" >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" 
+                                                  Command="{Binding LogoutCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

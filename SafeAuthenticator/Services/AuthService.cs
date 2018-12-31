@@ -231,11 +231,7 @@ namespace SafeAuthenticator.Services
                             await SendResponseBack(decodeResult, args.Response);
                         };
 
-                        // await Application.Current.MainPage.Navigation.PushModalAsync(requestPage);
-
                         await Application.Current.MainPage.Navigation.PushPopupAsync(requestPage);
-
-                        // PopupNavigation.Instance.PushAsync(requestPage);
                     }
                 }
             }

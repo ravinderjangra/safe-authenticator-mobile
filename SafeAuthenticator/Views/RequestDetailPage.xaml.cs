@@ -4,7 +4,6 @@ using Rg.Plugins.Popup.Services;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
 using SafeAuthenticator.ViewModels;
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace SafeAuthenticator.Views
@@ -34,19 +33,6 @@ namespace SafeAuthenticator.Views
                 CompleteRequest?.Invoke(this, new ResponseEventArgs(false));
             }
             PopupNavigation.Instance.PopAsync(true);
-        }
-
-        private void Unselect_Item(object sender, ItemTappedEventArgs e)
-        {
-            if (e.Item == null)
-            {
-                return;
-            }
-
-            if (sender is ListView lv)
-            {
-                lv.SelectedItem = null;
-            }
         }
     }
 }

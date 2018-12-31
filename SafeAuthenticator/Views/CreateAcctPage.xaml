@@ -26,7 +26,7 @@
                 <cv:CarouselViewControl.ItemsSource>
                     <x:Array Type="{x:Type View}">
 
-                        <!-- Item 1 -->
+                        <!-- Invitation -->
                         <StackLayout>
                             <StackLayout Spacing="20">
                                 <Label Text="But first, you need an invitation token"
@@ -54,18 +54,23 @@
                                            HorizontalTextAlignment="Start"
                                            HorizontalOptions="FillAndExpand"/>
 
-                                    <ImageButton Source="clipboardPaste"
-                                                 HeightRequest="30"
-                                                 WidthRequest="30"
-                                                 Margin="0,0,0,5"
-                                                 BackgroundColor="Transparent"
-                                                 Command="{Binding ClipboardPasteCommand}"/>
+                                    <Image Source="clipboardPaste"
+                                           HeightRequest="30"
+                                           Aspect="AspectFit"
+                                           WidthRequest="30"
+                                           Margin="0,0,0,5"
+                                           BackgroundColor="Transparent">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                                  Command="{Binding ClipboardPasteCommand}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
                                 </StackLayout>
                             </StackLayout>
                         </StackLayout>
 
 
-                        <!-- Item 2 -->
+                        <!-- Account Secret -->
                         <StackLayout Spacing="20">
                             <Label Text="Account Secret" 
                                    FontAttributes="Bold"
@@ -88,7 +93,7 @@
                         </StackLayout>
 
 
-                        <!-- Item 3 -->
+                        <!-- Account Password -->
                         <StackLayout Spacing="20">
                             <Label Text="Account Password" 
                                    FontAttributes="Bold"

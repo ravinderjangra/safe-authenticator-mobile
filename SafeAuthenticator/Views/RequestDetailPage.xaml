@@ -4,6 +4,7 @@
                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SafeAuthenticator.Views.RequestDetailPage" 
                  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
                  xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                 xmlns:behaviour="clr-namespace:SafeAuthenticator.Controls.Behaviour"
                  xmlns:controls="clr-namespace:SafeAuthenticator.Controls">
 
     <pages:PopupPage.Animation>
@@ -29,17 +30,13 @@
 
             <StackLayout Spacing="10" 
                          Padding="16">
-                <Label Text = "{Binding AppName, StringFormat=' {0:F0} is requesting access'}"
-                       HorizontalTextAlignment="Center"
+                <Label HorizontalTextAlignment="Center"
                        HorizontalOptions="Center"
-                       WidthRequest="200"
-                       FontSize="14"/>
-                
-                <Label IsVisible="{Binding AppContainerRequest}">
+                       Margin="20, 0">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="App Container Requested: "/>
-                            <Span Text="{Binding AppContainerRequest}" />
+                            <Span Text="{Binding AppName}" FontSize="14"/>
+                            <Span Text="\nis requesting access" FontSize="12"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -47,8 +44,11 @@
                 <ListView x:Name="ContainersListView" 
                           HasUnevenRows="True" 
                           SeparatorVisibility="None"
-                          ItemsSource="{Binding Containers}"
-                          ItemTapped="Unselect_Item">
+                          ItemsSource="{Binding Containers}">
+
+                    <ListView.Behaviors>
+                        <behaviour:ListViewNoSelectionBehavior />
+                    </ListView.Behaviors>
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -76,216 +76,3 @@
         </Frame>
     </StackLayout>
 </pages:PopupPage>
-
-<!--<ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:InverseBooleanConverter x:Key="InverseBoolean" />
-            <converters:ByteArraytoHexStringConverter x:Key="ByteArraytoHexString" />
-        </ResourceDictionary>
-    </ContentPage.Resources>-->
-
-<!--<StackLayout Padding="10,20,10,10">
-            <Label Text="{Binding PageTitle}" 
-                   FontSize="Large" 
-                   HorizontalTextAlignment="Center"/>
-            <BoxView
-                HeightRequest="1" 
-                BackgroundColor="Black" 
-                HorizontalOptions="FillAndExpand" />
-            <Label Text="App Details" FontSize="Medium"/>
-            <Label>
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="App Name: " FontAttributes="Bold" />
-                        <Span Text="{Binding AppName}" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Label>
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="App Id: " FontAttributes="Bold" />
-                        <Span Text="{Binding AppId}" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Label IsVisible="{Binding AppContainerRequest}">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="App Container Requested: " FontAttributes="Bold" />
-                        <Span Text="{Binding AppContainerRequest}" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Label>
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="Vendor: " FontAttributes="Bold" />
-                        <Span Text="{Binding AppVendor}" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <BoxView HeightRequest="1" BackgroundColor="Black" HorizontalOptions="FillAndExpand" />
-
-            <Label Text="Containers Permissions Requested" FontSize="Medium" IsVisible="{Binding IsMDataRequest, Converter={StaticResource InverseBoolean}}">
-                <Label.Triggers>
-                    <DataTrigger TargetType="Label"
-                             Binding="{Binding Source={x:Reference ContainersListView}, Path=ItemsSource.Count}" 
-                             Value="0">
-                        <Setter Property="Text" Value="No container permission requested" />
-                    </DataTrigger>
-                </Label.Triggers>
-            </Label>
-            <ListView x:Name="ContainersListView" HasUnevenRows="True" ItemsSource="{Binding Containers}" BackgroundColor="Transparent" IsVisible="{Binding IsMDataRequest, Converter={StaticResource InverseBoolean}}" ItemTapped="Unselect_Item">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Frame HasShadow="False" Margin="5" Padding="5" BackgroundColor="Transparent">
-                                <StackLayout BackgroundColor="Transparent">
-                                    <Label FontSize="Medium" TextColor="DarkBlue">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="Name: " />
-                                                <Span Text="{Binding ContainerName}" />
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-                                    <Label Text="Permissions" />
-                                    <Label IsVisible="False">
-                                        <Label.Triggers>
-                                            <DataTrigger TargetType="Label" Binding="{Binding Access.Read}" Value="true">
-                                                <Setter Property="Text" Value="Read" />
-                                                <Setter Property="IsVisible" Value="True" />
-                                            </DataTrigger>
-                                        </Label.Triggers>
-                                    </Label>
-                                    <Label IsVisible="False">
-                                        <Label.Triggers>
-                                            <DataTrigger TargetType="Label" Binding="{Binding Access.Insert}" Value="true">
-                                                <Setter Property="Text" Value="Insert" />
-                                                <Setter Property="IsVisible" Value="True" />
-                                            </DataTrigger>
-                                        </Label.Triggers>
-                                    </Label>
-                                    <Label IsVisible="False">
-                                        <Label.Triggers>
-                                            <DataTrigger TargetType="Label" Binding="{Binding Access.Update}" Value="true">
-                                                <Setter Property="Text" Value="Update" />
-                                                <Setter Property="IsVisible" Value="True" />
-                                            </DataTrigger>
-                                        </Label.Triggers>
-                                    </Label>
-                                    <Label IsVisible="False">
-                                        <Label.Triggers>
-                                            <DataTrigger TargetType="Label" Binding="{Binding Access.Delete}" Value="true">
-                                                <Setter Property="Text" Value="Delete" />
-                                                <Setter Property="IsVisible" Value="True" />
-                                            </DataTrigger>
-                                        </Label.Triggers>
-                                    </Label>
-                                    <Label IsVisible="False">
-                                        <Label.Triggers>
-                                            <DataTrigger TargetType="Label" Binding="{Binding Access.ManagePermissions}" Value="true">
-                                                <Setter Property="Text" Value="ManagePermissions" />
-                                                <Setter Property="IsVisible" Value="True" />
-                                            </DataTrigger>
-                                        </Label.Triggers>
-                                    </Label>
-                                </StackLayout>
-                            </Frame>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-            <Label Text="MData Permissions Requested" FontSize="Medium" IsVisible="{Binding IsMDataRequest}" />
-            <ListView HasUnevenRows="True" ItemsSource="{Binding MData}" BackgroundColor="Transparent" IsVisible="{Binding IsMDataRequest}" ItemTapped="Unselect_Item">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Frame HasShadow="False" Margin="5" Padding="5" BackgroundColor="Transparent">
-                                <StackLayout BackgroundColor="Transparent">
-                                    <Label>
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="Name: " FontAttributes="Bold"/>
-                                                <Span Text="{Binding MetaName}" />
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-                                    <Label>
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="Description: " FontAttributes="Bold"/>
-                                                <Span Text="{Binding MetaDescription}" />
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-                                    <Label>
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="XOR Name: " FontAttributes="Bold"/>
-                                                <Span Text="{Binding Name, Converter={StaticResource ByteArraytoHexString}}" />
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-                                    <Label>
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="TagType: " FontAttributes="Bold" />
-                                                <Span Text="{Binding TypeTag}" />
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-                                    <Label Text="Permissions" />
-                                    <Label IsVisible="False">
-                                        <Label.Triggers>
-                                            <DataTrigger TargetType="Label" Binding="{Binding Access.Read}" Value="true">
-                                                <Setter Property="Text" Value="Read" />
-                                                <Setter Property="IsVisible" Value="True" />
-                                            </DataTrigger>
-                                        </Label.Triggers>
-                                    </Label>
-                                    <Label IsVisible="False">
-                                        <Label.Triggers>
-                                            <DataTrigger TargetType="Label" Binding="{Binding Access.Insert}" Value="true">
-                                                <Setter Property="Text" Value="Insert" />
-                                                <Setter Property="IsVisible" Value="True" />
-                                            </DataTrigger>
-                                        </Label.Triggers>
-                                    </Label>
-                                    <Label IsVisible="False">
-                                        <Label.Triggers>
-                                            <DataTrigger TargetType="Label" Binding="{Binding Access.Update}" Value="true">
-                                                <Setter Property="Text" Value="Update" />
-                                                <Setter Property="IsVisible" Value="True" />
-                                            </DataTrigger>
-                                        </Label.Triggers>
-                                    </Label>
-                                    <Label IsVisible="False">
-                                        <Label.Triggers>
-                                            <DataTrigger TargetType="Label" Binding="{Binding Access.Delete}" Value="true">
-                                                <Setter Property="Text" Value="Delete" />
-                                                <Setter Property="IsVisible" Value="True" />
-                                            </DataTrigger>
-                                        </Label.Triggers>
-                                    </Label>
-                                    <Label IsVisible="False">
-                                        <Label.Triggers>
-                                            <DataTrigger TargetType="Label" Binding="{Binding Access.ManagePermissions}" Value="true">
-                                                <Setter Property="Text" Value="ManagePermissions" />
-                                                <Setter Property="IsVisible" Value="True" />
-                                            </DataTrigger>
-                                        </Label.Triggers>
-                                    </Label>
-                                </StackLayout>
-                            </Frame>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <StackLayout Orientation="Horizontal">
-                <Button x:Name="DenyButton" Text="Deny" Clicked="Send_Response" HorizontalOptions="FillAndExpand" HeightRequest="50" TextColor="White" />
-                <Button x:Name="AllowButton" Text="Allow" Clicked="Send_Response" HorizontalOptions="FillAndExpand" HeightRequest="50" TextColor="White" />
-            </StackLayout>
-        </StackLayout>-->

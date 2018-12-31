@@ -69,6 +69,23 @@ namespace SafeAuthenticator.ViewModels
                     },
                     ContainerName = x.ContName
                 }).ToObservableRangeCollection();
+
+            if (_authReq.AuthReq.AppContainer)
+            {
+                Containers.Add(new ContainerPermissionsModel()
+                {
+                    ContainerName = "App Container",
+                    Access = new PermissionSetModel
+                    {
+                        Read = true,
+                        Insert = true,
+                        Update = true,
+                        Delete = true,
+                        ManagePermissions = true
+                    }
+                });
+            }
+
             AppContainerRequest = _authReq.AuthReq.AppContainer;
         }
 

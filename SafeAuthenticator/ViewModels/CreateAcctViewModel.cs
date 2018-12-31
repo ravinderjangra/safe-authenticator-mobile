@@ -96,16 +96,14 @@ namespace SafeAuthenticator.ViewModels
         public int CarouselPagePosition
         {
             get => _carouselPagePosition;
-            set => SetProperty(ref _carouselPagePosition, value);
+            set
+            {
+                SetProperty(ref _carouselPagePosition, value);
+                OnPropertyChanged(nameof(IsBackButtonVisible));
+            }
         }
 
-        private bool _isBackButtonVisible;
-
-        public bool IsBackButtonVisible
-        {
-            get => _isBackButtonVisible;
-            set => SetProperty(ref _isBackButtonVisible, value);
-        }
+        public bool IsBackButtonVisible => CarouselPagePosition > 0;
 
         private string _acctSecretErrorMsg;
 
@@ -150,13 +148,6 @@ namespace SafeAuthenticator.ViewModels
             CarouselPageChangeCommand = new Command(CarouselPageChange);
             ClaimTokenCommand = new Command(OnClaimToken);
             ClipboardPasteCommand = new Command(async () => await OnClipboardPasteAsync());
-            AcctSecret = string.Empty;
-            ConfirmAcctSecret = string.Empty;
-            AcctPassword = string.Empty;
-            ConfirmAcctPassword = string.Empty;
-            Invitation = string.Empty;
-            IsBackButtonVisible = false;
-            CarouselPagePosition = 0;
         }
 
         private bool CanExecute()
@@ -212,9 +203,13 @@ namespace SafeAuthenticator.ViewModels
                 }
 
                 if (CarouselPagePosition < 2)
+                {
                     CarouselPagePosition = CarouselPagePosition + 1;
+                }
                 else
+                {
                     CreateAcct();
+                }
             }
             catch (Exception)
             {
@@ -223,26 +218,19 @@ namespace SafeAuthenticator.ViewModels
 
         private void OnBack()
         {
-            if (CarouselPagePosition > 0)
-            {
-                CarouselPagePosition = CarouselPagePosition - 1;
-            }
+            CarouselPagePosition = CarouselPagePosition - 1;
         }
 
         private void CarouselPageChange()
         {
             ((Command)CarouselContinueCommand).ChangeCanExecute();
-            if (CarouselPagePosition > 0)
-                IsBackButtonVisible = true;
-            else
-                IsBackButtonVisible = false;
         }
 
         private async void CreateAcct()
         {
             try
             {
-                using (UserDialogs.Instance.Loading("Loading"))
+                using (UserDialogs.Instance.Loading("Creating account"))
                 {
                     await Authenticator.CreateAccountAsync(AcctSecret, AcctPassword, Invitation);
                     MessagingCenter.Send(this, MessengerConstants.NavHomePage);
@@ -252,7 +240,10 @@ namespace SafeAuthenticator.ViewModels
             {
                 var errorMessage = Utilities.GetErrorMessage(ex);
                 if (ex.ErrorCode == -116)
+                {
                     CarouselPagePosition = 0;
+                }
+
                 await Application.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
             }
             catch (Exception ex)
