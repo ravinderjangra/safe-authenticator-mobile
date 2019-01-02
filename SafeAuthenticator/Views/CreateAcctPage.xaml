@@ -67,10 +67,10 @@
                                 <StackLayout Orientation="Horizontal"
                                              Margin="0,20,0,0">
 
-                                    <Entry Placeholder="Invitation token"
-                                           Text="{Binding Invitation}"
-                                           HorizontalTextAlignment="Start"
-                                           HorizontalOptions="FillAndExpand" />
+                                    <controls:MaterialEntry Placeholder="Invitation token"
+                                                            Text="{Binding Invitation}"
+                                                            HorizontalOptions="FillAndExpand" 
+                                                            ErrorDisplay="None" />
 
                                     <Image Source="clipboardPaste"
                                            HeightRequest="30"

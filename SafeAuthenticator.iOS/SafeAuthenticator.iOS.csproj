@@ -118,18 +118,13 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="LaunchScreen.storyboard" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="..\SafeAuthenticator\crust.config">
       <Link>crust.config</Link>
     </Content>
     <Content Include="..\SafeAuthenticator\log.toml">
       <Link>log.toml</Link>
     </Content>
-    <BundleResource Include="Resources\hide_pass.png" />
     <BundleResource Include="Resources\auth_start.png" />
-    <BundleResource Include="Resources\show_pass.png" />
     <BundleResource Include="Resources\authLogo.png" />
     <BundleResource Include="Resources\clipboardPaste.png" />
     <BundleResource Include="Resources\documents.png" />
@@ -143,9 +138,12 @@
     <BundleResource Include="Resources\tutorial1.png" />
     <BundleResource Include="Resources\tutorial2.png" />
     <BundleResource Include="Resources\videos.png" />
+    <BundleResource Include="Resources\HidePasswordIcon.png" />
+    <BundleResource Include="Resources\ShowPasswordIcon.png" />
     <None Include="app.config" />
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
+    <InterfaceDefinition Include="LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SafeAuthenticator\PlatformSpecific\AuthBindings.cs">
@@ -158,10 +156,9 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Extensions\ColorExtension.cs" />
+    <Compile Include="Helpers\BorderlessEntryRenderer.cs" />
     <Compile Include="Helpers\FileOps.cs" />
-    <Compile Include="Helpers\FloatLabeledTextField.cs" />
     <Compile Include="Extensions\FontExtensions.cs" />
-    <Compile Include="Helpers\MaterialEntryRenderer.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
   </ItemGroup>
@@ -204,9 +201,6 @@
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Resources\Media.xcassets\LaunchImages.launchimage\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
   </ItemGroup>

@@ -12,6 +12,7 @@ using Android.Views.InputMethods;
 using Android.Widget;
 using Java.Lang;
 using SafeAuthenticator.Controls;
+using SafeAuthenticator.Droid.ControlsRenderers;
 using SafeAuthenticator.Droid.Helpers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
