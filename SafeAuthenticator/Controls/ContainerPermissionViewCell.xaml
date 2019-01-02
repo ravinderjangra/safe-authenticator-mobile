@@ -33,7 +33,7 @@
                    TextColor="Black"
                    FontSize="14" />
             <Label Text="{Binding Access, Converter={StaticResource FormatContainerPermissionsConverter}}"
-                   TextColor="#8b8b8b"
+                   TextColor="{StaticResource SecondaryTitleColor}"
                    FontSize="12" />
         </StackLayout>
 

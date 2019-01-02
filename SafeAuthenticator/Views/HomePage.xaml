@@ -41,8 +41,22 @@
                         <Label Margin="20"
                                VerticalOptions="CenterAndExpand"
                                HorizontalOptions="CenterAndExpand"
-                               Text="No apps have been authorised yet."
-                               IsVisible="{Binding Apps.Count, Converter={StaticResource IsCollectionEmptyConverter}}" />
+                               IsVisible="False">
+                            <Label.Triggers>
+                                <MultiTrigger TargetType="Label">
+                                    <MultiTrigger.Conditions>
+                                        <BindingCondition Binding="{Binding Apps.Count}"
+                                                          Value="0"/>
+                                        <BindingCondition Binding="{Binding IsRefreshing}"
+                                                          Value="False"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="IsVisible"
+                                            Value="True"/>
+                                    <Setter Property="Text"
+                                            Value="No apps have been authorised yet."/>
+                                </MultiTrigger>
+                            </Label.Triggers>
+                        </Label>
                     </StackLayout>
                 </ListView.Footer>
             </ListView>

@@ -32,9 +32,8 @@ namespace SafeAuthenticator.Views
                     {
                         return;
                     }
-
-                    Navigation.InsertPageBefore(new LoginPage(), this);
-                    await Navigation.PopAsync();
+                    Navigation.InsertPageBefore(new LoginPage(), Navigation.NavigationStack[0]);
+                    await Navigation.PopToRootAsync();
                 });
         }
 

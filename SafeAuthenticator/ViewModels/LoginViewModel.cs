@@ -37,6 +37,8 @@ namespace SafeAuthenticator.ViewModels
 
         public ICommand LoginCommand { get; }
 
+        public ICommand NeedHelpCommand { get; }
+
         public bool IsUiEnabled
         {
             get => _isUiEnabled;
@@ -57,6 +59,11 @@ namespace SafeAuthenticator.ViewModels
 
             CreateAccountCommand = new Command(OnCreateAcct);
             LoginCommand = new Command(OnLogin, CanExecute);
+            CreateAccountCommand = new Command(OnCreateAcct);
+            NeedHelpCommand = new Command(() =>
+            {
+                Device.OpenUri(new Uri(@"https://safenetforum.org/t/trust-level-1-basic-user-requirements/15200"));
+            });
         }
 
         private bool CanExecute()
