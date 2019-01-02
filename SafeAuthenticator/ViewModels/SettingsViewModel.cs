@@ -33,10 +33,10 @@ namespace SafeAuthenticator.ViewModels
         public SettingsViewModel()
         {
             LogoutCommand = new Command(OnLogout);
-            GetAccountInfo();
+            AccountStorageInfo = "fetching account info...";
         }
 
-        private async void GetAccountInfo()
+        public async void GetAccountInfo()
         {
             var acctStorageTuple = await Authenticator.GetAccountInfoAsync();
             AccountStorageInfo = $"{acctStorageTuple.Item1} / {acctStorageTuple.Item2}";

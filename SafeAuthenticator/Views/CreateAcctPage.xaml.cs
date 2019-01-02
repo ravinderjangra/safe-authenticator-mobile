@@ -33,25 +33,11 @@ namespace SafeAuthenticator.Views
                     Navigation.InsertPageBefore(new HomePage(), rootPage);
                     await Navigation.PopToRootAsync();
                 });
-
-            MessagingCenter.Subscribe<CreateAcctViewModel>(
-                this,
-                MessengerConstants.NavWebPage,
-                async _ =>
-                {
-                    if (!App.IsPageValid(this))
-                    {
-                        MessageCenterUnsubscribe();
-                        return;
-                    }
-                    await Navigation.PushAsync(new WebPage());
-                });
         }
 
         public void MessageCenterUnsubscribe()
         {
             MessagingCenter.Unsubscribe<CreateAcctViewModel>(this, MessengerConstants.NavHomePage);
-            MessagingCenter.Unsubscribe<CreateAcctViewModel>(this, MessengerConstants.NavWebPage);
         }
     }
 }

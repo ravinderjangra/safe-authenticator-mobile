@@ -148,11 +148,14 @@ namespace SafeAuthenticator.ViewModels
             CarouselContinueCommand = new Command(async () => await OnContinueAsync(), () => CanExecute());
             CarouselBackCommand = new Command(OnBack);
             CarouselPageChangeCommand = new Command(CarouselPageChange);
-            ClaimTokenCommand = new Command(OnClaimToken);
             ClipboardPasteCommand = new Command(async () => await OnClipboardPasteAsync());
             OpenForumLinkCommand = new Command(() =>
             {
                 Device.OpenUri(new Uri(@"https://safenetforum.org/t/trust-level-1-basic-user-requirements/15200"));
+            });
+            ClaimTokenCommand = new Command(() =>
+            {
+                Device.OpenUri(new Uri(@"https://invite.maidsafe.net/"));
             });
         }
 
@@ -179,78 +182,41 @@ namespace SafeAuthenticator.ViewModels
             {
                 if (CarouselPagePosition == 1)
                 {
-                    await Task.Run(() =>
+                    using (UserDialogs.Instance.Loading("Loading"))
                     {
-                        _locationStrength = Utilities.StrengthChecker(AcctSecret);
-                        if (_locationStrength.Guesses < AppConstants.AccStrengthWeak)
+                        await Task.Run(() =>
                         {
-                            AcctSecretErrorMsg = "Secret needs to be stronger";
-                            throw new Exception();
-                        }
-                        else
-                        {
-                            AcctSecretErrorMsg = string.Empty;
-                        }
-                    });
-                }
-
-                if (CarouselPagePosition == 2)
-                {
-                    await Task.Run(() =>
-                    {
-                        _passwordStrength = Utilities.StrengthChecker(AcctPassword);
-                        if (_passwordStrength.Guesses < AppConstants.AccStrengthSomeWhatSecure)
-                        {
-                            AcctPasswordErrorMsg = "Password needs to be stronger";
-                            throw new Exception();
-                        }
-                        AcctPasswordErrorMsg = string.Empty;
-                    });
+                            _locationStrength = Utilities.StrengthChecker(AcctSecret);
+                            if (_locationStrength.Guesses < AppConstants.AccStrengthWeak)
+                            {
+                                AcctSecretErrorMsg = "Secret needs to be stronger";
+                                throw new InvalidOperationException();
+                            }
+                            else
+                            {
+                                AcctSecretErrorMsg = string.Empty;
+                            }
+                        });
+                    }
                 }
 
                 if (CarouselPagePosition < 2)
-                {
-                    CarouselPagePosition = CarouselPagePosition + 1;
-                }
+                    CarouselPagePosition += 1;
                 else
-                {
-                    CreateAcct();
-                }
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private void OnBack()
-        {
-            CarouselPagePosition = CarouselPagePosition - 1;
-        }
-
-        private void CarouselPageChange()
-        {
-            ((Command)CarouselContinueCommand).ChangeCanExecute();
-        }
-
-        private async void CreateAcct()
-        {
-            try
-            {
-                using (UserDialogs.Instance.Loading("Creating account"))
-                {
-                    await Authenticator.CreateAccountAsync(AcctSecret, AcctPassword, Invitation);
-                    MessagingCenter.Send(this, MessengerConstants.NavHomePage);
-                }
+                    await CreateAcct();
             }
             catch (FfiException ex)
             {
                 var errorMessage = Utilities.GetErrorMessage(ex);
                 if (ex.ErrorCode == -116)
-                {
                     CarouselPagePosition = 0;
-                }
+                else if (ex.ErrorCode == -102)
+                    CarouselPagePosition = 1;
 
                 await Application.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
+            }
+            catch (InvalidOperationException)
+            {
             }
             catch (Exception ex)
             {
@@ -258,9 +224,34 @@ namespace SafeAuthenticator.ViewModels
             }
         }
 
-        private void OnClaimToken()
+        private async Task CreateAcct()
         {
-            MessagingCenter.Send(this, MessengerConstants.NavWebPage);
+            using (UserDialogs.Instance.Loading("Creating account"))
+            {
+                await Task.Run(() =>
+                {
+                    _passwordStrength = Utilities.StrengthChecker(AcctPassword);
+                    if (_passwordStrength.Guesses < AppConstants.AccStrengthSomeWhatSecure)
+                    {
+                        AcctPasswordErrorMsg = "Password needs to be stronger";
+                        throw new InvalidOperationException();
+                    }
+                    AcctPasswordErrorMsg = string.Empty;
+                });
+
+                await Authenticator.CreateAccountAsync(AcctSecret, AcctPassword, Invitation);
+                MessagingCenter.Send(this, MessengerConstants.NavHomePage);
+            }
+        }
+
+        private void OnBack()
+        {
+            CarouselPagePosition -= 1;
+        }
+
+        private void CarouselPageChange()
+        {
+            ((Command)CarouselContinueCommand).ChangeCanExecute();
         }
 
         private async Task OnClipboardPasteAsync()

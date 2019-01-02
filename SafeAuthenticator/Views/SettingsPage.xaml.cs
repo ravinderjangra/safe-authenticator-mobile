@@ -8,9 +8,19 @@ namespace SafeAuthenticator.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage
     {
+        private readonly SettingsViewModel _settingsViewModel;
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            _settingsViewModel.GetAccountInfo();
+        }
+
         public SettingsPage()
         {
             InitializeComponent();
+            _settingsViewModel = new SettingsViewModel();
+            BindingContext = _settingsViewModel;
 
             MessagingCenter.Subscribe<SettingsViewModel>(
                 this,

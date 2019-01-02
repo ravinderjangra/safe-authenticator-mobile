@@ -42,7 +42,8 @@ namespace SafeAuthenticator
 
         private Page NewStartupPage()
         {
-            return new LoginPage();
+            // return new LoginPage();
+            return new TutorialPage();
         }
 
         protected override async void OnStart()

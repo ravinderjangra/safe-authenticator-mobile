@@ -2,9 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+             xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels"
              x:Class="SafeAuthenticator.Views.TutorialPage"
              NavigationPage.HasNavigationBar="False"
-             Padding="20">
+             Padding="25">
+
+    <ContentPage.BindingContext>
+        <viewModels:TutorialViewModel />
+    </ContentPage.BindingContext>
 
     <ContentPage.Content>
         <StackLayout Spacing="10">
@@ -15,7 +20,8 @@
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
                 PositionSelectedCommand="{Binding CarouselPageChangeCommand}"
-                Position="{Binding CarouselPagePosition}">
+                Position="{Binding CarouselPagePosition}"
+                Margin="0,30,0,30">
                 <cv:CarouselViewControl.ItemsSource>
                     <x:Array Type="{x:Type View}">
 
@@ -24,8 +30,8 @@
                             <StackLayout HorizontalOptions="CenterAndExpand" 
                                          VerticalOptions="CenterAndExpand">
                                 <Image Source="authLogo" 
-                                       HeightRequest="120"
-                                       WidthRequest="120"/>
+                                       HeightRequest="86"
+                                       WidthRequest="86"/>
 
                                 <Label Text="What is the SAFE Authenticator?"
                                        FontAttributes="Bold"
@@ -39,7 +45,7 @@
 
 
                         <!-- Tutorial Page2 -->
-                        <StackLayout Spacing="20">
+                        <StackLayout Spacing="50">
                             <StackLayout HorizontalOptions="CenterAndExpand" 
                                          VerticalOptions="CenterAndExpand">
 
@@ -56,7 +62,7 @@
 
 
                         <!-- Tutorial Page3 -->
-                        <StackLayout Spacing="20">
+                        <StackLayout Spacing="50">
                             <StackLayout HorizontalOptions="CenterAndExpand" 
                                          VerticalOptions="CenterAndExpand">
 
@@ -76,12 +82,14 @@
             </cv:CarouselViewControl>
 
             <StackLayout>
-                <Button Text="CONTINUE"/>
-
-                <Button Text="SKIP" 
-                        HorizontalOptions="Center"
+                <Button Text="{Binding SecondaryButtonText}"
+                        Command="{Binding  SecondaryButtonCommand}"
                         BackgroundColor="Transparent"
-                        TextColor="{StaticResource Primary}"/>
+                        TextColor="{StaticResource Primary}"
+                        Margin="0,20,0,0"/>
+
+                <Button Text="{Binding PrimaryButtonText}" 
+                        Command="{Binding  PrimaryButtonCommand}"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
