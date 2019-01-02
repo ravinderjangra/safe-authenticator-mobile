@@ -30,8 +30,8 @@
                             <StackLayout HorizontalOptions="CenterAndExpand" 
                                          VerticalOptions="CenterAndExpand">
                                 <Image Source="authLogo" 
-                                       HeightRequest="86"
-                                       WidthRequest="86"/>
+                                       HeightRequest="90"
+                                       WidthRequest="90"/>
 
                                 <Label Text="What is the SAFE Authenticator?"
                                        FontAttributes="Bold"

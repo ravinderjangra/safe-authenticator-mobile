@@ -27,8 +27,7 @@ namespace SafeAuthenticator.Views
                         MessageCenterUnsubscribe();
                         return;
                     }
-                    Navigation.InsertPageBefore(new CreateAcctPage(), this);
-                    await Navigation.PopAsync();
+                    await Navigation.PushAsync(new CreateAcctPage());
                 });
 
             MessagingCenter.Subscribe<TutorialViewModel>(

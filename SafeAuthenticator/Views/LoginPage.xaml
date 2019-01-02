@@ -20,8 +20,8 @@
                              Spacing="10">
                     <Image Source="authLogo"
                            Aspect="AspectFit"
-                           HeightRequest="86"
-                           WidthRequest="86"
+                           HeightRequest="90"
+                           WidthRequest="90"
                            HorizontalOptions="Center" />
 
                     <Label Text="SAFE Authenticator"

@@ -78,6 +78,7 @@ namespace SafeAuthenticator.ViewModels
                 "Logout",
                 "Cancel"))
             {
+                AuthReconnect = false;
                 await Authenticator.LogoutAsync();
                 MessagingCenter.Send(this, MessengerConstants.NavLoginPage);
             }

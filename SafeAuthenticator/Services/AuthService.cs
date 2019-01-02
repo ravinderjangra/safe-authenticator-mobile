@@ -12,6 +12,7 @@ using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
 using SafeAuthenticator.Services;
 using SafeAuthenticator.Views;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(AuthService))]
@@ -21,6 +22,7 @@ namespace SafeAuthenticator.Services
     public class AuthService : ObservableObject, IDisposable
     {
         private const string AuthReconnectPropKey = nameof(AuthReconnect);
+        private const string AutoReconnect = "AutoReconnect";
         private readonly SemaphoreSlim _reconnectSemaphore = new SemaphoreSlim(1, 1);
         private Authenticator _authenticator;
         private bool _isLogInitialised;
@@ -41,13 +43,15 @@ namespace SafeAuthenticator.Services
         {
             get
             {
-                if (!Application.Current.Properties.ContainsKey(AuthReconnectPropKey))
+                if (!Application.Current.Properties.ContainsKey(AutoReconnect))
                 {
+                    Application.Current.Properties[AutoReconnect] = false;
                     return false;
                 }
-
-                var val = Application.Current.Properties[AuthReconnectPropKey] as bool?;
-                return val == true;
+                else
+                {
+                    return (bool)Application.Current.Properties[AutoReconnect];
+                }
             }
 
             set
@@ -60,8 +64,7 @@ namespace SafeAuthenticator.Services
                 {
                     CredentialCache.Delete();
                 }
-
-                Application.Current.Properties[AuthReconnectPropKey] = value;
+                Application.Current.Properties[AutoReconnect] = value;
             }
         }
 
@@ -69,14 +72,16 @@ namespace SafeAuthenticator.Services
         {
             _isLogInitialised = false;
             CredentialCache = new CredentialCacheService();
-            Authenticator.Disconnected += OnNetworkDisconnected;
+            Connectivity.ConnectivityChanged += InternetConnectivityChanged;
+
+            // Authenticator.Disconnected += OnNetworkDisconnected;
             Task.Run(async () => await InitLoggingAsync());
         }
 
         public void Dispose()
         {
             // ReSharper disable once DelegateSubtraction
-            Authenticator.Disconnected -= OnNetworkDisconnected;
+            // Authenticator.Disconnected -= OnNetworkDisconnected;
             FreeState();
             GC.SuppressFinalize(this);
         }
@@ -99,15 +104,9 @@ namespace SafeAuthenticator.Services
 
                 if (_authenticator.IsDisconnected)
                 {
-                    if (!AuthReconnect)
-                    {
-                        throw new Exception("Reconnect Disabled");
-                    }
-
                     using (UserDialogs.Instance.Loading("Reconnecting to Network"))
                     {
-                        var (location, password) = await CredentialCache.Retrieve();
-                        await LoginAsync(location, password);
+                        await LoginAsync(_secret, _password);
                     }
                 }
             }
@@ -235,6 +234,11 @@ namespace SafeAuthenticator.Services
                     }
                 }
             }
+            catch (FfiException ex)
+            {
+                var errorMessage = Utilities.GetErrorMessage(ex);
+                await Application.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
+            }
             catch (Exception ex)
             {
                 var errorMsg = ex.Message;
@@ -317,11 +321,11 @@ namespace SafeAuthenticator.Services
             });
         }
 
-        private void OnNetworkDisconnected(object obj, EventArgs args)
+        private void InternetConnectivityChanged(object obj, EventArgs args)
         {
             Debug.WriteLine("Network Observer Fired");
 
-            if (obj == null || _authenticator == null || obj as Authenticator != _authenticator)
+            if (_authenticator == null || Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 return;
             }
