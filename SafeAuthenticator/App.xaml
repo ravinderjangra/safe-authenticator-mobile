@@ -24,6 +24,7 @@
                 <On Platform="iOS" Value="45" />
             </OnPlatform>
             <OnPlatform x:TypeArguments="system:Double" x:Key="EntryHeightRequest">
+                <On Platform="Android" Value="40" />
                 <On Platform="iOS" Value="40" />
             </OnPlatform>
 
