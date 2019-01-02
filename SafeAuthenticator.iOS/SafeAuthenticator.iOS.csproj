@@ -124,7 +124,6 @@
     <Content Include="..\SafeAuthenticator\log.toml">
       <Link>log.toml</Link>
     </Content>
-    <BundleResource Include="Resources\auth_start.png" />
     <BundleResource Include="Resources\authLogo.png" />
     <BundleResource Include="Resources\clipboardPaste.png" />
     <BundleResource Include="Resources\documents.png" />
@@ -134,12 +133,13 @@
     <BundleResource Include="Resources\pictures.png" />
     <BundleResource Include="Resources\publicContainer.png" />
     <BundleResource Include="Resources\publicNames.png" />
-    <BundleResource Include="Resources\settingsIcon.png" />
     <BundleResource Include="Resources\tutorial1.png" />
     <BundleResource Include="Resources\tutorial2.png" />
     <BundleResource Include="Resources\videos.png" />
     <BundleResource Include="Resources\HidePasswordIcon.png" />
     <BundleResource Include="Resources\ShowPasswordIcon.png" />
+    <BundleResource Include="Resources\settingsIcon%402.png" />
+    <BundleResource Include="Resources\settingsIcon%403x.png" />
     <None Include="app.config" />
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
@@ -168,12 +168,6 @@
     <BundleResource Include="Resources\profile_generic%403x.png" />
     <BundleResource Include="Resources\slideout.png" />
     <BundleResource Include="Resources\slideout%402x.png" />
-    <BundleResource Include="Resources\tab_about.png" />
-    <BundleResource Include="Resources\tab_about%402x.png" />
-    <BundleResource Include="Resources\tab_about%403x.png" />
-    <BundleResource Include="Resources\tab_feed.png" />
-    <BundleResource Include="Resources\tab_feed%402x.png" />
-    <BundleResource Include="Resources\tab_feed%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SafeAuthenticator\SafeAuthenticator.csproj">
