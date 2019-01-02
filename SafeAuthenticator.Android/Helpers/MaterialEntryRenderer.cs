@@ -12,7 +12,7 @@ using Android.Views.InputMethods;
 using Android.Widget;
 using Java.Lang;
 using SafeAuthenticator.Controls;
-using SafeAuthenticator.Droid.ControlsRenderers;
+using SafeAuthenticator.Droid.Helpers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using AColor = Android.Graphics.Color;
@@ -21,7 +21,7 @@ using Color = Xamarin.Forms.Color;
 using FormsAppCompat = Xamarin.Forms.Platform.Android.AppCompat;
 
 [assembly: ExportRenderer(typeof(MaterialEntry), typeof(MaterialEntryRenderer))]
-namespace SafeAuthenticator.Droid.ControlsRenderers
+namespace SafeAuthenticator.Droid.Helpers
 {
     public class MaterialEntryRenderer : FormsAppCompat.ViewRenderer<MaterialEntry, TextInputLayout>,
         ITextWatcher,

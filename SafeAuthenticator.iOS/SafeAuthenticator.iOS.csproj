@@ -130,6 +130,19 @@
     <BundleResource Include="Resources\hide_pass.png" />
     <BundleResource Include="Resources\auth_start.png" />
     <BundleResource Include="Resources\show_pass.png" />
+    <BundleResource Include="Resources\authLogo.png" />
+    <BundleResource Include="Resources\clipboardPaste.png" />
+    <BundleResource Include="Resources\documents.png" />
+    <BundleResource Include="Resources\downloads.png" />
+    <BundleResource Include="Resources\MData.png" />
+    <BundleResource Include="Resources\music.png" />
+    <BundleResource Include="Resources\pictures.png" />
+    <BundleResource Include="Resources\publicContainer.png" />
+    <BundleResource Include="Resources\publicNames.png" />
+    <BundleResource Include="Resources\settingsIcon.png" />
+    <BundleResource Include="Resources\tutorial1.png" />
+    <BundleResource Include="Resources\tutorial2.png" />
+    <BundleResource Include="Resources\videos.png" />
     <None Include="app.config" />
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
@@ -141,8 +154,14 @@
     <Compile Include="..\SafeAuthenticator\PlatformSpecific\AuthBindings.Manual.cs">
       <Link>Helpers\AuthBindings.Manual.cs</Link>
     </Compile>
+    <Compile Include="Extensions\KeyboardExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Extensions\ColorExtension.cs" />
     <Compile Include="Helpers\FileOps.cs" />
+    <Compile Include="Helpers\FloatLabeledTextField.cs" />
+    <Compile Include="Extensions\FontExtensions.cs" />
+    <Compile Include="Helpers\MaterialEntryRenderer.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
   </ItemGroup>
