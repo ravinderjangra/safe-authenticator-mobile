@@ -20,8 +20,8 @@
                              Spacing="10">
                     <Image Source="authLogo"
                            Aspect="AspectFit"
-                           HeightRequest="86"
-                           WidthRequest="86"
+                           HeightRequest="90"
+                           WidthRequest="90"
                            HorizontalOptions="Center" />
 
                     <Label Text="SAFE Authenticator"
@@ -54,9 +54,14 @@
                 </StackLayout>
 
                 <Label Text="Need any help?"
-                       HorizontalOptions="Center"
-                       VerticalOptions="End"
-                       FontAttributes="Bold" />
+                        HorizontalOptions="Center"
+                        VerticalOptions="End"
+                        FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1" 
+                                              Command="{Binding NeedHelpCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

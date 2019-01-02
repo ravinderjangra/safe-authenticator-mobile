@@ -19,7 +19,7 @@ namespace SafeAuthenticator.Droid
     [Activity(
          Label = "@string/app_name",
          Theme = "@style/MyTheme",
-         MainLauncher = true,
+         MainLauncher = false,
          LaunchMode = LaunchMode.SingleTask,
          ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     [IntentFilter(

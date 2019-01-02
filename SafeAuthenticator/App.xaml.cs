@@ -12,6 +12,7 @@ namespace SafeAuthenticator
     public partial class App : Application
     {
         internal const string AppName = "SAFE Authenticator";
+        private const string IsFirstLaunch = "IsFirstLaunch";
         private static volatile bool _isBackgrounded;
 
         internal static bool IsBackgrounded
@@ -42,8 +43,15 @@ namespace SafeAuthenticator
 
         private Page NewStartupPage()
         {
-            // return new LoginPage();
-            return new TutorialPage();
+            if (!Current.Properties.ContainsKey(IsFirstLaunch))
+            {
+                Current.Properties[IsFirstLaunch] = true;
+                return new TutorialPage();
+            }
+            else
+            {
+                return new LoginPage();
+            }
         }
 
         protected override async void OnStart()

@@ -34,7 +34,7 @@
                         <Label Text="Account Status" 
                                Style="{StaticResource DefaultStyle}"   />
                         <Label Text="{Binding AccountStorageInfo}" 
-                               TextColor="#C1C1C1"
+                               TextColor="{StaticResource SecondaryTitleColor}"
                                LineBreakMode="TailTruncation"/>
                     </StackLayout>
 
@@ -49,8 +49,7 @@
                         <Label Text="Auto Reconnect"
                                Style="{StaticResource DefaultStyle}"
                                VerticalOptions="Center"/>
-                        <Switch  OnColor="#0074E4"
-                                 Grid.Column="1"
+                        <Switch  Grid.Column="1"
                                  HorizontalOptions="End"
                                  VerticalOptions="Center"
                                  IsToggled="{Binding AuthReconnect}"/>
@@ -64,14 +63,26 @@
                     <Label Text="Help" 
                            Style="{StaticResource TitleStyle}" />
                     <Label Text="FAQs" 
-                           Style="{StaticResource DefaultStyle}" />
+                           Style="{StaticResource DefaultStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" 
+                                                  Command="{Binding FAQCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+
                     <Label Text="Privacy statement" 
-                           Style="{StaticResource DefaultStyle}" />
+                           Style="{StaticResource DefaultStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" 
+                                                  Command="{Binding PrivacyInfoCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    
                     <StackLayout>
                         <Label Text="Application version" 
                                Style="{StaticResource DefaultStyle}" />
                         <Label Text="0.1.0" 
-                               TextColor="#C1C1C1" 
+                               TextColor="{StaticResource SecondaryTitleColor}" 
                                HorizontalOptions="Start" />
                     </StackLayout>
                 </StackLayout>

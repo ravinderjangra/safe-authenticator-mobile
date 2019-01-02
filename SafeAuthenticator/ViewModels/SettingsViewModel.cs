@@ -1,5 +1,7 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using SafeAuthenticator.Helpers;
+using SafeAuthenticator.Native;
 using Xamarin.Forms;
 
 namespace SafeAuthenticator.ViewModels
@@ -7,6 +9,10 @@ namespace SafeAuthenticator.ViewModels
     class SettingsViewModel : BaseViewModel
     {
         public ICommand LogoutCommand { get; }
+
+        public ICommand FAQCommand { get; }
+
+        public ICommand PrivacyInfoCommand { get; }
 
         private string _accountStorageInfo;
 
@@ -34,12 +40,34 @@ namespace SafeAuthenticator.ViewModels
         {
             LogoutCommand = new Command(OnLogout);
             AccountStorageInfo = "fetching account info...";
+
+            FAQCommand = new Command(() =>
+            {
+                Device.OpenUri(new Uri(@"https://safenetforum.org/t/trust-level-1-basic-user-requirements/15200"));
+            });
+
+            PrivacyInfoCommand = new Command(() =>
+            {
+                Device.OpenUri(new Uri(@"https://maidsafe.net/privacy"));
+            });
         }
 
         public async void GetAccountInfo()
         {
-            var acctStorageTuple = await Authenticator.GetAccountInfoAsync();
-            AccountStorageInfo = $"{acctStorageTuple.Item1} / {acctStorageTuple.Item2}";
+            try
+            {
+                var acctStorageTuple = await Authenticator.GetAccountInfoAsync();
+                AccountStorageInfo = $"{acctStorageTuple.Item1} / {acctStorageTuple.Item2}";
+            }
+            catch (FfiException ex)
+            {
+                var errorMessage = Utilities.GetErrorMessage(ex);
+                await Application.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", $"Log in Failed: {ex.Message}", "OK");
+            }
         }
 
         private async void OnLogout()
@@ -50,6 +78,7 @@ namespace SafeAuthenticator.ViewModels
                 "Logout",
                 "Cancel"))
             {
+                AuthReconnect = false;
                 await Authenticator.LogoutAsync();
                 MessagingCenter.Send(this, MessengerConstants.NavLoginPage);
             }
