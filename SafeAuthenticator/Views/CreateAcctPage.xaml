@@ -14,12 +14,12 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Spacing="10">
             <cv:CarouselViewControl
                 ShowArrows="False"
                 ShowIndicators="False"
                 IsSwipeEnabled="False"
-                HeightRequest="300"
+                HeightRequest="350"
                 PositionSelectedCommand="{Binding CarouselPageChangeCommand}"
                 Position="{Binding CarouselPagePosition}"
                 Margin="0,40,0,0">
@@ -28,7 +28,7 @@
 
                         <!-- Invitation -->
                         <StackLayout>
-                            <StackLayout Spacing="20">
+                            <StackLayout Spacing="10">
                                 <Label Text="But first, you need an invitation token"
                                        FontAttributes="Bold"
                                        FontSize="16" />
@@ -67,10 +67,10 @@
                                 <StackLayout Orientation="Horizontal"
                                              Margin="0,20,0,0">
 
-                                    <Entry Placeholder="Invitation token"
-                                           Text="{Binding Invitation}"
-                                           HorizontalTextAlignment="Start"
-                                           HorizontalOptions="FillAndExpand" />
+                                    <controls:MaterialEntry Placeholder="Invitation token"
+                                                            Text="{Binding Invitation}"
+                                                            HorizontalOptions="FillAndExpand" 
+                                                            ErrorDisplay="None" />
 
                                     <Image Source="clipboardPaste"
                                            HeightRequest="30"
@@ -87,9 +87,8 @@
                             </StackLayout>
                         </StackLayout>
 
-
                         <!-- Account Secret -->
-                        <StackLayout Spacing="20">
+                        <StackLayout Spacing="10">
                             <Label Text="Account Secret"
                                    FontAttributes="Bold"
                                    FontSize="16" />
@@ -109,9 +108,8 @@
                                                     ErrorText="{Binding AcctSecretErrorMsg}" />
                         </StackLayout>
 
-
                         <!-- Account Password -->
-                        <StackLayout Spacing="20">
+                        <StackLayout Spacing="10">
                             <Label Text="Account Password"
                                    FontAttributes="Bold"
                                    FontSize="16" />
@@ -135,13 +133,12 @@
                     </x:Array>
                 </cv:CarouselViewControl.ItemsSource>
             </cv:CarouselViewControl>
+
             <Button Text="CONTINUE"
-                    Margin="0,20,0,0"
                     Command="{Binding CarouselContinueCommand}" />
 
             <Button Text="BACK"
                     HorizontalOptions="Center"
-                    Margin="0,10,0,0"
                     Command="{Binding CarouselBackCommand}"
                     IsVisible="{Binding IsBackButtonVisible}"
                     BackgroundColor="Transparent"

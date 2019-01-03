@@ -67,10 +67,19 @@
     <None Update="Controls\AuthorisationPopup.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+    <None Update="Controls\ContainerPermissionViewCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
     <None Update="Controls\ContainerView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+    <None Update="Controls\MDataPermissionViewCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
     <None Update="Controls\RegisteredAppView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\RegisteredAppViewCell.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Views\AppInfoPage.xaml">
@@ -89,6 +98,9 @@
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Views\SettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\TutorialPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Views\WebPage.xaml">

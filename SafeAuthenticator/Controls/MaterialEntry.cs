@@ -5,6 +5,14 @@ namespace SafeAuthenticator.Controls
 {
     public class MaterialEntry : Entry
     {
+        public MaterialEntry()
+        {
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                HeightRequest = 40;
+            }
+        }
+
         public static readonly BindableProperty ErrorTextProperty = BindableProperty.Create(
             nameof(ErrorText),
             typeof(string),
