@@ -58,12 +58,15 @@
 
                 <BoxView HeightRequest="0.5" Color="DarkGray" />
 
-                <StackLayout Padding="16, 0" Spacing="15">
+                <StackLayout Padding="16, 0" Spacing="10">
 
                     <Label Text="Help" 
                            Style="{StaticResource TitleStyle}" />
                     <Label Text="FAQs" 
-                           Style="{StaticResource DefaultStyle}">
+                           Style="{StaticResource DefaultStyle}"
+                           HorizontalOptions="Start"
+                           HeightRequest="30"
+                           >
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1" 
                                                   Command="{Binding FAQCommand}"/>
@@ -71,7 +74,9 @@
                     </Label>
 
                     <Label Text="Privacy statement" 
-                           Style="{StaticResource DefaultStyle}">
+                           Style="{StaticResource DefaultStyle}"
+                           HorizontalOptions="Start"
+                            HeightRequest="30">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1" 
                                                   Command="{Binding PrivacyInfoCommand}"/>
@@ -87,12 +92,13 @@
                     </StackLayout>
                 </StackLayout>
 
-                <BoxView HeightRequest="0.5" 
-                         Color="DarkGray" />
+                <BoxView HeightRequest="0.5"  Color="DarkGray" />
 
-                <StackLayout Padding="16, 0" Spacing="15">
+                <StackLayout Padding="16, 0" Spacing="10">
                     <Label Text="Logout" 
-                           Style="{StaticResource LogoutStyle}" >
+                           Style="{StaticResource LogoutStyle}" 
+                           HorizontalOptions="Start"
+                            HeightRequest="30">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1" 
                                                   Command="{Binding LogoutCommand}"/>

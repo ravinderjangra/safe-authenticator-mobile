@@ -23,7 +23,8 @@
                HeightRequest="25"
                WidthRequest="25"
                VerticalOptions="Center"
-               HorizontalOptions="Center" />
+               HorizontalOptions="Center"
+               Grid.RowSpan="2"/>
 
         <StackLayout VerticalOptions="FillAndExpand"
                      Grid.Column="1"
