@@ -1,4 +1,5 @@
-﻿using CoreAnimation;
+﻿using System.Drawing;
+using CoreAnimation;
 using CoreGraphics;
 using SafeAuthenticator.Controls;
 using SafeAuthenticator.iOS.Helpers;
@@ -16,14 +17,14 @@ namespace SafeAuthenticator.iOS.Helpers
         {
             base.OnElementChanged(e);
 
-            if (e.OldElement != null || e.NewElement == null)
+            if (Control == null)
             {
                 return;
             }
 
             var buttonRect = UIButton.FromType(UIButtonType.Custom);
-            buttonRect.ImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
-            buttonRect.SetImage(new UIImage("music"), UIControlState.Normal);
+            buttonRect.Frame = new RectangleF(0, 0, 30, 30);
+            buttonRect.SetImage(new UIImage("ShowPasswordIcon"), UIControlState.Normal);
             buttonRect.TouchUpInside += (sender, e1) =>
             {
                 if (Control.SecureTextEntry)
@@ -40,23 +41,33 @@ namespace SafeAuthenticator.iOS.Helpers
 
             Control.ShouldChangeCharacters += (textField, range, replacementString) =>
             {
-                string text = Control.Text;
+                var text = Control.Text;
                 var result = text.Substring(0, (int)range.Location) + replacementString + text.Substring((int)range.Location + (int)range.Length);
                 Control.Text = result;
                 return false;
             };
 
-            Control.RightViewMode = UITextFieldViewMode.Always;
-            Control.RightView = buttonRect;
-
             Control.BorderStyle = UITextBorderStyle.None;
-            var borderLayer = new CALayer
+            var borderLayer = new CALayer();
+
+            if (Element.IsPassword)
             {
-                MasksToBounds = true,
-                Frame = new CGRect(0f, Frame.Height - 1, Frame.Width, 1f),
-                BorderColor = Color.FromHex("#0074e4").ToCGColor(),
-                BorderWidth = 2.0f
-            };
+                Control.RightViewMode = UITextFieldViewMode.Always;
+                Control.RightView = buttonRect;
+                borderLayer.Frame = new CGRect(
+                    0f,
+                    Element.HeightRequest - 1,
+                    Frame.Width + Control.RightView.Frame.Width + 10,
+                    1f);
+                borderLayer.BorderColor = Color.FromHex("#0074e4").ToCGColor();
+                borderLayer.BorderWidth = 2.0f;
+            }
+            else
+            {
+                borderLayer.Frame = new CGRect(0f, Element.HeightRequest - 1, Frame.Width, 1f);
+                borderLayer.BorderColor = Color.FromHex("#0074e4").ToCGColor();
+                borderLayer.BorderWidth = 2.0f;
+            }
 
             Control.Layer.AddSublayer(borderLayer);
             Control.Layer.MasksToBounds = true;
