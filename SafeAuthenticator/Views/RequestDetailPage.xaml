@@ -43,8 +43,8 @@
                        Margin="20, 0">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="{Binding AppName}" FontSize="14" />
-                            <Span Text="&#10;is requesting access" FontSize="12" />
+                            <Span Text="{Binding AppName}" FontSize="16" />
+                            <Span Text="&#10;is requesting access" FontSize="13" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
