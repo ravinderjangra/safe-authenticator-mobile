@@ -178,10 +178,7 @@ namespace SafeAuthenticator.ViewModels
                                 AcctSecretErrorMsg = "Secret needs to be stronger";
                                 throw new InvalidOperationException();
                             }
-                            else
-                            {
-                                AcctSecretErrorMsg = string.Empty;
-                            }
+                            AcctSecretErrorMsg = string.Empty;
                         });
                     }
                 }

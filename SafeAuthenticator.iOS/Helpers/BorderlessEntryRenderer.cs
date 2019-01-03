@@ -17,10 +17,8 @@ namespace SafeAuthenticator.iOS.Helpers
         {
             base.OnElementChanged(e);
 
-            if (Control == null)
-            {
+            if (e.OldElement != null || e.NewElement == null)
                 return;
-            }
 
             var buttonRect = UIButton.FromType(UIButtonType.Custom);
             buttonRect.Frame = new RectangleF(0, 0, 30, 30);
@@ -39,18 +37,10 @@ namespace SafeAuthenticator.iOS.Helpers
                 }
             };
 
-            Control.ShouldChangeCharacters += (textField, range, replacementString) =>
-            {
-                var text = Control.Text;
-                var result = text.Substring(0, (int)range.Location) + replacementString + text.Substring((int)range.Location + (int)range.Length);
-                Control.Text = result;
-                return false;
-            };
-
             Control.BorderStyle = UITextBorderStyle.None;
             var borderLayer = new CALayer();
 
-            if (Element.IsPassword)
+            if (((MaterialEntry)Element).IsPassword)
             {
                 Control.RightViewMode = UITextFieldViewMode.Always;
                 Control.RightView = buttonRect;
@@ -60,7 +50,7 @@ namespace SafeAuthenticator.iOS.Helpers
                     Frame.Width + Control.RightView.Frame.Width + 10,
                     1f);
                 borderLayer.BorderColor = Color.FromHex("#0074e4").ToCGColor();
-                borderLayer.BorderWidth = 2.0f;
+                borderLayer.BorderWidth = 3.0f;
             }
             else
             {
