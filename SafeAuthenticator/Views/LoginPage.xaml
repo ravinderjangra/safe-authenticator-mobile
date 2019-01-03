@@ -20,14 +20,15 @@
                              Spacing="10">
                     <Image Source="authLogo"
                            Aspect="AspectFit"
-                           HeightRequest="90"
-                           WidthRequest="90"
+                           HeightRequest="95"
+                           WidthRequest="95"
                            HorizontalOptions="Center" />
 
                     <Label Text="SAFE Authenticator"
                            HorizontalOptions="Center"
                            FontAttributes="Bold"
-                           Margin="0,10,0,0" />
+                           Margin="0,10,0,0"
+                           FontSize="Medium"/>
 
                     <controls:MaterialEntry Placeholder="Account Secret"
                                             IsPassword="True"

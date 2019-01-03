@@ -49,6 +49,19 @@
                     </Label.FormattedText>
                 </Label>
 
+                <Label Text="No container permissions requested"
+                       IsVisible="False"
+                       Margin="0,20,0,0">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label"
+                                     Binding="{Binding Containers.Count}"
+                                     Value="0">
+                            <Setter Property="IsVisible"
+                                    Value="True"/>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                
                 <ListView x:Name="ContainerPermissionListView"
                           HasUnevenRows="True"
                           SeparatorVisibility="None"

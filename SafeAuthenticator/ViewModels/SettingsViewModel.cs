@@ -73,7 +73,7 @@ namespace SafeAuthenticator.ViewModels
         private async void OnLogout()
         {
             if (await Application.Current.MainPage.DisplayAlert(
-                "Confirm Logout",
+                "Logout",
                 "Are you sure you want to logout?",
                 "Logout",
                 "Cancel"))

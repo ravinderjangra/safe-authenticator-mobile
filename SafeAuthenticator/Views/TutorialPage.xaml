@@ -12,26 +12,30 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <StackLayout Spacing="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
             <cv:CarouselViewControl 
                 ShowArrows="False"
-                ShowIndicators="False" 
+                ShowIndicators="False"
                 IsSwipeEnabled="False"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand"
                 PositionSelectedCommand="{Binding CarouselPageChangeCommand}"
                 Position="{Binding CarouselPagePosition}"
-                Margin="0,30,0,30">
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
                 <cv:CarouselViewControl.ItemsSource>
                     <x:Array Type="{x:Type View}">
 
                         <!-- Tutorial Page1 -->
-                        <StackLayout Spacing="16">
+                        <StackLayout Spacing="20">
                             <StackLayout HorizontalOptions="CenterAndExpand" 
                                          VerticalOptions="CenterAndExpand">
-                                <Image Source="authLogo" 
-                                       HeightRequest="90"
-                                       WidthRequest="90"/>
+
+                                <Image Source="authLogo"
+                                   HeightRequest="95"
+                                   WidthRequest="95"/>
 
                                 <Label Text="What is the SAFE Authenticator?"
                                        FontAttributes="Bold"
@@ -39,13 +43,13 @@
                                        Margin="0,100,0,0"/>
 
                                 <Label Text="The Authenticator enables users to securely authenticate themselves onto the SAFE Network and protects network login credentials from apps"
-                                       HorizontalTextAlignment="Start"/>
+                                   HorizontalTextAlignment="Start"/>
                             </StackLayout>
                         </StackLayout>
 
-
+                        
                         <!-- Tutorial Page2 -->
-                        <StackLayout Spacing="50">
+                        <StackLayout>
                             <StackLayout HorizontalOptions="CenterAndExpand" 
                                          VerticalOptions="CenterAndExpand">
 
@@ -53,10 +57,13 @@
                                        FontAttributes="Bold"
                                        HorizontalTextAlignment="Center"/>
 
-                                <Label Text="Review and grant permissions to apps" 
-                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="Review and grant permissions to apps"  
+                                       HorizontalTextAlignment="Center"
+                                       Margin="0,15,0,0"/>
 
-                                <Image Source="tutorial1"/>
+                                <Image Source="tutorial1"
+                                       Margin="0,30,0,0"
+                                       Aspect="AspectFit"/>
                             </StackLayout>
                         </StackLayout>
 
@@ -71,9 +78,12 @@
                                        HorizontalTextAlignment="Center"/>
 
                                 <Label Text="View all authorised apps and their permissions" 
-                                       HorizontalTextAlignment="Center"/>
+                                       HorizontalTextAlignment="Center"
+                                       Margin="0,15,0,0"/>
 
-                                <Image Source="tutorial2"/>
+                                <Image Source="tutorial2"
+                                       Margin="0,30,0,0"
+                                       Aspect="AspectFit"/>
                             </StackLayout>
                         </StackLayout>
 
@@ -81,16 +91,18 @@
                 </cv:CarouselViewControl.ItemsSource>
             </cv:CarouselViewControl>
 
-            <StackLayout>
+            <StackLayout Grid.Row="1"
+                         VerticalOptions="End">
                 <Button Text="{Binding SecondaryButtonText}"
                         Command="{Binding  SecondaryButtonCommand}"
                         BackgroundColor="Transparent"
                         TextColor="{StaticResource Primary}"
-                        Margin="0,20,0,0"/>
+                        Margin="0,20,0,0"
+                        HorizontalOptions="Center"/>
 
                 <Button Text="{Binding PrimaryButtonText}" 
                         Command="{Binding  PrimaryButtonCommand}"/>
             </StackLayout>
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

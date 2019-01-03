@@ -6,9 +6,7 @@
   </item>
   <item>
     <bitmap
-    android:src ="@drawable/authLogo"
-    android:gravity="center"
-    android:height="30dp"
-    android:width="30dp"/>
+    android:src="@drawable/authLogo"
+    android:gravity= "center"/>
   </item>
 </layer-list>

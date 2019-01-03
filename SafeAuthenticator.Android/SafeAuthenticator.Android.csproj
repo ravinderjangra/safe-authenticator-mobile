@@ -213,7 +213,6 @@
   <Import Project="$(MSBuildThisFileDirectory)..\CodeStyles.targets" />
   <ItemGroup>
     <Content Include="..\stylecop.json" Link="stylecop.json" />
-    <AndroidResource Include="Resources\drawable\authLogo.png" />
     <AndroidResource Include="Resources\drawable\music.png" />
     <AndroidResource Include="Resources\drawable\documents.png" />
     <AndroidResource Include="Resources\drawable\downloads.png" />
@@ -231,6 +230,11 @@
     <AndroidResource Include="Resources\drawable-xhdpi\settingsIcon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\settingsIcon.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\settingsIcon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\authLogo.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\authLogo.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\authLogo.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\authLogo.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\authLogo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="CheckNativeLibs" BeforeTargets="PrepareForBuild">
