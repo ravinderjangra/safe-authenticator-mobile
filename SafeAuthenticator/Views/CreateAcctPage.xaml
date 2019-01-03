@@ -130,7 +130,6 @@
                                                         Text="{Binding ConfirmAcctPassword}"
                                                         ErrorText="{Binding AcctPasswordErrorMsg}" />
                             </StackLayout>
-
                         </x:Array>
                     </cv:CarouselViewControl.ItemsSource>
                 </cv:CarouselViewControl>
