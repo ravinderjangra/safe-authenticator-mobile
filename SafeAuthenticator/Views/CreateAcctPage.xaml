@@ -101,7 +101,8 @@
                                 <controls:MaterialEntry Placeholder="Account secret"
                                                         IsPassword="True"
                                                         Text="{Binding AcctSecret}"
-                                                        ErrorDisplay="None" />
+                                                        ErrorDisplay="None"
+                                                        Margin="0,50,0,0" />
 
                                 <controls:MaterialEntry Placeholder="Confirm account secret"
                                                         IsPassword="True"
@@ -123,7 +124,8 @@
                                 <controls:MaterialEntry Placeholder="Account password"
                                                         IsPassword="True"
                                                         Text="{Binding AcctPassword}"
-                                                        ErrorDisplay="None" />
+                                                        ErrorDisplay="None"
+                                                        Margin="0,50,0,0" />
 
                                 <controls:MaterialEntry Placeholder="Confirm account password"
                                                         IsPassword="True"

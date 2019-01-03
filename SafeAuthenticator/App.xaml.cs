@@ -15,6 +15,8 @@ namespace SafeAuthenticator
         private const string IsFirstLaunch = "IsFirstLaunch";
         private static volatile bool _isBackgrounded;
 
+        private AuthService Service => DependencyService.Get<AuthService>();
+
         internal static bool IsBackgrounded
         {
             get => _isBackgrounded;
@@ -57,14 +59,16 @@ namespace SafeAuthenticator
         protected override async void OnStart()
         {
             base.OnStart();
-            await DependencyService.Get<AuthService>().CheckAndReconnect();
+            if (Service.AuthReconnect)
+                await Service.CheckAndReconnect();
         }
 
         protected override async void OnResume()
         {
             base.OnResume();
             IsBackgrounded = false;
-            await DependencyService.Get<AuthService>().CheckAndReconnect();
+            if (Service.AuthReconnect)
+                await Service.CheckAndReconnect();
         }
 
         protected override async void OnSleep()

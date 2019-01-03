@@ -74,14 +74,14 @@ namespace SafeAuthenticator.Services
             CredentialCache = new CredentialCacheService();
             Connectivity.ConnectivityChanged += InternetConnectivityChanged;
 
-            // Authenticator.Disconnected += OnNetworkDisconnected;
+            Authenticator.Disconnected += OnNetworkDisconnected;
             Task.Run(async () => await InitLoggingAsync());
         }
 
         public void Dispose()
         {
             // ReSharper disable once DelegateSubtraction
-            // Authenticator.Disconnected -= OnNetworkDisconnected;
+            Authenticator.Disconnected -= OnNetworkDisconnected;
             FreeState();
             GC.SuppressFinalize(this);
         }
@@ -91,7 +91,7 @@ namespace SafeAuthenticator.Services
             await _reconnectSemaphore.WaitAsync();
             try
             {
-                if (_authenticator == null)
+                if (AuthReconnect && _authenticator == null)
                 {
                     var (location, password) = await CredentialCache.Retrieve();
                     using (UserDialogs.Instance.Loading("Reconnecting to Network"))
@@ -101,18 +101,13 @@ namespace SafeAuthenticator.Services
                     }
                     return;
                 }
-
-                if (_authenticator.IsDisconnected)
+                else if (_authenticator.IsDisconnected)
                 {
                     using (UserDialogs.Instance.Loading("Reconnecting to Network"))
                     {
                         await LoginAsync(_secret, _password);
                     }
                 }
-            }
-            catch (NullReferenceException)
-            {
-                // ignore if secret/password is not cached
             }
             catch (FfiException ex)
             {
@@ -323,9 +318,22 @@ namespace SafeAuthenticator.Services
 
         private void InternetConnectivityChanged(object obj, EventArgs args)
         {
+            Device.BeginInvokeOnMainThread(
+                async () =>
+                {
+                    if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+                    {
+                        return;
+                    }
+                    await CheckAndReconnect();
+                });
+        }
+
+        private void OnNetworkDisconnected(object obj, EventArgs args)
+        {
             Debug.WriteLine("Network Observer Fired");
 
-            if (_authenticator == null || Connectivity.NetworkAccess != NetworkAccess.Internet)
+            if (obj == null || _authenticator == null || obj as Authenticator != _authenticator)
             {
                 return;
             }

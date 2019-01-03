@@ -30,15 +30,27 @@
 
     <StackLayout VerticalOptions="Center"
                  Padding="20,0"
-                 HorizontalOptions="FillAndExpand"
-                 HeightRequest="300">
+                 HorizontalOptions="FillAndExpand">
 
         <Frame Padding="0"
                BackgroundColor="White">
 
             <StackLayout Spacing="10"
-                         Padding="16">
-                <Label HorizontalTextAlignment="Center"
+                         Padding="16"
+                         HeightRequest="250">
+                <StackLayout.Triggers>
+                    <MultiTrigger TargetType="StackLayout">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding Containers.Count, Converter={StaticResource IsCollectionEmptyConverter}}"
+                               Value="true"/>
+                            <BindingCondition Binding="{Binding MData.Count, Converter={StaticResource IsCollectionEmptyConverter}}"
+                               Value="true"/>
+                        </MultiTrigger.Conditions>
+                        <Setter Property="HeightRequest" Value="140" />
+                    </MultiTrigger>
+                </StackLayout.Triggers>
+
+                    <Label HorizontalTextAlignment="Center"
                        HorizontalOptions="Center"
                        Margin="20, 0">
                     <Label.FormattedText>
@@ -49,23 +61,10 @@
                     </Label.FormattedText>
                 </Label>
 
-                <Label Text="No container permissions requested"
-                       IsVisible="False"
-                       Margin="0,20,0,0">
-                    <Label.Triggers>
-                        <DataTrigger TargetType="Label"
-                                     Binding="{Binding Containers.Count}"
-                                     Value="0">
-                            <Setter Property="IsVisible"
-                                    Value="True"/>
-                        </DataTrigger>
-                    </Label.Triggers>
-                </Label>
-                
                 <ListView x:Name="ContainerPermissionListView"
                           HasUnevenRows="True"
                           SeparatorVisibility="None"
-                          IsVisible="{Binding IsMDataRequest, Converter={StaticResource InverseBoolean}}" 
+                          IsVisible="{Binding IsMDataRequest, Converter={StaticResource InverseBoolean}}"
                           ItemsSource="{Binding Containers}">
 
                     <ListView.Behaviors>
@@ -103,7 +102,7 @@
                             BackgroundColor="Transparent"
                             TextColor="{StaticResource Primary}"
                             Clicked="Send_Response"
-                            x:Name="DenyButton" />
+                            x:Name="DenyButton"/>
 
                     <Button Text="ALLOW"
                             HorizontalOptions="End"

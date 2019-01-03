@@ -31,6 +31,8 @@ namespace SafeAuthenticator.ViewModels
 
         public RequestDetailViewModel(IpcReq req)
         {
+            Containers = new ObservableRangeCollection<ContainerPermissionsModel>();
+            MData = new ObservableRangeCollection<MDataModel>();
             var requestType = req.GetType();
             if (requestType == typeof(AuthIpcReq))
             {
