@@ -5,104 +5,106 @@
              xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels"
              x:Class="SafeAuthenticator.Views.TutorialPage"
              NavigationPage.HasNavigationBar="False"
-             Padding="25">
+             >
 
     <ContentPage.BindingContext>
         <viewModels:TutorialViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
-            <cv:CarouselViewControl 
-                ShowArrows="False"
-                ShowIndicators="False"
-                IsSwipeEnabled="False"
-                PositionSelectedCommand="{Binding CarouselPageChangeCommand}"
-                Position="{Binding CarouselPagePosition}"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand">
-                <cv:CarouselViewControl.ItemsSource>
-                    <x:Array Type="{x:Type View}">
+        <ScrollView Padding="25">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <cv:CarouselViewControl 
+                    ShowArrows="False"
+                    ShowIndicators="False"
+                    IsSwipeEnabled="False"
+                    PositionSelectedCommand="{Binding CarouselPageChangeCommand}"
+                    Position="{Binding CarouselPagePosition}"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <cv:CarouselViewControl.ItemsSource>
+                        <x:Array Type="{x:Type View}">
 
-                        <!-- Tutorial Page1 -->
-                        <StackLayout Spacing="20">
-                            <StackLayout HorizontalOptions="CenterAndExpand" 
-                                         VerticalOptions="CenterAndExpand">
+                            <!-- Tutorial Page1 -->
+                            <StackLayout Spacing="20">
+                                <StackLayout HorizontalOptions="CenterAndExpand" 
+                                             VerticalOptions="CenterAndExpand">
 
-                                <Image Source="authLogo"
-                                   HeightRequest="95"
-                                   WidthRequest="95"/>
+                                    <Image Source="authLogo"
+                                       HeightRequest="95"
+                                       WidthRequest="95"/>
 
-                                <Label Text="What is the SAFE Authenticator?"
-                                       FontAttributes="Bold"
-                                       HorizontalTextAlignment="Start"
-                                       Margin="0,100,0,0"/>
+                                    <Label Text="What is the SAFE Authenticator?"
+                                           FontAttributes="Bold"
+                                           HorizontalTextAlignment="Start"
+                                           Margin="0,100,0,0"/>
 
-                                <Label Text="The Authenticator enables users to securely authenticate themselves onto the SAFE Network and protects network login credentials from apps"
-                                   HorizontalTextAlignment="Start"/>
+                                    <Label Text="The Authenticator enables users to securely authenticate themselves onto the SAFE Network and protects network login credentials from apps"
+                                       HorizontalTextAlignment="Start"/>
+                                </StackLayout>
                             </StackLayout>
-                        </StackLayout>
 
                         
-                        <!-- Tutorial Page2 -->
-                        <StackLayout>
-                            <StackLayout HorizontalOptions="CenterAndExpand" 
-                                         VerticalOptions="CenterAndExpand">
+                            <!-- Tutorial Page2 -->
+                            <StackLayout>
+                                <StackLayout HorizontalOptions="CenterAndExpand" 
+                                             VerticalOptions="CenterAndExpand">
 
-                                <Label Text="Manage authorisation requests"
-                                       FontAttributes="Bold"
-                                       HorizontalTextAlignment="Center"/>
+                                    <Label Text="Manage authorisation requests"
+                                           FontAttributes="Bold"
+                                           HorizontalTextAlignment="Center"/>
 
-                                <Label Text="Review and grant permissions to apps"  
-                                       HorizontalTextAlignment="Center"
-                                       Margin="0,15,0,0"/>
+                                    <Label Text="Review and grant permissions to apps"  
+                                           HorizontalTextAlignment="Center"
+                                           Margin="0,15,0,0"/>
 
-                                <Image Source="tutorial1"
-                                       Margin="0,30,0,0"
-                                       Aspect="AspectFit"/>
+                                    <Image Source="tutorial1"
+                                           Margin="0,30,0,0"
+                                           Aspect="AspectFit"/>
+                                </StackLayout>
                             </StackLayout>
-                        </StackLayout>
 
 
-                        <!-- Tutorial Page3 -->
-                        <StackLayout Spacing="50">
-                            <StackLayout HorizontalOptions="CenterAndExpand" 
-                                         VerticalOptions="CenterAndExpand">
+                            <!-- Tutorial Page3 -->
+                            <StackLayout Spacing="50">
+                                <StackLayout HorizontalOptions="CenterAndExpand" 
+                                             VerticalOptions="CenterAndExpand">
 
-                                <Label Text="Manage authorisation requests"
-                                       FontAttributes="Bold"
-                                       HorizontalTextAlignment="Center"/>
+                                    <Label Text="Manage authorisation requests"
+                                           FontAttributes="Bold"
+                                           HorizontalTextAlignment="Center"/>
 
-                                <Label Text="View all authorised apps and their permissions" 
-                                       HorizontalTextAlignment="Center"
-                                       Margin="0,15,0,0"/>
+                                    <Label Text="View all authorised apps and their permissions" 
+                                           HorizontalTextAlignment="Center"
+                                           Margin="0,15,0,0"/>
 
-                                <Image Source="tutorial2"
-                                       Margin="0,30,0,0"
-                                       Aspect="AspectFit"/>
+                                    <Image Source="tutorial2"
+                                           Margin="0,30,0,0"
+                                           Aspect="AspectFit"/>
+                                </StackLayout>
                             </StackLayout>
-                        </StackLayout>
 
-                    </x:Array>
-                </cv:CarouselViewControl.ItemsSource>
-            </cv:CarouselViewControl>
+                        </x:Array>
+                    </cv:CarouselViewControl.ItemsSource>
+                </cv:CarouselViewControl>
 
-            <StackLayout Grid.Row="1"
-                         VerticalOptions="End">
-                <Button Text="{Binding SecondaryButtonText}"
-                        Command="{Binding  SecondaryButtonCommand}"
-                        BackgroundColor="Transparent"
-                        TextColor="{StaticResource Primary}"
-                        Margin="0,20,0,0"
-                        HorizontalOptions="Center"/>
+                <StackLayout Grid.Row="1"
+                             VerticalOptions="End">
+                    <Button Text="{Binding SecondaryButtonText}"
+                            Command="{Binding  SecondaryButtonCommand}"
+                            BackgroundColor="Transparent"
+                            TextColor="{StaticResource Primary}"
+                            Margin="0,20,0,0"
+                            HorizontalOptions="Center"/>
 
-                <Button Text="{Binding PrimaryButtonText}" 
-                        Command="{Binding  PrimaryButtonCommand}"/>
-            </StackLayout>
-        </Grid>
+                    <Button Text="{Binding PrimaryButtonText}" 
+                            Command="{Binding  PrimaryButtonCommand}"/>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -33,7 +33,7 @@
                     <controls:MaterialEntry Placeholder="Account Secret"
                                             IsPassword="True"
                                             ErrorDisplay="None"
-                                            Margin="0,30,0,0"
+                                            Margin="0,50,0,0"
                                             Text="{Binding AccountSecret}" />
 
                     <controls:MaterialEntry Placeholder="Account Password"
@@ -57,7 +57,8 @@
                 <Label Text="Need any help?"
                         HorizontalOptions="Center"
                         VerticalOptions="End"
-                        FontAttributes="Bold">
+                        FontAttributes="Bold"
+                       HeightRequest="30">
                     <Label.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1" 
                                               Command="{Binding NeedHelpCommand}"/>
