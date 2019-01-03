@@ -17,11 +17,11 @@ using Xamarin.Forms.Platform.Android;
 namespace SafeAuthenticator.Droid
 {
     [Activity(
-         Label = "@string/app_name",
-         Theme = "@style/MyTheme",
-         MainLauncher = false,
-         LaunchMode = LaunchMode.SingleTask,
-         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+        Label = "@string/app_name",
+        Theme = "@style/MyTheme",
+        MainLauncher = false,
+        LaunchMode = LaunchMode.SingleTask,
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     [IntentFilter(
         new[] { Intent.ActionView },
         Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable },
@@ -105,7 +105,10 @@ namespace SafeAuthenticator.Droid
             }
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        public override void OnRequestPermissionsResult(
+            int requestCode,
+            string[] permissions,
+            [GeneratedEnum] Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -128,7 +131,9 @@ namespace SafeAuthenticator.Droid
             LogUnhandledException(newExc);
         }
 
-        private static void TaskSchedulerOnUnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs exEventArgs)
+        private static void TaskSchedulerOnUnobservedTaskException(
+            object sender,
+            UnobservedTaskExceptionEventArgs exEventArgs)
         {
             var newExc = new Exception("TaskSchedulerOnUnobservedTaskException", exEventArgs.Exception);
             LogUnhandledException(newExc);
