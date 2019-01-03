@@ -12,7 +12,6 @@ namespace SafeAuthenticator.Helpers
     internal static class Utilities
     {
         private static ZxcvbnEstimator _estimator;
-        private static Random _random;
 
         internal static ObservableRangeCollection<T> ToObservableRangeCollection<T>(this IEnumerable<T> source)
         {
@@ -28,7 +27,9 @@ namespace SafeAuthenticator.Helpers
         internal static StrengthIndicator StrengthChecker(string data)
         {
             if (_estimator == null)
+            {
                 _estimator = new ZxcvbnEstimator();
+            }
 
             var strengthIndicator = new StrengthIndicator();
 
@@ -37,13 +38,22 @@ namespace SafeAuthenticator.Helpers
                 var result = _estimator.EstimateStrength(data);
                 strengthIndicator.Guesses = Math.Log(result.Guesses) / Math.Log(10);
                 if (strengthIndicator.Guesses < AppConstants.AccStrengthVeryWeak)
+                {
                     strengthIndicator.Strength = "VERY_WEAK";
+                }
                 else if (strengthIndicator.Guesses < AppConstants.AccStrengthWeak)
+                {
                     strengthIndicator.Strength = "WEAK";
+                }
                 else if (strengthIndicator.Guesses < AppConstants.AccStrengthSomeWhatSecure)
+                {
                     strengthIndicator.Strength = "SOMEWHAT_SECURE";
+                }
                 else if (strengthIndicator.Guesses >= AppConstants.AccStrengthSomeWhatSecure)
+                {
                     strengthIndicator.Strength = "SECURE";
+                }
+
                 strengthIndicator.Percentage = Math.Round(Math.Min((strengthIndicator.Guesses / 16) * 100, 100));
             }
             return strengthIndicator;
@@ -53,7 +63,10 @@ namespace SafeAuthenticator.Helpers
         {
             var current = Connectivity.NetworkAccess;
             if (current != NetworkAccess.Internet)
+            {
                 return "No internet connection";
+            }
+
             switch (error.ErrorCode)
             {
                 case -2000:
@@ -73,10 +86,8 @@ namespace SafeAuthenticator.Helpers
             }
         }
 
-        internal static string GetRandomColor()
+        internal static string GetRandomColor(int appNameLength)
         {
-            if (_random == null)
-                _random = new Random();
             var colors = new List<string>
             {
                 "#EF5350",
@@ -89,7 +100,7 @@ namespace SafeAuthenticator.Helpers
                 "#AB47BC",
                 "#26A69A"
             };
-            return colors[_random.Next(colors.Count)];
+            return colors[appNameLength % colors.Count];
         }
 
         #region Encoding Extensions

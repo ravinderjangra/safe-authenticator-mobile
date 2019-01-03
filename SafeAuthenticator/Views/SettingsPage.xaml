@@ -31,8 +31,11 @@
                     <Label Text="Account"
                            Style="{StaticResource TitleStyle}" />
                     <StackLayout>
-                        <Label Text="Account Status" 
-                               Style="{StaticResource DefaultStyle}"   />
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Account Status" 
+                                   Style="{StaticResource DefaultStyle}"   />
+                            <Image HeightRequest="15" x:Name="AccountStatusImage" Source="info"/>
+                        </StackLayout>
                         <Label Text="{Binding AccountStorageInfo}" 
                                TextColor="{StaticResource SecondaryTitleColor}"
                                LineBreakMode="TailTruncation"/>
