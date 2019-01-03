@@ -14,11 +14,12 @@
              Padding="16">
 
     <ContentPage.Content>
-        <StackLayout Spacing="20">
+        <StackLayout >
 
             <Grid RowSpacing="10"
                   VerticalOptions="CenterAndExpand"
-                  ColumnSpacing="15">
+                  ColumnSpacing="15"
+                  >
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*" />
@@ -40,19 +41,25 @@
                 </StackLayout>
 
                 <Button Grid.Column="1"
+                        MinimumHeightRequest="50"
                         Text="REVOKE"
                         TextColor="#1C1C1C"
                         HorizontalOptions="End"
-                        HeightRequest="40"
                         WidthRequest="100"
                         BackgroundColor="#D6D7D7"
                         FontAttributes="Bold"
                         Padding="5"
                         Command="{Binding RevokeAppCommand}" />
             </Grid>
-
+            
+            <Label Text="Permissions granted"
+                           FontAttributes="Bold"
+                           FontSize="14"
+                           TextColor="Black"
+                           Margin="0,20,0,0"/>
+            
             <ListView HasUnevenRows="True"
-                      Margin="0, 10"
+                      Margin="0, 0"
                       SeparatorVisibility="None"
                       ItemsSource="{Binding AppModelInfo.Containers}"
                       IsPullToRefreshEnabled="False"
@@ -61,13 +68,6 @@
                 <ListView.Behaviors>
                     <behaviour:ListViewNoSelectionBehavior />
                 </ListView.Behaviors>
-
-                <ListView.Header>
-                    <Label Text="Permissions granted"
-                           FontAttributes="Bold"
-                           FontSize="14"
-                           TextColor="Black" />
-                </ListView.Header>
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
