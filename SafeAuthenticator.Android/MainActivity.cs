@@ -21,6 +21,7 @@ namespace SafeAuthenticator.Droid
         Theme = "@style/MyTheme",
         MainLauncher = false,
         LaunchMode = LaunchMode.SingleTask,
+        ScreenOrientation = ScreenOrientation.Portrait,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     [IntentFilter(
         new[] { Intent.ActionView },

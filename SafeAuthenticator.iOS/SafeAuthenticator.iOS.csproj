@@ -140,6 +140,7 @@
     <BundleResource Include="Resources\ShowPasswordIcon.png" />
     <BundleResource Include="Resources\settingsIcon%402.png" />
     <BundleResource Include="Resources\settingsIcon%403x.png" />
+    <BundleResource Include="Resources\info.png" />
     <None Include="app.config" />
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />

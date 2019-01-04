@@ -39,7 +39,7 @@ namespace SafeAuthenticator.Models
                     },
                     ContainerName = x.ContName
                 }).ToObservableRangeCollection();
-            CircleColor = Utilities.GetRandomColor();
+            CircleColor = Utilities.GetRandomColor(AppName.Length);
         }
 
         public int CompareTo(object obj)

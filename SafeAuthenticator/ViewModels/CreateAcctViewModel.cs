@@ -182,10 +182,7 @@ namespace SafeAuthenticator.ViewModels
                                     await Application.Current.MainPage.DisplayAlert("Error", "Secret needs to be stronger", "OK");
                                 throw new InvalidOperationException();
                             }
-                            else
-                            {
-                                AcctSecretErrorMsg = string.Empty;
-                            }
+                            AcctSecretErrorMsg = string.Empty;
                         });
                     }
                 }
