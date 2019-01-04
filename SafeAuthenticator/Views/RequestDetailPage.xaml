@@ -97,18 +97,22 @@
 
                 <StackLayout Orientation="Horizontal">
 
-                    <Button Text="DENY"
+                    <Button x:Name="DenyButton"
+                            Text="DENY"
                             HorizontalOptions="EndAndExpand"
-                            BackgroundColor="Transparent"
                             TextColor="{StaticResource Primary}"
                             Clicked="Send_Response"
-                            x:Name="DenyButton"/>
+                            HeightRequest="37"
+                            WidthRequest="85"
+                            BackgroundColor="Transparent"/>
 
-                    <Button Text="ALLOW"
+                    <Button x:Name="AllowButton"
+                            Text="ALLOW"
                             HorizontalOptions="End"
                             BackgroundColor="{StaticResource Primary}"
                             Clicked="Send_Response"
-                            x:Name="AllowButton" />
+                            HeightRequest="37"
+                            WidthRequest="85"/>
                 </StackLayout>
 
             </StackLayout>

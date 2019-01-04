@@ -10,9 +10,20 @@ namespace SafeAuthenticator.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CreateAcctPage : ContentPage, ICleanup
     {
+        private readonly CreateAcctViewModel _createAcctViewModel;
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            _createAcctViewModel.InitializeStrengthChecker();
+        }
+
         public CreateAcctPage()
         {
             InitializeComponent();
+            _createAcctViewModel = new CreateAcctViewModel();
+            BindingContext = _createAcctViewModel;
 
             MessagingCenter.Subscribe<CreateAcctViewModel>(
                 this,

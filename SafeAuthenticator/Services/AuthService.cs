@@ -91,15 +91,21 @@ namespace SafeAuthenticator.Services
             await _reconnectSemaphore.WaitAsync();
             try
             {
-                if (AuthReconnect && _authenticator == null)
+                if (_authenticator == null)
                 {
-                    var (location, password) = await CredentialCache.Retrieve();
-                    using (UserDialogs.Instance.Loading("Reconnecting to Network"))
+                    if (AuthReconnect)
                     {
-                        await LoginAsync(location, password);
-                        MessagingCenter.Send(this, MessengerConstants.NavHomePage);
+                        var (location, password) = await CredentialCache.Retrieve();
+                        using (UserDialogs.Instance.Loading("Reconnecting to Network"))
+                        {
+                            await LoginAsync(location, password);
+                            MessagingCenter.Send(this, MessengerConstants.NavHomePage);
+                        }
                     }
-                    return;
+                    else
+                    {
+                        return;
+                    }
                 }
                 else if (_authenticator.IsDisconnected)
                 {

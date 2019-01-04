@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Acr.UserDialogs;
+using Hexasoft.Zxcvbn;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
@@ -168,14 +169,17 @@ namespace SafeAuthenticator.ViewModels
             {
                 if (CarouselPagePosition == 1)
                 {
-                    using (UserDialogs.Instance.Loading("Loading"))
+                    using (UserDialogs.Instance.Loading("Checking secret strength"))
                     {
-                        await Task.Run(() =>
+                        await Task.Run(async () =>
                         {
                             _locationStrength = Utilities.StrengthChecker(AcctSecret);
                             if (_locationStrength.Guesses < AppConstants.AccStrengthWeak)
                             {
-                                AcctSecretErrorMsg = "Secret needs to be stronger";
+                                if (Device.RuntimePlatform == Device.Android)
+                                    AcctSecretErrorMsg = "Secret needs to be stronger";
+                                else if (Device.RuntimePlatform == Device.iOS)
+                                    await Application.Current.MainPage.DisplayAlert("Error", "Secret needs to be stronger", "OK");
                                 throw new InvalidOperationException();
                             }
                             else
@@ -214,12 +218,15 @@ namespace SafeAuthenticator.ViewModels
         {
             using (UserDialogs.Instance.Loading("Creating account"))
             {
-                await Task.Run(() =>
+                await Task.Run(async () =>
                 {
                     _passwordStrength = Utilities.StrengthChecker(AcctPassword);
                     if (_passwordStrength.Guesses < AppConstants.AccStrengthSomeWhatSecure)
                     {
-                        AcctPasswordErrorMsg = "Password needs to be stronger";
+                        if (Device.RuntimePlatform == Device.Android)
+                            AcctPasswordErrorMsg = "Password needs to be stronger";
+                        else if (Device.RuntimePlatform == Device.iOS)
+                            await Application.Current.MainPage.DisplayAlert("Error", "Password needs to be stronger", "OK");
                         throw new InvalidOperationException();
                     }
                     AcctPasswordErrorMsg = string.Empty;
@@ -243,6 +250,14 @@ namespace SafeAuthenticator.ViewModels
         private async Task OnClipboardPasteAsync()
         {
             Invitation = await Clipboard.GetTextAsync();
+        }
+
+        public async void InitializeStrengthChecker()
+        {
+            await Task.Run(() =>
+           {
+               Utilities.StrengthChecker("Initialze");
+           });
         }
     }
 }
