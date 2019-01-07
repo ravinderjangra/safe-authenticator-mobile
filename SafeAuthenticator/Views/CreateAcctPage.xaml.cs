@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Linq;
+﻿using System.Linq;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.ViewModels;
 using Xamarin.Forms;
@@ -13,6 +12,7 @@ namespace SafeAuthenticator.Views
         public CreateAcctPage()
         {
             InitializeComponent();
+            NavigationPage.SetBackButtonTitle(this, "Login");
 
             MessagingCenter.Subscribe<CreateAcctViewModel>(
                 this,

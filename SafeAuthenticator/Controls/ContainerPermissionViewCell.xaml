@@ -30,7 +30,7 @@
                      Grid.Column="1"
                      Grid.Row="0"
                      Spacing="3">
-            <Label Text="{Binding ContainerName, Converter={StaticResource FormatContainerNameConverter}}"
+            <Label Text="{Binding ContainerName}"
                    TextColor="Black"
                    FontSize="14" />
             <Label Text="{Binding Access, Converter={StaticResource FormatContainerPermissionsConverter}}"

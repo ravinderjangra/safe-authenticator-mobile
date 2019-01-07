@@ -11,21 +11,21 @@ namespace SafeAuthenticator.Controls.Converters
             var text = value.ToString();
             switch (text)
             {
-                case "_documents":
+                case "Documents":
                     return "documents";
-                case "_downloads":
+                case "Downloads":
                     return "downloads";
-                case "_music":
+                case "Music":
                     return "music";
-                case "_pictures":
+                case "Pictures":
                     return "pictures";
-                case "_videos":
+                case "Videos":
                     return "videos";
-                case "_public":
+                case "Public":
                     return "publicContainer";
-                case "_publicNames":
+                case "Public Names":
                     return "publicNames";
-                case "App Container":
+                case "App's own Container":
                     return "appcontainer";
                 default:
                     throw new Exception();

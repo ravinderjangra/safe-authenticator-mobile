@@ -107,6 +107,21 @@ namespace SafeAuthenticator.Helpers
             return colors[appNameLength % colors.Count];
         }
 
+        internal static string FormatContainerName(string containerName)
+        {
+            if (containerName.StartsWith("apps/"))
+            {
+                return "App's own Container";
+            }
+
+            if (containerName == "_publicNames")
+            {
+                return "Public Names";
+            }
+
+            return $"{containerName.Substring(1, 1).ToUpper()}{containerName.Substring(2)}";
+        }
+
         #region Encoding Extensions
 
         public static string ToUtfString(this List<byte> input)

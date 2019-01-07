@@ -37,8 +37,10 @@ namespace SafeAuthenticator.Models
                         Delete = x.Access.Delete,
                         ManagePermissions = x.Access.ManagePermissions
                     },
-                    ContainerName = x.ContName
+                    ContainerName = Utilities.FormatContainerName(x.ContName)
                 }).ToObservableRangeCollection();
+
+            Containers = Containers.OrderBy(c => c.ContainerName).ToObservableRangeCollection();
             CircleColor = Utilities.GetRandomColor(AppName.Length);
         }
 
