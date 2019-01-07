@@ -4,6 +4,7 @@ using Rg.Plugins.Popup.Services;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
 using SafeAuthenticator.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace SafeAuthenticator.Views
@@ -18,6 +19,14 @@ namespace SafeAuthenticator.Views
         public RequestDetailPage(IpcReq req)
         {
             InitializeComponent();
+
+            var appDetailsTapGestureRecogniser = new TapGestureRecognizer { NumberOfTapsRequired = 1 };
+            appDetailsTapGestureRecogniser.Tapped += (s, e) =>
+            {
+                AppDetailsStackLayout.IsVisible = !AppDetailsStackLayout.IsVisible;
+            };
+            InfoIcon.GestureRecognizers.Add(appDetailsTapGestureRecogniser);
+
             _viewModel = new RequestDetailViewModel(req);
             BindingContext = _viewModel;
         }
