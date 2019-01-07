@@ -20,12 +20,12 @@
             DurationOut="300"
             EasingIn="SinOut"
             EasingOut="SinIn"
-            HasBackgroundAnimation="True"/>
+            HasBackgroundAnimation="True" />
     </pages:PopupPage.Animation>
 
     <pages:PopupPage.Resources>
         <ResourceDictionary>
-            <converters:InverseBooleanConverter x:Key="InverseBoolean"/>
+            <converters:InverseBooleanConverter x:Key="InverseBoolean" />
         </ResourceDictionary>
     </pages:PopupPage.Resources>
 
@@ -42,19 +42,21 @@
                 <StackLayout.Triggers>
                     <MultiTrigger TargetType="StackLayout">
                         <MultiTrigger.Conditions>
-                            <BindingCondition Binding="{Binding Containers.Count, Converter={StaticResource IsCollectionEmptyConverter}}"
-                               Value="true"/>
-                            <BindingCondition Binding="{Binding MData.Count, Converter={StaticResource IsCollectionEmptyConverter}}"
-                               Value="true"/>
+                            <BindingCondition
+                                Binding="{Binding Containers.Count, Converter={StaticResource IsCollectionEmptyConverter}}"
+                                Value="true" />
+                            <BindingCondition
+                                Binding="{Binding MData.Count, Converter={StaticResource IsCollectionEmptyConverter}}"
+                                Value="true" />
                         </MultiTrigger.Conditions>
                         <Setter Property="HeightRequest" Value="140" />
                     </MultiTrigger>
                 </StackLayout.Triggers>
 
-                    <Label HorizontalTextAlignment="Center"
-                           HorizontalOptions="Center"
-                           Margin="20, 0"
-                           FontSize="16">
+                <Label HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center"
+                       Margin="20, 0"
+                       FontSize="16">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="{Binding AppName}" FontSize="16" />
@@ -65,7 +67,7 @@
                         <DataTrigger TargetType="Label"
                                      Binding="{Binding IsUnregisteredRequest}"
                                      Value="true">
-                            <Setter Property="Text" Value="An unregistered app is requesting access"/>
+                            <Setter Property="Text" Value="An unregistered app is requesting access" />
                         </DataTrigger>
                     </Label.Triggers>
                 </Label>
@@ -113,7 +115,7 @@
                             Clicked="Send_Response"
                             HeightRequest="37"
                             WidthRequest="85"
-                            BackgroundColor="Transparent"/>
+                            BackgroundColor="Transparent" />
 
                     <Button x:Name="AllowButton"
                             Text="ALLOW"
@@ -121,7 +123,7 @@
                             BackgroundColor="{StaticResource Primary}"
                             Clicked="Send_Response"
                             HeightRequest="37"
-                            WidthRequest="85"/>
+                            WidthRequest="85" />
                 </StackLayout>
 
             </StackLayout>

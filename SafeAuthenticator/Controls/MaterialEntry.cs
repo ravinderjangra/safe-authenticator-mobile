@@ -9,7 +9,17 @@ namespace SafeAuthenticator.Controls
         {
             if (Device.RuntimePlatform == Device.iOS)
             {
-                HeightRequest = 40;
+                FloatingHintEnabled = false;
+            }
+        }
+
+        protected override void OnPropertyChanging(string propertyName = null)
+        {
+            base.OnPropertyChanging(propertyName);
+
+            if (propertyName == IsPasswordProperty.PropertyName && Device.RuntimePlatform == Device.iOS)
+            {
+                Effects.Add(new ShowHidePasswordEffect());
             }
         }
 

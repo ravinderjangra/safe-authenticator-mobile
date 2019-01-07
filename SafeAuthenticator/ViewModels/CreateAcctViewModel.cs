@@ -171,15 +171,12 @@ namespace SafeAuthenticator.ViewModels
                 {
                     using (UserDialogs.Instance.Loading("Checking secret strength"))
                     {
-                        await Task.Run(async () =>
+                        await Task.Run(() =>
                         {
                             _locationStrength = Utilities.StrengthChecker(AcctSecret);
                             if (_locationStrength.Guesses < AppConstants.AccStrengthWeak)
                             {
-                                if (Device.RuntimePlatform == Device.Android)
-                                    AcctSecretErrorMsg = "Secret needs to be stronger";
-                                else if (Device.RuntimePlatform == Device.iOS)
-                                    await Application.Current.MainPage.DisplayAlert("Error", "Secret needs to be stronger", "OK");
+                                AcctSecretErrorMsg = "Secret needs to be stronger";
                                 throw new InvalidOperationException();
                             }
                             AcctSecretErrorMsg = string.Empty;
@@ -215,15 +212,12 @@ namespace SafeAuthenticator.ViewModels
         {
             using (UserDialogs.Instance.Loading("Creating account"))
             {
-                await Task.Run(async () =>
+                await Task.Run(() =>
                 {
                     _passwordStrength = Utilities.StrengthChecker(AcctPassword);
                     if (_passwordStrength.Guesses < AppConstants.AccStrengthSomeWhatSecure)
                     {
-                        if (Device.RuntimePlatform == Device.Android)
-                            AcctPasswordErrorMsg = "Password needs to be stronger";
-                        else if (Device.RuntimePlatform == Device.iOS)
-                            await Application.Current.MainPage.DisplayAlert("Error", "Password needs to be stronger", "OK");
+                        AcctPasswordErrorMsg = "Password needs to be stronger";
                         throw new InvalidOperationException();
                     }
                     AcctPasswordErrorMsg = string.Empty;

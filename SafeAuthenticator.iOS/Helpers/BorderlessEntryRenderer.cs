@@ -8,7 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using Color = Xamarin.Forms.Color;
 
-[assembly: ExportRenderer(typeof(MaterialEntry), typeof(BorderlessEntryRenderer))]
+// [assembly: ExportRenderer(typeof(MaterialEntry), typeof(BorderlessEntryRenderer))]
 namespace SafeAuthenticator.iOS.Helpers
 {
     public class BorderlessEntryRenderer : EntryRenderer
@@ -35,6 +35,14 @@ namespace SafeAuthenticator.iOS.Helpers
                     Control.SecureTextEntry = true;
                     buttonRect.SetImage(new UIImage("ShowPasswordIcon"), UIControlState.Normal);
                 }
+            };
+
+            Control.ShouldChangeCharacters += (textField, range, replacementString) =>
+            {
+                var text = Control.Text;
+                var result = text.Substring(0, (int)range.Location) + replacementString + text.Substring((int)range.Location + (int)range.Length);
+                Control.Text = result;
+                return false;
             };
 
             Control.BorderStyle = UITextBorderStyle.None;
