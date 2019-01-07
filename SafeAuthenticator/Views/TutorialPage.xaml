@@ -21,7 +21,6 @@
                 <cv:CarouselViewControl 
                     ShowArrows="False"
                     ShowIndicators="False"
-                    IsSwipeEnabled="False"
                     PositionSelectedCommand="{Binding CarouselPageChangeCommand}"
                     Position="{Binding CarouselPagePosition}"
                     HorizontalOptions="FillAndExpand"

@@ -56,11 +56,12 @@
                 <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
                     <Label HorizontalTextAlignment="Center"
                            HorizontalOptions="CenterAndExpand"
+                           Margin="20, 0"
                            FontSize="16">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="{Binding AppName}" FontSize="16" />
-                                <Span Text="&#10;is requesting access" FontSize="13" />
+                                <Span Text="{Binding AppName}" FontSize="16" FontAttributes="Bold" />
+                                <Span Text="{Binding SecondaryTitle}" FontSize="13" />
                             </FormattedString>
                         </Label.FormattedText>
                         <Label.Triggers>
@@ -135,7 +136,7 @@
                             HorizontalOptions="EndAndExpand"
                             TextColor="{StaticResource Primary}"
                             Clicked="Send_Response"
-                            HeightRequest="37"
+                            HeightRequest="39"
                             WidthRequest="85"
                             BackgroundColor="Transparent" />
 
@@ -144,8 +145,8 @@
                             HorizontalOptions="End"
                             BackgroundColor="{StaticResource Primary}"
                             Clicked="Send_Response"
-                            HeightRequest="37"
-                            WidthRequest="85" />
+                            HeightRequest="39"
+                            WidthRequest="85"/>
                 </StackLayout>
 
             </StackLayout>

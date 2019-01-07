@@ -77,7 +77,7 @@
                         <Label Margin="20"
                                VerticalOptions="CenterAndExpand"
                                HorizontalOptions="CenterAndExpand"
-                               Text="No containers."
+                               Text="No container permissions granted"
                                IsVisible="{Binding AppModelInfo.Containers.Count, Converter={StaticResource IsCollectionEmptyConverter}}" />
                     </StackLayout>
                 </ListView.Footer>

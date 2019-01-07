@@ -214,7 +214,6 @@
     <AndroidResource Include="Resources\drawable\publicNames.png" />
     <AndroidResource Include="Resources\drawable\videos.png" />
     <AndroidResource Include="Resources\drawable\publicContainer.png" />
-    <AndroidResource Include="Resources\drawable\clipboardPaste.png" />
     <AndroidResource Include="Resources\drawable\MData.png" />
     <AndroidResource Include="Resources\drawable\tutorial2.png" />
     <AndroidResource Include="Resources\drawable\tutorial1.png" />

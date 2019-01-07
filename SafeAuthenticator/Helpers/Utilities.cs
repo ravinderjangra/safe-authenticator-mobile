@@ -83,6 +83,8 @@ namespace SafeAuthenticator.Helpers
                     return "Invitation already claimed";
                 case -206:
                     return "SharedMData request denied";
+                case -113:
+                    return "Insufficient account balance";
                 default:
                     return error.Message;
             }

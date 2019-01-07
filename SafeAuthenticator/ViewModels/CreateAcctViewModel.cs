@@ -116,8 +116,6 @@ namespace SafeAuthenticator.ViewModels
 
         public ICommand ClaimTokenCommand { get; }
 
-        public ICommand ClipboardPasteCommand { get; }
-
         public ICommand OpenForumLinkCommand { get; }
 
         public CreateAcctViewModel()
@@ -135,7 +133,6 @@ namespace SafeAuthenticator.ViewModels
             CarouselContinueCommand = new Command(async () => await OnContinueAsync(), () => CanExecute());
             CarouselBackCommand = new Command(OnBack);
             CarouselPageChangeCommand = new Command(CarouselPageChange);
-            ClipboardPasteCommand = new Command(async () => await OnClipboardPasteAsync());
             OpenForumLinkCommand = new Command(() =>
             {
                 Device.OpenUri(new Uri(@"https://safenetforum.org/t/trust-level-1-basic-user-requirements/15200"));
@@ -236,19 +233,6 @@ namespace SafeAuthenticator.ViewModels
         private void CarouselPageChange()
         {
             ((Command)CarouselContinueCommand).ChangeCanExecute();
-        }
-
-        private async Task OnClipboardPasteAsync()
-        {
-            Invitation = await Clipboard.GetTextAsync();
-        }
-
-        public async void InitializeStrengthChecker()
-        {
-            await Task.Run(() =>
-           {
-               Utilities.StrengthChecker("Initialze");
-           });
         }
     }
 }

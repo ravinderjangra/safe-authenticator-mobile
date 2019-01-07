@@ -4,14 +4,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
              xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
+             xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels"
              x:Class="SafeAuthenticator.Views.CreateAcctPage"
-             Title="Create Account"
-             Padding="25">
-    
+             Title="Create Account">
+
+    <ContentPage.BindingContext>
+        <viewModels:CreateAcctViewModel/>
+    </ContentPage.BindingContext>
+
     <ContentPage.Content>
-        
+
             <StackLayout Spacing="10">
-                <cv:CarouselViewControl
+                <cv:CarouselViewControl                    
                     ShowArrows="False"
                     ShowIndicators="False"
                     IsSwipeEnabled="False"
@@ -24,7 +28,8 @@
 
                             <!-- Invitation -->
                             <StackLayout>
-                                <StackLayout Spacing="10">
+                                <StackLayout Spacing="10"
+                                             Padding="25,0">
                                     <Label Text="But first, you need an invitation token"
                                            FontAttributes="Bold"
                                            FontSize="16" />
@@ -68,23 +73,13 @@
                                                                 HorizontalOptions="FillAndExpand" 
                                                                 ErrorDisplay="None" />
 
-                                        <Image Source="clipboardPaste"
-                                               HeightRequest="30"
-                                               Aspect="AspectFit"
-                                               WidthRequest="30"
-                                               Margin="0,0,0,5"
-                                               BackgroundColor="Transparent">
-                                            <Image.GestureRecognizers>
-                                                <TapGestureRecognizer NumberOfTapsRequired="1"
-                                                                      Command="{Binding ClipboardPasteCommand}" />
-                                            </Image.GestureRecognizers>
-                                        </Image>
                                     </StackLayout>
                                 </StackLayout>
                             </StackLayout>
 
                             <!-- Account Secret -->
-                            <StackLayout Spacing="15">
+                            <StackLayout Spacing="15"
+                                         Padding="25,0">
                                 <Label Text="Account Secret"
                                        FontAttributes="Bold"
                                        FontSize="16" />
@@ -106,7 +101,8 @@
                             </StackLayout>
 
                             <!-- Account Password -->
-                            <StackLayout Spacing="15">
+                            <StackLayout Spacing="15"
+                                         Padding="25,0">
                                 <Label Text="Account Password"
                                        FontAttributes="Bold"
                                        FontSize="16" />
@@ -132,14 +128,16 @@
                 </cv:CarouselViewControl>
 
                 <Button Text="CONTINUE"
-                        Command="{Binding CarouselContinueCommand}" />
+                        Command="{Binding CarouselContinueCommand}"
+                        Margin="25,0"/>
 
                 <Button Text="BACK"
                         HorizontalOptions="Center"
                         Command="{Binding CarouselBackCommand}"
                         IsVisible="{Binding IsBackButtonVisible}"
                         BackgroundColor="Transparent"
-                        TextColor="{StaticResource Primary}" />
+                        TextColor="{StaticResource Primary}"
+                        Margin="25,0"/>
             </StackLayout>
         
     </ContentPage.Content>
