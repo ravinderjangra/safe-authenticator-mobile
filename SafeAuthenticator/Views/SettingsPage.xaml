@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SafeAuthenticator.Views.SettingsPage"
              BackgroundColor="White"
              Title="Settings">
-    
+
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style x:Key="TextStyle" TargetType="Label" >
+            <Style x:Key="TextStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="Black" />
                 <Setter Property="FontSize" Value="14" />
             </Style>
@@ -26,19 +27,19 @@
         <ScrollView>
             <StackLayout Spacing="15">
 
-                <StackLayout Padding="16, 10" 
+                <StackLayout Padding="16, 10"
                              Spacing="15">
                     <Label Text="Account"
                            Style="{StaticResource TitleStyle}" />
                     <StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="Account Status" 
-                                   Style="{StaticResource TextStyle}"   />
-                            <Image HeightRequest="15" x:Name="AccountStatusImage" Source="info"/>
+                            <Label Text="Account Status"
+                                   Style="{StaticResource TextStyle}" />
+                            <Image HeightRequest="15" x:Name="AccountStatusImage" Source="info" />
                         </StackLayout>
-                        <Label Text="{Binding AccountStorageInfo}" 
+                        <Label Text="{Binding AccountStorageInfo}"
                                TextColor="{StaticResource SecondaryTitleColor}"
-                               LineBreakMode="TailTruncation"/>
+                               LineBreakMode="TailTruncation" />
                     </StackLayout>
 
                     <Grid>
@@ -51,11 +52,11 @@
                         </Grid.ColumnDefinitions>
                         <Label Text="Auto Reconnect"
                                Style="{StaticResource TextStyle}"
-                               VerticalOptions="Center"/>
-                        <Switch  Grid.Column="1"
-                                 HorizontalOptions="End"
-                                 VerticalOptions="Center"
-                                 IsToggled="{Binding AuthReconnect}"/>
+                               VerticalOptions="Center" />
+                        <Switch Grid.Column="1"
+                                HorizontalOptions="End"
+                                VerticalOptions="Center"
+                                IsToggled="{Binding AuthReconnect}" />
                     </Grid>
                 </StackLayout>
 
@@ -63,41 +64,41 @@
 
                 <StackLayout Padding="16, 0" Spacing="20">
 
-                    <Label Text="Help" 
+                    <Label Text="Help"
                            Style="{StaticResource TitleStyle}" />
-                    <Label Text="FAQs" 
-                           Style="{StaticResource TextStyle}" >
+                    <Label Text="FAQs"
+                           Style="{StaticResource TextStyle}">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" 
-                                                  Command="{Binding FAQCommand}"/>
+                            <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                  Command="{Binding FAQCommand}" />
                         </Label.GestureRecognizers>
                     </Label>
 
-                    <Label Text="Privacy statement" 
-                           Style="{StaticResource TextStyle}" >
+                    <Label Text="Privacy statement"
+                           Style="{StaticResource TextStyle}">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" 
-                                                  Command="{Binding PrivacyInfoCommand}"/>
+                            <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                  Command="{Binding PrivacyInfoCommand}" />
                         </Label.GestureRecognizers>
                     </Label>
-                    
+
                     <StackLayout>
-                        <Label Text="Application version" 
+                        <Label Text="Application version"
                                Style="{StaticResource TextStyle}" />
-                        <Label Text="0.1.0" 
-                               TextColor="{StaticResource SecondaryTitleColor}" 
+                        <Label Text="0.1.0"
+                               TextColor="{StaticResource SecondaryTitleColor}"
                                HorizontalOptions="Start" />
                     </StackLayout>
                 </StackLayout>
 
-                <BoxView HeightRequest="0.5"  Color="DarkGray" />
+                <BoxView HeightRequest="0.5" Color="DarkGray" />
 
                 <StackLayout Padding="16, 0" Spacing="20">
-                    <Label Text="Logout" 
-                           Style="{StaticResource LogoutStyle}" >
+                    <Label Text="Logout"
+                           Style="{StaticResource LogoutStyle}">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" 
-                                                  Command="{Binding LogoutCommand}"/>
+                            <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                  Command="{Binding LogoutCommand}" />
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
