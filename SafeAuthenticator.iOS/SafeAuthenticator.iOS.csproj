@@ -167,13 +167,6 @@
     <Compile Include="AppDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\profile_generic.png" />
-    <BundleResource Include="Resources\profile_generic%402x.png" />
-    <BundleResource Include="Resources\profile_generic%403x.png" />
-    <BundleResource Include="Resources\slideout.png" />
-    <BundleResource Include="Resources\slideout%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\SafeAuthenticator\SafeAuthenticator.csproj">
       <Project>{2477dbaf-96ee-4ea4-8ddc-0150da13991f}</Project>
       <Name>SafeAuthenticator</Name>
