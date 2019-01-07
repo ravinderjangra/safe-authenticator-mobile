@@ -26,7 +26,7 @@ namespace SafeAuthenticator.Controls.Converters
                 case "_publicNames":
                     return "publicNames";
                 case "App Container":
-                    return "publicNames";
+                    return "appcontainer";
                 default:
                     throw new Exception();
             }

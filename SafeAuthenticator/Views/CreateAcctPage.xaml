@@ -13,7 +13,7 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <ScrollView>
+
             <StackLayout Spacing="10">
                 <cv:CarouselViewControl                    
                     ShowArrows="False"
@@ -78,7 +78,7 @@
                             </StackLayout>
 
                             <!-- Account Secret -->
-                            <StackLayout Spacing="10"
+                            <StackLayout Spacing="15"
                                          Padding="25,0">
                                 <Label Text="Account Secret"
                                        FontAttributes="Bold"
@@ -101,7 +101,7 @@
                             </StackLayout>
 
                             <!-- Account Password -->
-                            <StackLayout Spacing="10"
+                            <StackLayout Spacing="15"
                                          Padding="25,0">
                                 <Label Text="Account Password"
                                        FontAttributes="Bold"
@@ -139,6 +139,6 @@
                         TextColor="{StaticResource Primary}"
                         Margin="25,0"/>
             </StackLayout>
-        </ScrollView>
+        
     </ContentPage.Content>
 </ContentPage>

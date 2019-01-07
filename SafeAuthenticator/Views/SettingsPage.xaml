@@ -7,7 +7,7 @@
     
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style x:Key="DefaultStyle" TargetType="Label" >
+            <Style x:Key="TextStyle" TargetType="Label" >
                 <Setter Property="TextColor" Value="Black" />
                 <Setter Property="FontSize" Value="14" />
             </Style>
@@ -33,7 +33,7 @@
                     <StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Account Status" 
-                                   Style="{StaticResource DefaultStyle}"   />
+                                   Style="{StaticResource TextStyle}"   />
                             <Image HeightRequest="15" x:Name="AccountStatusImage" Source="info"/>
                         </StackLayout>
                         <Label Text="{Binding AccountStorageInfo}" 
@@ -50,7 +50,7 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Label Text="Auto Reconnect"
-                               Style="{StaticResource DefaultStyle}"
+                               Style="{StaticResource TextStyle}"
                                VerticalOptions="Center"/>
                         <Switch  Grid.Column="1"
                                  HorizontalOptions="End"
@@ -61,15 +61,12 @@
 
                 <BoxView HeightRequest="0.5" Color="DarkGray" />
 
-                <StackLayout Padding="16, 0" Spacing="10">
+                <StackLayout Padding="16, 0" Spacing="20">
 
                     <Label Text="Help" 
                            Style="{StaticResource TitleStyle}" />
                     <Label Text="FAQs" 
-                           Style="{StaticResource DefaultStyle}"
-                           HorizontalOptions="Start"
-                           HeightRequest="30"
-                           >
+                           Style="{StaticResource TextStyle}" >
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1" 
                                                   Command="{Binding FAQCommand}"/>
@@ -77,9 +74,7 @@
                     </Label>
 
                     <Label Text="Privacy statement" 
-                           Style="{StaticResource DefaultStyle}"
-                           HorizontalOptions="Start"
-                            HeightRequest="30">
+                           Style="{StaticResource TextStyle}" >
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1" 
                                                   Command="{Binding PrivacyInfoCommand}"/>
@@ -88,7 +83,7 @@
                     
                     <StackLayout>
                         <Label Text="Application version" 
-                               Style="{StaticResource DefaultStyle}" />
+                               Style="{StaticResource TextStyle}" />
                         <Label Text="0.1.0" 
                                TextColor="{StaticResource SecondaryTitleColor}" 
                                HorizontalOptions="Start" />
@@ -97,11 +92,9 @@
 
                 <BoxView HeightRequest="0.5"  Color="DarkGray" />
 
-                <StackLayout Padding="16, 0" Spacing="10">
+                <StackLayout Padding="16, 0" Spacing="20">
                     <Label Text="Logout" 
-                           Style="{StaticResource LogoutStyle}" 
-                           HorizontalOptions="Start"
-                            HeightRequest="30">
+                           Style="{StaticResource LogoutStyle}" >
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1" 
                                                   Command="{Binding LogoutCommand}"/>

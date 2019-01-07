@@ -39,7 +39,7 @@ namespace SafeAuthenticator.ViewModels
         public SettingsViewModel()
         {
             LogoutCommand = new Command(OnLogout);
-            AccountStorageInfo = "fetching account info...";
+            AccountStorageInfo = "Fetching account info...";
 
             FAQCommand = new Command(() =>
             {
