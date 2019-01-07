@@ -85,7 +85,7 @@ namespace SafeAuthenticator.ViewModels
             {
                 Containers.Add(new ContainerPermissionsModel()
                 {
-                    ContainerName = "App Container",
+                    ContainerName = "App's own Container",
                     Access = new PermissionSetModel
                     {
                         Read = true,

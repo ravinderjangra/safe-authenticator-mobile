@@ -2,11 +2,9 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Acr.UserDialogs;
-using Hexasoft.Zxcvbn;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace SafeAuthenticator.ViewModels
