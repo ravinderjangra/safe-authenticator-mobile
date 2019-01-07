@@ -248,13 +248,5 @@ namespace SafeAuthenticator.ViewModels
         {
             Invitation = await Clipboard.GetTextAsync();
         }
-
-        public async void InitializeStrengthChecker()
-        {
-            await Task.Run(() =>
-           {
-               Utilities.StrengthChecker("Initialze");
-           });
-        }
     }
 }

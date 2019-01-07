@@ -78,11 +78,13 @@ namespace SafeAuthenticator.Helpers
                 case -102:
                     return "Account already exists";
                 case -116:
-                    return "Invalid invitation";
+                    return "Invalid invitation token";
                 case -117:
                     return "Invitation already claimed";
                 case -206:
                     return "SharedMData request denied";
+                case -113:
+                    return "Insufficient account balance";
                 default:
                     return error.Message;
             }

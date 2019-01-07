@@ -6,15 +6,14 @@
              xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
              x:Class="SafeAuthenticator.Views.LoginPage" IsEnabled="{Binding IsUiEnabled}"
              BackgroundColor="{StaticResource LightBackgroundColor}"
-             NavigationPage.HasNavigationBar="False"
-             Padding="25">
+             NavigationPage.HasNavigationBar="False">
 
     <ContentPage.BindingContext>
-        <viewModels:LoginViewModel />
+        <viewModels:LoginViewModel/>
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <ScrollView>
+        <ScrollView Padding="25">
             <StackLayout>
                 <StackLayout VerticalOptions="CenterAndExpand"
                              Spacing="10">

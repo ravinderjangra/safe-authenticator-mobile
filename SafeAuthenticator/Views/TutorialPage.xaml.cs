@@ -28,6 +28,8 @@ namespace SafeAuthenticator.Views
                         return;
                     }
                     await Navigation.PushAsync(new CreateAcctPage());
+                    Navigation.InsertPageBefore(new LoginPage(),  Navigation.NavigationStack[1]);
+                    Navigation.RemovePage(Navigation.NavigationStack[0]);
                 });
 
             MessagingCenter.Subscribe<TutorialViewModel>(

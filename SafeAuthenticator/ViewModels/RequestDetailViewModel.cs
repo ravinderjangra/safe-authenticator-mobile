@@ -23,6 +23,8 @@ namespace SafeAuthenticator.ViewModels
 
         public bool IsUnregisteredRequest { get; }
 
+        public string SecondaryTitle { get; set; }
+
         public ObservableRangeCollection<ContainerPermissionsModel> Containers { get; set; }
 
         public ObservableRangeCollection<MDataModel> MData { get; set; }
@@ -44,21 +46,21 @@ namespace SafeAuthenticator.ViewModels
             else if (requestType == typeof(AuthIpcReq))
             {
                 _authReq = req as AuthIpcReq;
-                PageTitle = "Authentication Request";
                 ProcessAuthRequestData();
+                SecondaryTitle = Containers.Count > 0 ? "\nis requesting access to" : "\nis requesting access";
             }
             else if (requestType == typeof(ContainersIpcReq))
             {
                 _containerReq = req as ContainersIpcReq;
-                PageTitle = "Container Request";
                 ProcessContainerRequestData();
+                SecondaryTitle = Containers.Count > 0 ? "\nis requesting access to" : "\nis requesting access";
             }
             else if (requestType == typeof(ShareMDataIpcReq))
             {
                 _shareMdReq = req as ShareMDataIpcReq;
-                PageTitle = "Share MData Request";
                 IsMDataRequest = true;
                 ProcessMDataRequestData();
+                SecondaryTitle = MData.Count > 0 ? "\nis requesting access to" : "\nis requesting access";
             }
         }
 
