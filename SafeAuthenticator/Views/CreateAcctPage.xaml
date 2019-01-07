@@ -73,17 +73,6 @@
                                                                 HorizontalOptions="FillAndExpand" 
                                                                 ErrorDisplay="None" />
 
-                                        <Image Source="clipboardPaste"
-                                               HeightRequest="30"
-                                               Aspect="AspectFit"
-                                               WidthRequest="30"
-                                               Margin="0,0,0,5"
-                                               BackgroundColor="Transparent">
-                                            <Image.GestureRecognizers>
-                                                <TapGestureRecognizer NumberOfTapsRequired="1"
-                                                                      Command="{Binding ClipboardPasteCommand}" />
-                                            </Image.GestureRecognizers>
-                                        </Image>
                                     </StackLayout>
                                 </StackLayout>
                             </StackLayout>
