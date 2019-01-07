@@ -81,6 +81,8 @@ namespace SafeAuthenticator.Helpers
                     return "Invalid invitation";
                 case -117:
                     return "Invitation already claimed";
+                case -206:
+                    return "SharedMData request denied";
                 default:
                     return error.Message;
             }

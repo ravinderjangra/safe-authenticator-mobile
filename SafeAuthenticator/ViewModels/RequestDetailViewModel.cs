@@ -21,6 +21,8 @@ namespace SafeAuthenticator.ViewModels
 
         public bool IsMDataRequest { get; }
 
+        public bool IsUnregisteredRequest { get; }
+
         public ObservableRangeCollection<ContainerPermissionsModel> Containers { get; set; }
 
         public ObservableRangeCollection<MDataModel> MData { get; set; }
@@ -34,7 +36,12 @@ namespace SafeAuthenticator.ViewModels
             Containers = new ObservableRangeCollection<ContainerPermissionsModel>();
             MData = new ObservableRangeCollection<MDataModel>();
             var requestType = req.GetType();
-            if (requestType == typeof(AuthIpcReq))
+
+            if (requestType == typeof(UnregisteredIpcReq))
+            {
+                IsUnregisteredRequest = true;
+            }
+            else if (requestType == typeof(AuthIpcReq))
             {
                 _authReq = req as AuthIpcReq;
                 PageTitle = "Authentication Request";

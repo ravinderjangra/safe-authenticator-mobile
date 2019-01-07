@@ -21,8 +21,7 @@ namespace SafeAuthenticator.Services
 {
     public class AuthService : ObservableObject, IDisposable
     {
-        private const string AuthReconnectPropKey = nameof(AuthReconnect);
-        private const string AutoReconnect = "AutoReconnect";
+        private const string AutoReconnectPropKey = "AutoReconnect";
         private readonly SemaphoreSlim _reconnectSemaphore = new SemaphoreSlim(1, 1);
         private Authenticator _authenticator;
         private bool _isLogInitialised;
@@ -43,14 +42,14 @@ namespace SafeAuthenticator.Services
         {
             get
             {
-                if (!Application.Current.Properties.ContainsKey(AutoReconnect))
+                if (!Application.Current.Properties.ContainsKey(AutoReconnectPropKey))
                 {
-                    Application.Current.Properties[AutoReconnect] = false;
+                    Application.Current.Properties[AutoReconnectPropKey] = false;
                     return false;
                 }
                 else
                 {
-                    return (bool)Application.Current.Properties[AutoReconnect];
+                    return (bool)Application.Current.Properties[AutoReconnectPropKey];
                 }
             }
 
@@ -64,7 +63,7 @@ namespace SafeAuthenticator.Services
                 {
                     CredentialCache.Delete();
                 }
-                Application.Current.Properties[AutoReconnect] = value;
+                Application.Current.Properties[AutoReconnectPropKey] = value;
             }
         }
 
@@ -175,64 +174,37 @@ namespace SafeAuthenticator.Services
         {
             try
             {
-                if (_authenticator == null)
+                if (_authenticator == null && !AuthReconnect)
                 {
+                    if (await HandleUnregisteredAppRequest(encodedUri))
+                        return;
                     AuthenticationReq = encodedUri;
-                    try
-                    {
-                        var (location, password) = await CredentialCache.Retrieve();
-                    }
-                    catch (NullReferenceException)
-                    {
-                        await Application.Current.MainPage.DisplayAlert("Error", "Need to be logged in to accept app requests", "OK");
-                    }
-
+                    await Application.Current.MainPage.DisplayAlert("Error", "Need to be logged in to accept app requests", "OK");
                     return;
                 }
 
                 await CheckAndReconnect();
-                if (encodedUri.Contains("/unregistered"))
+                if (await HandleUnregisteredAppRequest(encodedUri))
+                    return;
+
+                var encodedReq = UrlFormat.GetRequestData(encodedUri);
+                var decodeResult = await _authenticator.DecodeIpcMessageAsync(encodedReq);
+                var decodedType = decodeResult.GetType();
+                if (decodedType == typeof(IpcReqError))
                 {
-                    var unregisteredRemoved = encodedUri.Replace("/unregistered", string.Empty);
-                    var uencodedReq = UrlFormat.GetRequestData(unregisteredRemoved);
-                    var udecodeResult = await Authenticator.UnRegisteredDecodeIpcMsgAsync(uencodedReq);
-                    var udecodedType = udecodeResult.GetType();
-                    if (udecodedType == typeof(UnregisteredIpcReq))
-                    {
-                        var uauthReq = udecodeResult as UnregisteredIpcReq;
-                        var isGranted = await Application.Current.MainPage.DisplayAlert(
-                            "Unregistered auth request",
-                            "An app is requesting access.",
-                            "Allow",
-                            "Deny");
-                        var encodedRsp = await Authenticator.EncodeUnregisteredRespAsync(uauthReq.ReqId, isGranted);
-                        var appIdFromUrl = UrlFormat.GetAppId(encodedUri);
-                        var formattedRsp = UrlFormat.Format(appIdFromUrl, encodedRsp, false);
-                        Debug.WriteLine($"Encoded Rsp to app: {formattedRsp}");
-                        Device.BeginInvokeOnMainThread(() => { Device.OpenUri(new Uri(formattedRsp)); });
-                    }
+                    var error = decodeResult as IpcReqError;
+                    await Application.Current.MainPage.DisplayAlert("Auth Request", $"Error: {error?.Description}", "Ok");
                 }
                 else
                 {
-                    var encodedReq = UrlFormat.GetRequestData(encodedUri);
-                    var decodeResult = await _authenticator.DecodeIpcMessageAsync(encodedReq);
-                    var decodedType = decodeResult.GetType();
-                    if (decodedType == typeof(IpcReqError))
+                    var requestPage = new RequestDetailPage(decodeResult);
+                    requestPage.CompleteRequest += async (s, e) =>
                     {
-                        var error = decodeResult as IpcReqError;
-                        await Application.Current.MainPage.DisplayAlert("Auth Request", $"Error: {error?.Description}", "Ok");
-                    }
-                    else
-                    {
-                        var requestPage = new RequestDetailPage(decodeResult);
-                        requestPage.CompleteRequest += async (s, e) =>
-                        {
-                            var args = e as ResponseEventArgs;
-                            await SendResponseBack(decodeResult, args.Response);
-                        };
+                        var args = e as ResponseEventArgs;
+                        await SendResponseBack(encodedUri, decodeResult, args.Response);
+                    };
 
-                        await Application.Current.MainPage.Navigation.PushPopupAsync(requestPage);
-                    }
+                    await Application.Current.MainPage.Navigation.PushPopupAsync(requestPage);
                 }
             }
             catch (FfiException ex)
@@ -252,14 +224,21 @@ namespace SafeAuthenticator.Services
             }
         }
 
-        private async Task SendResponseBack(IpcReq req, bool isGranted)
+        private async Task SendResponseBack(string encodedUri, IpcReq req, bool isGranted)
         {
             try
             {
                 string encodedRsp;
                 var formattedRsp = string.Empty;
                 var requestType = req.GetType();
-                if (requestType == typeof(AuthIpcReq))
+                if (requestType == typeof(UnregisteredIpcReq))
+                {
+                    var uauthReq = req as UnregisteredIpcReq;
+                    encodedRsp = await Authenticator.EncodeUnregisteredRespAsync(uauthReq.ReqId, isGranted);
+                    var appIdFromUrl = UrlFormat.GetAppId(encodedUri);
+                    formattedRsp = UrlFormat.Format(appIdFromUrl, encodedRsp, false);
+                }
+                else if (requestType == typeof(AuthIpcReq))
                 {
                     var authReq = req as AuthIpcReq;
                     encodedRsp = await _authenticator.EncodeAuthRespAsync(authReq, isGranted);
@@ -283,19 +262,32 @@ namespace SafeAuthenticator.Services
             }
             catch (FfiException ex)
             {
-                if (ex.ErrorCode == -206)
-                {
-                    await Application.Current.MainPage.DisplayAlert("ShareMData Request", "Request Denied", "OK");
-                }
-                else
-                {
-                    await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-                }
+                var errorMessage = Utilities.GetErrorMessage(ex);
+                await Application.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
             }
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
+        }
+
+        private async Task<bool> HandleUnregisteredAppRequest(string encodedUri)
+        {
+            var encodedReq = UrlFormat.GetRequestData(encodedUri);
+            var udecodeResult = await Authenticator.UnRegisteredDecodeIpcMsgAsync(encodedReq);
+            if (udecodeResult.GetType() == typeof(UnregisteredIpcReq))
+            {
+                var requestPage = new RequestDetailPage(udecodeResult);
+                requestPage.CompleteRequest += async (s, e) =>
+                {
+                    var args = e as ResponseEventArgs;
+                    await SendResponseBack(encodedUri, udecodeResult, args.Response);
+                };
+
+                await Application.Current.MainPage.Navigation.PushPopupAsync(requestPage);
+                return true;
+            }
+            return false;
         }
 
         private async Task InitLoggingAsync()
