@@ -78,7 +78,7 @@ namespace SafeAuthenticator.Helpers
                 case -102:
                     return "Account already exists";
                 case -116:
-                    return "Invalid invitation";
+                    return "Invalid invitation token";
                 case -117:
                     return "Invitation already claimed";
                 case -206:

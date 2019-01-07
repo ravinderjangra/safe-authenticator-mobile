@@ -5,14 +5,14 @@
              xmlns:viewModels="clr-namespace:SafeAuthenticator.ViewModels"
              x:Class="SafeAuthenticator.Views.TutorialPage"
              NavigationPage.HasNavigationBar="False"
-             >
+             Padding="25">
 
     <ContentPage.BindingContext>
         <viewModels:TutorialViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <ScrollView Padding="25">
+        
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="3*"/>
@@ -105,6 +105,6 @@
                             Command="{Binding  PrimaryButtonCommand}"/>
                 </StackLayout>
             </Grid>
-        </ScrollView>
+       
     </ContentPage.Content>
 </ContentPage>

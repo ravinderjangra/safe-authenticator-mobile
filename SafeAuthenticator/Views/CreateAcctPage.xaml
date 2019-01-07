@@ -5,10 +5,11 @@
              xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
              xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
              x:Class="SafeAuthenticator.Views.CreateAcctPage"
-             Title="Create Account">
+             Title="Create Account"
+             Padding="25">
     
     <ContentPage.Content>
-        <ScrollView Padding="25">
+        
             <StackLayout Spacing="10">
                 <cv:CarouselViewControl
                     ShowArrows="False"
@@ -140,6 +141,6 @@
                         BackgroundColor="Transparent"
                         TextColor="{StaticResource Primary}" />
             </StackLayout>
-        </ScrollView>
+        
     </ContentPage.Content>
 </ContentPage>
