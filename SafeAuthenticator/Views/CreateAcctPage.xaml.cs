@@ -12,7 +12,6 @@ namespace SafeAuthenticator.Views
         public CreateAcctPage()
         {
             InitializeComponent();
-            NavigationPage.SetBackButtonTitle(this, "Login");
 
             MessagingCenter.Subscribe<CreateAcctViewModel>(
                 this,

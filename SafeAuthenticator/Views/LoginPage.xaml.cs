@@ -57,6 +57,7 @@ namespace SafeAuthenticator.Views
                     }
 
                     Debug.WriteLine("LoginPage -> CreateAcctPage");
+                    NavigationPage.SetBackButtonTitle(this, "Login");
                     await Navigation.PushAsync(new CreateAcctPage());
                 });
         }
