@@ -14,8 +14,8 @@
 
     <ContentPage.Content>
 
-            <StackLayout Spacing="10">
-                <cv:CarouselViewControl                    
+        <StackLayout Spacing="10">
+            <cv:CarouselViewControl                    
                     ShowArrows="False"
                     ShowIndicators="False"
                     IsSwipeEnabled="False"
@@ -23,41 +23,41 @@
                     PositionSelectedCommand="{Binding CarouselPageChangeCommand}"
                     Position="{Binding CarouselPagePosition}"
                     Margin="0,40,0,0">
-                    <cv:CarouselViewControl.ItemsSource>
-                        <x:Array Type="{x:Type View}">
+                <cv:CarouselViewControl.ItemsSource>
+                    <x:Array Type="{x:Type View}">
 
-                            <!-- Invitation -->
-                            <StackLayout>
-                                <StackLayout Spacing="10"
+                        <!-- Invitation -->
+                        <StackLayout>
+                            <StackLayout Spacing="10"
                                              Padding="25,0">
-                                    <Label Text="First, you need an invitation token"
+                                <Label Text="First, you need an invitation token"
                                            FontAttributes="Bold"
                                            FontSize="16" />
 
-                                    <Label>
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="In order to create an account, you need to achieve trust level 1 on the "
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="In order to create an account, you need to achieve trust level 1 on the "
                                                       TextColor="#2C2828"/>
-                                                <Span Text="SAFE network forum" 
+                                            <Span Text="SAFE network forum" 
                                                       TextColor="#0074E4"
                                                       TextDecorations="Underline">
-                                                    <Span.GestureRecognizers>
-                                                        <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                <Span.GestureRecognizers>
+                                                    <TapGestureRecognizer NumberOfTapsRequired="1"
                                                                               Command="{Binding OpenForumLinkCommand}">
-                                                        </TapGestureRecognizer>
-                                                    </Span.GestureRecognizers>
-                                                </Span>
-                                                <Span Text="." TextColor="#2C2828"/>
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
+                                                    </TapGestureRecognizer>
+                                                </Span.GestureRecognizers>
+                                            </Span>
+                                            <Span Text="." TextColor="#2C2828"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
 
-                                    <Button Text="CLAIM INVITATION TOKEN"
+                                <Button Text="CLAIM INVITATION TOKEN"
                                             Margin="0,20,0,0"
                                             Command="{Binding ClaimTokenCommand}" />
 
-                                    <Label Text="OR"
+                                <Label Text="OR"
                                            FontSize="Medium"
                                            HorizontalOptions="Center"
                                            HorizontalTextAlignment="Center"
@@ -65,80 +65,91 @@
                                            FontAttributes="Bold"
                                            Margin="0,20,0,0" />
 
-                                    <StackLayout Orientation="Horizontal"
+                                <StackLayout Orientation="Horizontal"
                                                  Margin="0,20,0,0">
 
-                                        <controls:MaterialEntry Placeholder="Invitation token"
+                                    <controls:MaterialEntry Placeholder="Invitation token"
                                                                 Text="{Binding Invitation}"
                                                                 HorizontalOptions="FillAndExpand" 
                                                                 ErrorDisplay="None" />
 
-                                    </StackLayout>
+                                    <Image Source="clipboardPaste"
+                                               HeightRequest="30"
+                                               Aspect="AspectFit"
+                                               WidthRequest="30"
+                                               Margin="0,0,0,5"
+                                               BackgroundColor="Transparent">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                                      Command="{Binding ClipboardPasteCommand}" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
                                 </StackLayout>
                             </StackLayout>
+                        </StackLayout>
 
-                            <!-- Account Secret -->
-                            <StackLayout Spacing="15"
+                        <!-- Account Secret -->
+                        <StackLayout Spacing="15"
                                          Padding="25,0">
-                                <Label Text="Account Secret"
+                            <Label Text="Account Secret"
                                        FontAttributes="Bold"
                                        FontSize="16" />
 
-                                <Label Text="Your 'Account Secret' is private and should not be shared with anyone."
+                            <Label Text="Your 'Account Secret' is private and should not be shared with anyone."
                                        Margin="0,0,0,20" 
                                        TextColor="#2C2828"/>
 
-                                <controls:MaterialEntry Placeholder="Account secret"
+                            <controls:MaterialEntry Placeholder="Account secret"
                                                         IsPassword="True"
                                                         Text="{Binding AcctSecret}"
                                                         ErrorDisplay="None"
                                                         Margin="0,50,0,0" />
 
-                                <controls:MaterialEntry Placeholder="Confirm account secret"
+                            <controls:MaterialEntry Placeholder="Confirm account secret"
                                                         IsPassword="True"
                                                         Text="{Binding ConfirmAcctSecret}"
                                                         ErrorText="{Binding AcctSecretErrorMsg}" />
-                            </StackLayout>
+                        </StackLayout>
 
-                            <!-- Account Password -->
-                            <StackLayout Spacing="15"
+                        <!-- Account Password -->
+                        <StackLayout Spacing="15"
                                          Padding="25,0">
-                                <Label Text="Account Password"
+                            <Label Text="Account Password"
                                        FontAttributes="Bold"
                                        FontSize="16" />
 
-                                <Label
+                            <Label
                                     Text="Your 'Account Password' is never sent to the network, it will not leave your device."
                                     Margin="0,0,0,20" 
                                     TextColor="#2C2828"/>
 
-                                <controls:MaterialEntry Placeholder="Account password"
+                            <controls:MaterialEntry Placeholder="Account password"
                                                         IsPassword="True"
                                                         Text="{Binding AcctPassword}"
                                                         ErrorDisplay="None"
                                                         Margin="0,50,0,0" />
 
-                                <controls:MaterialEntry Placeholder="Confirm account password"
+                            <controls:MaterialEntry Placeholder="Confirm account password"
                                                         IsPassword="True"
                                                         Text="{Binding ConfirmAcctPassword}"
                                                         ErrorText="{Binding AcctPasswordErrorMsg}" />
-                            </StackLayout>
-                        </x:Array>
-                    </cv:CarouselViewControl.ItemsSource>
-                </cv:CarouselViewControl>
+                        </StackLayout>
+                    </x:Array>
+                </cv:CarouselViewControl.ItemsSource>
+            </cv:CarouselViewControl>
 
-                <Button Text="CONTINUE"
+            <Button Text="CONTINUE"
                         Command="{Binding CarouselContinueCommand}"
                         Margin="25,0"/>
 
-                <Button Text="BACK"
+            <Button Text="BACK"
                         HorizontalOptions="Center"
                         Command="{Binding CarouselBackCommand}"
                         IsVisible="{Binding IsBackButtonVisible}"
                         BackgroundColor="Transparent"
                         TextColor="{StaticResource Primary}"
                         Margin="25,0"/>
-            </StackLayout>
-        
+        </StackLayout>
+
     </ContentPage.Content>
 </ContentPage>

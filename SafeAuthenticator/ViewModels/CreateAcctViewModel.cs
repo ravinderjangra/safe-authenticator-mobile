@@ -5,6 +5,7 @@ using Acr.UserDialogs;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace SafeAuthenticator.ViewModels
@@ -108,6 +109,8 @@ namespace SafeAuthenticator.ViewModels
 
         public ICommand CarouselPageChangeCommand { get; }
 
+        public ICommand ClipboardPasteCommand { get; }
+
         public ICommand CarouselContinueCommand { get; }
 
         public ICommand CarouselBackCommand { get; }
@@ -138,6 +141,10 @@ namespace SafeAuthenticator.ViewModels
             ClaimTokenCommand = new Command(() =>
             {
                 Device.OpenUri(new Uri(@"https://invite.maidsafe.net/"));
+            });
+            ClipboardPasteCommand = new Command(async () =>
+            {
+                Invitation = await Clipboard.GetTextAsync();
             });
         }
 
