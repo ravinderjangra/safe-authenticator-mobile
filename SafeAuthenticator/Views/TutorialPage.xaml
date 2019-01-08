@@ -18,7 +18,7 @@
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
-            <StackLayout BackgroundColor="{StaticResource LightBackgroundColor}" Padding="25, 25, 25, 0">
+            <StackLayout BackgroundColor="{StaticResource LightBackgroundColor}" Padding="30, 0, 30, 0">
                 <cv:CarouselViewControl 
                     ShowArrows="False"
                     ShowIndicators="False"
@@ -30,59 +30,83 @@
                         <x:Array Type="{x:Type View}">
 
                             <!-- Tutorial Page1 -->
-                            <StackLayout Spacing="20">
-                                <StackLayout HorizontalOptions="CenterAndExpand" 
-                                             VerticalOptions="CenterAndExpand">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="4*"/>
+                                    <RowDefinition Height="1*" />
+                                </Grid.RowDefinitions>
 
-                                    <Image Source="tutorial0"
-                                           Aspect="AspectFit"/>
-                                </StackLayout>
-                            </StackLayout>
+                                <Image Source="tutorial0"
+                                       Aspect="AspectFit"/>
 
+                                <Label Grid.Row="1"
+                                       Text="The Authenticator enables users to securely authenticate themselves onto the SAFE Network and protects network login credentials from apps"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center"
+                                       FontSize="16" />
+                            </Grid>
 
 
                             <!-- Tutorial Page2 -->
-                            <StackLayout>
-                                <StackLayout HorizontalOptions="CenterAndExpand" 
-                                             VerticalOptions="CenterAndExpand">
+                            <Grid RowSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="3*" />
+                                </Grid.RowDefinitions>
 
-                                    <Label Text="Manage authorisation requests"
-                                           FontAttributes="Bold"
-                                           HorizontalTextAlignment="Center"
-                                           FontSize="18"/>
+                                <StackLayout Spacing="5" 
+                                             VerticalOptions="End" 
+                                             Margin="0, 20"
+                                             HorizontalOptions="CenterAndExpand">
+                                    <Label HorizontalTextAlignment="Center" 
+                                           Text="Manage authorisation requests" 
+                                           FontSize="18"
+                                           FontAttributes="Bold" />
+                                    
+                                    <Label HorizontalTextAlignment="Center" 
+                                           Text="Review and grant permissions to apps" 
+                                           FontSize="16"/>
 
-                                    <Label Text="Review and grant permissions to apps"  
-                                           HorizontalTextAlignment="Center"
-                                           Margin="0,5,0,0"
-                                           FontSize="14"/>
-
-                                    <Image Source="tutorial1"
-                                           Margin="40,15,40,0"
-                                           Aspect="AspectFit"/>
                                 </StackLayout>
-                            </StackLayout>
+
+                                <Image Source="tutorial1"
+                                       Grid.Row="1"
+                                       HorizontalOptions="Center"
+                                       Margin="20, 0"
+                                       VerticalOptions="End"                                       
+                                       Aspect="AspectFit"/>
+                            </Grid>
 
 
                             <!-- Tutorial Page3 -->
-                            <StackLayout>
-                                <StackLayout HorizontalOptions="CenterAndExpand" 
-                                             VerticalOptions="CenterAndExpand">
-
-                                    <Label Text="Manage authorisation requests"
+                            <Grid RowSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="3*" />
+                                </Grid.RowDefinitions>
+                                
+                                <StackLayout Spacing="5" 
+                                             VerticalOptions="End" 
+                                             Margin="0, 20"
+                                             HorizontalOptions="CenterAndExpand">
+                                    <Label HorizontalTextAlignment="Center" 
+                                           Text="Manage authorisation requests" 
+                                           FontSize="18" 
                                            FontAttributes="Bold"
-                                           HorizontalTextAlignment="Center"                                           
-                                           FontSize="18"/>
-
-                                    <Label Text="View all authorised apps and their permissions" 
-                                           HorizontalTextAlignment="Center"
-                                           Margin="0,5,0,0"
-                                           FontSize="14"/>
-
-                                    <Image Source="tutorial2"
-                                           Margin="40,15,40,0"
-                                           Aspect="AspectFit"/>
+                                           HorizontalOptions="Center"/>
+                                    
+                                    <Label HorizontalTextAlignment="Center" 
+                                           Text="View all authorised apps and their permissions" 
+                                           FontSize="16"/>
                                 </StackLayout>
-                            </StackLayout>
+
+                                <Image Source="tutorial2"
+                                       Grid.Row="1" 
+                                       Margin="20, 0"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="End"
+                                       Aspect="AspectFit"/>
+                            </Grid>
 
                         </x:Array>
                     </cv:CarouselViewControl.ItemsSource>
@@ -100,11 +124,11 @@
                             Margin="0,20,0,0"
                             HorizontalOptions="Center"
                         VerticalOptions="EndAndExpand"/>
-                
+
                 <Button Text="{Binding PrimaryButtonText}" 
                         Command="{Binding  PrimaryButtonCommand}"
                         VerticalOptions="End"/>
-                
+
                 <StackLayout.Triggers>
                     <DataTrigger TargetType="StackLayout"
                                          Binding="{Binding CarouselPagePosition}"

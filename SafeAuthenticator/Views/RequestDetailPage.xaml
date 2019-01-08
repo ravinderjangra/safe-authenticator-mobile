@@ -38,7 +38,7 @@
 
             <StackLayout Spacing="10"
                          Padding="16"
-                         HeightRequest="250">
+                         HeightRequest="280">
                 <StackLayout.Triggers>
                     <MultiTrigger TargetType="StackLayout">
                         <MultiTrigger.Conditions>
@@ -49,7 +49,7 @@
                                 Binding="{Binding MData.Count, Converter={StaticResource IsCollectionEmptyConverter}}"
                                 Value="true" />
                         </MultiTrigger.Conditions>
-                        <Setter Property="HeightRequest" Value="140" />
+                        <Setter Property="HeightRequest" Value="170" />
                     </MultiTrigger>
                 </StackLayout.Triggers>
 
@@ -78,9 +78,7 @@
                            WidthRequest="15"
                            x:Name="InfoIcon"
                            VerticalOptions="Center"
-                           HorizontalOptions="End"
-                           IsVisible="{Binding IsUnregisteredRequest, Converter={StaticResource InverseBoolean}}"
-                           Margin="0,0,0,0"/>
+                           IsVisible="{Binding IsUnregisteredRequest, Converter={StaticResource InverseBoolean}}"/>
                 </StackLayout>
 
                 <StackLayout x:Name="AppDetailsStackLayout" IsVisible="False" Margin="10,0">
