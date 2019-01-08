@@ -163,6 +163,7 @@
     <Compile Include="Helpers\FileOps.cs" />
     <Compile Include="Extensions\FontExtensions.cs" />
     <Compile Include="Helpers\FloatLabeledTextField.cs" />
+    <Compile Include="Helpers\GradientContentViewRenderer.cs" />
     <Compile Include="Helpers\MaterialEntryRenderer.cs" />
     <Compile Include="Helpers\ShowHidePassEffect.cs" />
     <Compile Include="Main.cs" />

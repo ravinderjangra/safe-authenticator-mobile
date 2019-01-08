@@ -77,6 +77,7 @@
     </Compile>
     <Compile Include="Helpers\FileOps.cs" />
     <Compile Include="Helpers\FontExtensions.cs" />
+    <Compile Include="Helpers\GradientContentViewRenderer.cs" />
     <Compile Include="Helpers\MaterialEntryRenderer.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
