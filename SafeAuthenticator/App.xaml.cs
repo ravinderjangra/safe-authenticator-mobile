@@ -59,16 +59,14 @@ namespace SafeAuthenticator
         protected override async void OnStart()
         {
             base.OnStart();
-            if (Service.AuthReconnect)
-                await Service.CheckAndReconnect();
+            await Service.CheckAndReconnect();
         }
 
         protected override async void OnResume()
         {
             base.OnResume();
             IsBackgrounded = false;
-            if (Service.AuthReconnect)
-                await Service.CheckAndReconnect();
+            await Service.CheckAndReconnect();
         }
 
         protected override async void OnSleep()
