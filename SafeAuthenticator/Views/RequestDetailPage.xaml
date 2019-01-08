@@ -49,14 +49,15 @@
                                 Binding="{Binding MData.Count, Converter={StaticResource IsCollectionEmptyConverter}}"
                                 Value="true" />
                         </MultiTrigger.Conditions>
-                        <Setter Property="HeightRequest" Value="170" />
+                        <Setter Property="HeightRequest" Value="195" />
                     </MultiTrigger>
                 </StackLayout.Triggers>
 
-                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                <StackLayout HorizontalOptions="FillAndExpand" 
+                             Orientation="Horizontal">
                     <Label HorizontalTextAlignment="Center"
                            HorizontalOptions="CenterAndExpand"
-                           Margin="20, 0"
+                           Margin="20,0,0,0"
                            FontSize="16">
                         <Label.FormattedText>
                             <FormattedString>
@@ -74,10 +75,11 @@
                     </Label>
 
                     <Image Source="info"
-                           HeightRequest="15"
-                           WidthRequest="15"
+                           HeightRequest="17"
+                           WidthRequest="17"
                            x:Name="InfoIcon"
                            VerticalOptions="Center"
+                           Margin="0,5,20,0"
                            IsVisible="{Binding IsUnregisteredRequest, Converter={StaticResource InverseBoolean}}"/>
                 </StackLayout>
 

@@ -18,7 +18,7 @@
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
-            <StackLayout BackgroundColor="{StaticResource LightBackgroundColor}" Padding="30, 0, 30, 0">
+            <StackLayout BackgroundColor="{StaticResource LightBackgroundColor}" >
                 <cv:CarouselViewControl 
                     ShowArrows="False"
                     ShowIndicators="False"
@@ -30,7 +30,7 @@
                         <x:Array Type="{x:Type View}">
 
                             <!-- Tutorial Page1 -->
-                            <Grid>
+                            <Grid Padding="30, 0, 30, 0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="4*"/>
                                     <RowDefinition Height="1*" />
@@ -43,12 +43,20 @@
                                        Text="The Authenticator enables users to securely authenticate themselves onto the SAFE Network and protects network login credentials from apps"
                                        HorizontalTextAlignment="Center"
                                        VerticalTextAlignment="Center"
-                                       FontSize="16" />
+                                       FontSize="16">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="The Authenticator " FontAttributes="Bold" />
+                                            <Span Text="enables users to securely authenticate themselves onto the SAFE Network and protects network login credentials from apps" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
                             </Grid>
 
 
                             <!-- Tutorial Page2 -->
-                            <Grid RowSpacing="0">
+                            <Grid RowSpacing="0"
+                                  Padding="30, 0, 30, 0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*" />
                                     <RowDefinition Height="3*" />
@@ -79,7 +87,8 @@
 
 
                             <!-- Tutorial Page3 -->
-                            <Grid RowSpacing="0">
+                            <Grid RowSpacing="0"
+                                  Padding="30, 0, 30, 0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*" />
                                     <RowDefinition Height="3*" />
