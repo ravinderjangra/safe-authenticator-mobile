@@ -9,7 +9,7 @@
           VerticalOptions="CenterAndExpand"
           RowSpacing="10"
           ColumnSpacing="10">
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -33,7 +33,7 @@
             <Label Text="{Binding MetaName}"
                    TextColor="Black"
                    FontSize="14" />
-            
+
             <Label Text="{Binding Access, Converter={StaticResource FormatContainerPermissionsConverter}}"
                    TextColor="#8b8b8b"
                    FontSize="12" />

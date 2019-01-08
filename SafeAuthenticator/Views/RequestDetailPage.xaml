@@ -147,7 +147,7 @@
                             BackgroundColor="{StaticResource Primary}"
                             Clicked="Send_Response"
                             HeightRequest="39"
-                            WidthRequest="85"/>
+                            WidthRequest="85" />
                 </StackLayout>
 
             </StackLayout>

@@ -9,7 +9,7 @@
           VerticalOptions="CenterAndExpand"
           RowSpacing="10"
           ColumnSpacing="10">
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -24,13 +24,13 @@
                WidthRequest="25"
                VerticalOptions="Center"
                HorizontalOptions="Center"
-               Grid.RowSpan="2"/>
+               Grid.RowSpan="2" />
 
         <StackLayout VerticalOptions="FillAndExpand"
                      Grid.Column="1"
                      Grid.Row="0"
                      Spacing="3">
-            <Label Text="{Binding ContainerName, Converter={StaticResource FormatContainerNameConverter}}"
+            <Label Text="{Binding ContainerName}"
                    TextColor="Black"
                    FontSize="14" />
             <Label Text="{Binding Access, Converter={StaticResource FormatContainerPermissionsConverter}}"

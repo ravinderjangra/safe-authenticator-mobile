@@ -78,14 +78,14 @@ namespace SafeAuthenticator.ViewModels
                         Delete = x.Access.Delete,
                         ManagePermissions = x.Access.ManagePermissions
                     },
-                    ContainerName = x.ContName
+                    ContainerName = Utilities.FormatContainerName(x.ContName)
                 }).ToObservableRangeCollection();
 
             if (_authReq.AuthReq.AppContainer)
             {
                 Containers.Add(new ContainerPermissionsModel()
                 {
-                    ContainerName = "App Container",
+                    ContainerName = "App's own Container",
                     Access = new PermissionSetModel
                     {
                         Read = true,
@@ -97,6 +97,7 @@ namespace SafeAuthenticator.ViewModels
                 });
             }
 
+            Containers = Containers.OrderBy(c => c.ContainerName).ToObservableRangeCollection();
             IsAppContainerRequest = _authReq.AuthReq.AppContainer;
         }
 
@@ -114,8 +115,10 @@ namespace SafeAuthenticator.ViewModels
                         Delete = x.Access.Delete,
                         ManagePermissions = x.Access.ManagePermissions
                     },
-                    ContainerName = x.ContName
+                    ContainerName = Utilities.FormatContainerName(x.ContName)
                 }).ToObservableRangeCollection();
+
+            Containers = Containers.OrderBy(c => c.ContainerName).ToObservableRangeCollection();
         }
 
         private void ProcessMDataRequestData()

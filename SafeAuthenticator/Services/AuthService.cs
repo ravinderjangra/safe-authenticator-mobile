@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
 using Rg.Plugins.Popup.Extensions;
-using Rg.Plugins.Popup.Services;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
@@ -47,15 +46,13 @@ namespace SafeAuthenticator.Services
                     Application.Current.Properties[AutoReconnectPropKey] = false;
                     return false;
                 }
-                else
-                {
-                    return (bool)Application.Current.Properties[AutoReconnectPropKey];
-                }
+
+                return (bool)Application.Current.Properties[AutoReconnectPropKey];
             }
 
             set
             {
-                if (value == true)
+                if (value)
                 {
                     StoreCredentials();
                 }
@@ -100,10 +97,6 @@ namespace SafeAuthenticator.Services
                             await LoginAsync(location, password);
                             MessagingCenter.Send(this, MessengerConstants.NavHomePage);
                         }
-                    }
-                    else
-                    {
-                        return;
                     }
                 }
                 else if (_authenticator.IsDisconnected)

@@ -59,8 +59,6 @@ namespace SafeAuthenticator.ViewModels
                     SecondaryButtonText = "CREATE ACCOUNT";
                     PrimaryButtonText = "LOGIN";
                     break;
-                default:
-                    break;
             }
         }
 

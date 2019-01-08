@@ -41,7 +41,7 @@ namespace SafeAuthenticator.Views
             {
                 CompleteRequest?.Invoke(this, new ResponseEventArgs(false));
             }
-            PopupNavigation.Instance.PopAsync(true);
+            PopupNavigation.Instance.PopAsync();
         }
     }
 }

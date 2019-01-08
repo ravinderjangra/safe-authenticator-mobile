@@ -46,14 +46,14 @@
                                 <MultiTrigger TargetType="Label">
                                     <MultiTrigger.Conditions>
                                         <BindingCondition Binding="{Binding Apps.Count}"
-                                                          Value="0"/>
+                                                          Value="0" />
                                         <BindingCondition Binding="{Binding IsRefreshing}"
-                                                          Value="False"/>
+                                                          Value="False" />
                                     </MultiTrigger.Conditions>
                                     <Setter Property="IsVisible"
-                                            Value="True"/>
+                                            Value="True" />
                                     <Setter Property="Text"
-                                            Value="No apps have been authorised yet."/>
+                                            Value="No apps have been authorised yet." />
                                 </MultiTrigger>
                             </Label.Triggers>
                         </Label>
