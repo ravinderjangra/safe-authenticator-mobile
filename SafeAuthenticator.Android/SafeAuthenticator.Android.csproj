@@ -230,6 +230,7 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\authLogo.png" />
     <AndroidResource Include="Resources\drawable\info.png" />
     <AndroidResource Include="Resources\drawable\appcontainer.png" />
+    <AndroidResource Include="Resources\drawable\tutorial0.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="CheckNativeLibs" BeforeTargets="PrepareForBuild">

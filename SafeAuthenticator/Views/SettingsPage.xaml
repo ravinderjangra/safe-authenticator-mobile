@@ -73,13 +73,13 @@
                         </Label.GestureRecognizers>
                     </Label>
 
-                    <Label Text="Privacy statement" 
+                    <!--<Label Text="Privacy statement" 
                            Style="{StaticResource TextStyle}" >
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1" 
                                                   Command="{Binding PrivacyInfoCommand}"/>
                         </Label.GestureRecognizers>
-                    </Label>
+                    </Label>-->
                     
                     <StackLayout>
                         <Label Text="Application version" 

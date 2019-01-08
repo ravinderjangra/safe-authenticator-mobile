@@ -179,7 +179,7 @@ namespace SafeAuthenticator.Services
                     if (await HandleUnregisteredAppRequest(encodedUri))
                         return;
                     AuthenticationReq = encodedUri;
-                    await Application.Current.MainPage.DisplayAlert("Error", "Need to be logged in to accept app requests", "OK");
+                    await Application.Current.MainPage.DisplayAlert("Alert", "You have received an auth request, login to view details", "OK");
                     return;
                 }
 
@@ -214,13 +214,7 @@ namespace SafeAuthenticator.Services
             }
             catch (Exception ex)
             {
-                var errorMsg = ex.Message;
-                if (ex is ArgumentNullException)
-                {
-                    errorMsg = "Ignoring Auth Request: Need to be logged in to accept app requests.";
-                }
-
-                await Application.Current.MainPage.DisplayAlert("Error", errorMsg, "OK");
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
         }
 

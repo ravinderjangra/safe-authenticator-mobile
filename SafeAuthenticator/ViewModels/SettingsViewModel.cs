@@ -12,7 +12,7 @@ namespace SafeAuthenticator.ViewModels
 
         public ICommand FAQCommand { get; }
 
-        public ICommand PrivacyInfoCommand { get; }
+        // public ICommand PrivacyInfoCommand { get; }
 
         private string _accountStorageInfo;
 
@@ -43,13 +43,13 @@ namespace SafeAuthenticator.ViewModels
 
             FAQCommand = new Command(() =>
             {
-                Device.OpenUri(new Uri(@"https://safenetforum.org/t/trust-level-1-basic-user-requirements/15200"));
+                Device.OpenUri(new Uri(@"https://safenetforum.org/t/safe-authenticator-faq/26683"));
             });
 
-            PrivacyInfoCommand = new Command(() =>
-            {
-                Device.OpenUri(new Uri(@"https://maidsafe.net/privacy"));
-            });
+            // PrivacyInfoCommand = new Command(() =>
+            // {
+            //    Device.OpenUri(new Uri(@"https://maidsafe.net/privacy"));
+            // });
         }
 
         public async void GetAccountInfo()

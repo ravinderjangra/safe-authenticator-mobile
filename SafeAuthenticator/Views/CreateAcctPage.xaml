@@ -30,7 +30,7 @@
                             <StackLayout>
                                 <StackLayout Spacing="10"
                                              Padding="25,0">
-                                    <Label Text="But first, you need an invitation token"
+                                    <Label Text="First, you need an invitation token"
                                            FontAttributes="Bold"
                                            FontSize="16" />
 

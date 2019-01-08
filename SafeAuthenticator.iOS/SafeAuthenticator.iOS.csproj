@@ -125,7 +125,6 @@
       <Link>log.toml</Link>
     </Content>
     <BundleResource Include="Resources\authLogo.png" />
-    <BundleResource Include="Resources\clipboardPaste.png" />
     <BundleResource Include="Resources\documents.png" />
     <BundleResource Include="Resources\downloads.png" />
     <BundleResource Include="Resources\MData.png" />

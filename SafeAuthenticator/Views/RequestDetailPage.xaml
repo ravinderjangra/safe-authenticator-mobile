@@ -68,7 +68,7 @@
                             <DataTrigger TargetType="Label"
                                          Binding="{Binding IsUnregisteredRequest}"
                                          Value="true">
-                                <Setter Property="Text" Value="An unregistered app is requesting access" />
+                                <Setter Property="Text" Value="An app is requesting access" />
                             </DataTrigger>
                         </Label.Triggers>
                     </Label>
@@ -79,7 +79,8 @@
                            x:Name="InfoIcon"
                            VerticalOptions="Center"
                            HorizontalOptions="End"
-                           IsVisible="{Binding IsUnregisteredRequest, Converter={StaticResource InverseBoolean}}" />
+                           IsVisible="{Binding IsUnregisteredRequest, Converter={StaticResource InverseBoolean}}"
+                           Margin="0,0,0,0"/>
                 </StackLayout>
 
                 <StackLayout x:Name="AppDetailsStackLayout" IsVisible="False" Margin="10,0">

@@ -49,13 +49,21 @@
                         Padding="5"
                         Command="{Binding RevokeAppCommand}" />
             </Grid>
-            
+
             <Label Text="Permissions granted"
                    FontAttributes="Bold"
                    FontSize="14"
                    TextColor="Black"
-                   Margin="0,20,0,0"/>
-            
+                   Margin="0,20,0,0">
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label"
+                                 Binding="{Binding AppModelInfo.Containers.Count, Converter={StaticResource IsCollectionEmptyConverter}}"
+                                 Value="true">
+                        <Setter Property="IsVisible" Value="False"/>
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+
             <ListView HasUnevenRows="True"
                       SeparatorVisibility="None"
                       ItemsSource="{Binding AppModelInfo.Containers}"
