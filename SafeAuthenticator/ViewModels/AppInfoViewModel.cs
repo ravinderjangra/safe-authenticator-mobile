@@ -39,7 +39,7 @@ namespace SafeAuthenticator.ViewModels
             {
                 try
                 {
-                    using (UserDialogs.Instance.Loading("Revoking permission"))
+                    using (UserDialogs.Instance.Loading("Revoking app access"))
                     {
                         await Authenticator.RevokeAppAsync(_appModelInfo.AppId);
                         MessagingCenter.Send(this, MessengerConstants.NavHomePage);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Input;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
@@ -74,8 +75,8 @@ namespace SafeAuthenticator.ViewModels
             {
                 IsRefreshing = true;
                 var registeredApps = await Authenticator.GetRegisteredAppsAsync();
+                registeredApps = registeredApps.OrderBy(a => a.AppName).ToList();
                 Apps.ReplaceRange(registeredApps);
-                Apps.Sort();
             }
             catch (FfiException ex)
             {
