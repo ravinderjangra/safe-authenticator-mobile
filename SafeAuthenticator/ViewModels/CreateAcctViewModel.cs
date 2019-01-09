@@ -199,7 +199,7 @@ namespace SafeAuthenticator.ViewModels
                 else if (ex.ErrorCode == -102)
                     CarouselPagePosition = 1;
 
-                await Application.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
+                await Application.Current.MainPage.DisplayAlert("Create account", errorMessage, "OK");
             }
             catch (InvalidOperationException)
             {

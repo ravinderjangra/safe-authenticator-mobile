@@ -20,12 +20,23 @@ namespace SafeAuthenticator.Views
         {
             InitializeComponent();
 
-            var appDetailsTapGestureRecogniser = new TapGestureRecognizer { NumberOfTapsRequired = 1 };
-            appDetailsTapGestureRecogniser.Tapped += (s, e) =>
+            InfoIcon.Clicked += (s, e) =>
             {
                 AppDetailsStackLayout.IsVisible = !AppDetailsStackLayout.IsVisible;
+                if (AppDetailsStackLayout.IsVisible)
+                    PopupLayout.HeightRequest += 85;
+                else
+                    PopupLayout.HeightRequest -= 85;
+
+                // if (_viewModel.MData.Count != 0)
+                //    MDataPermissionListView.IsVisible = !MDataPermissionListView.IsVisible;
+
+                // if (_viewModel.Containers.Count != 0)
+                //    ContainerPermissionListView.IsVisible = !ContainerPermissionListView.IsVisible;
+
+                // if (_viewModel.Containers.Count == 0 && _viewModel.MData.Count == 0 && !_viewModel.IsUnregisteredRequest)
+                //    NoContainerTextLabel.IsVisible = !NoContainerTextLabel.IsVisible;
             };
-            InfoIcon.GestureRecognizers.Add(appDetailsTapGestureRecogniser);
 
             _viewModel = new RequestDetailViewModel(req);
             BindingContext = _viewModel;

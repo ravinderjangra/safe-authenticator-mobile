@@ -172,7 +172,7 @@ namespace SafeAuthenticator.Services
                     if (await HandleUnregisteredAppRequest(encodedUri))
                         return;
                     AuthenticationReq = encodedUri;
-                    await Application.Current.MainPage.DisplayAlert("Alert", "You have received an auth request, login to view details", "OK");
+                    await Application.Current.MainPage.DisplayAlert("Login", "An application is requesting access, login to view details", "OK");
                     return;
                 }
 

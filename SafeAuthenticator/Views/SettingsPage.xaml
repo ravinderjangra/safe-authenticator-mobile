@@ -34,8 +34,13 @@
                     <StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Account Status"
-                                   Style="{StaticResource TextStyle}" />
-                            <Image HeightRequest="15" x:Name="AccountStatusImage" Source="info" />
+                                   Style="{StaticResource TextStyle}"
+                                   VerticalOptions="Center" />
+                            <ImageButton HeightRequest="30"                                   
+                                         x:Name="AccountStatusImage" 
+                                         Source="info"
+                                         Padding="5"
+                                         BackgroundColor="Transparent"/>
                         </StackLayout>
                         <Label Text="{Binding AccountStorageInfo}"
                                TextColor="{StaticResource SecondaryTitleColor}"
