@@ -197,13 +197,7 @@ namespace SafeAuthenticator.Services
                         await SendResponseBack(encodedUri, decodeResult, args.Response);
                     };
 
-                    var navigationStackSize = Application.Current.MainPage.Navigation.NavigationStack.Count - 1;
-                    var topNavigationStackPageType = Application.Current.MainPage.Navigation.NavigationStack[navigationStackSize].GetType();
-                    if (topNavigationStackPageType == typeof(SettingsPage) || topNavigationStackPageType == typeof(AppInfoPage))
-                    {
-                        await Application.Current.MainPage.Navigation.PopAsync();
-                    }
-
+                    MessagingCenter.Send(this, MessengerConstants.NavHomePage);
                     await Application.Current.MainPage.Navigation.PushPopupAsync(requestPage);
                 }
             }
