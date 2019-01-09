@@ -62,7 +62,7 @@ namespace SafeAuthenticator.ViewModels
             CreateAccountCommand = new Command(OnCreateAcct);
             NeedHelpCommand = new Command(() =>
             {
-                Device.OpenUri(new Uri(@"https://safenetforum.org/t/trust-level-1-basic-user-requirements/15200"));
+                OpeNativeBrowserService.LaunchNativeEmbeddedBrowser(@"https://safenetforum.org/t/safe-authenticator-faq/26683");
             });
         }
 

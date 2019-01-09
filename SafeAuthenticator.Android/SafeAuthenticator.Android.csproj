@@ -75,6 +75,7 @@
     <Compile Include="..\SafeAuthenticator\PlatformSpecific\AuthBindings.Manual.cs">
       <Link>Helpers\AuthBindings.Manual.cs</Link>
     </Compile>
+    <Compile Include="Helpers\AndroidNativeBrowserService.cs" />
     <Compile Include="Helpers\FileOps.cs" />
     <Compile Include="Helpers\FontExtensions.cs" />
     <Compile Include="Helpers\GradientContentViewRenderer.cs" />
