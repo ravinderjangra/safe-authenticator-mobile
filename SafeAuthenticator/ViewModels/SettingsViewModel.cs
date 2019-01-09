@@ -43,12 +43,12 @@ namespace SafeAuthenticator.ViewModels
 
             FAQCommand = new Command(() =>
             {
-                Device.OpenUri(new Uri(@"https://safenetforum.org/t/safe-authenticator-faq/26683"));
+                OpeNativeBrowserService.LaunchNativeEmbeddedBrowser(@"https://safenetforum.org/t/safe-authenticator-faq/26683");
             });
 
             // PrivacyInfoCommand = new Command(() =>
             // {
-            //    Device.OpenUri(new Uri(@"https://maidsafe.net/privacy"));
+            //    OpeNativeBrowserService.LaunchNativeEmbeddedBrowser(@"https://maidsafe.net/privacy");
             // });
         }
 

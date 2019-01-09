@@ -136,11 +136,11 @@ namespace SafeAuthenticator.ViewModels
             CarouselPageChangeCommand = new Command(CarouselPageChange);
             OpenForumLinkCommand = new Command(() =>
             {
-                Device.OpenUri(new Uri(@"https://safenetforum.org/t/trust-level-1-basic-user-requirements/15200"));
+                OpeNativeBrowserService.LaunchNativeEmbeddedBrowser(@"https://safenetforum.org/t/trust-level-1-basic-user-requirements/15200");
             });
             ClaimTokenCommand = new Command(() =>
             {
-                Device.OpenUri(new Uri(@"https://invite.maidsafe.net/"));
+                OpeNativeBrowserService.LaunchNativeEmbeddedBrowser(@"https://invite.maidsafe.net/");
             });
             ClipboardPasteCommand = new Command(async () =>
             {
