@@ -241,6 +241,11 @@ namespace SafeAuthenticator.Services
                 else if (requestType == typeof(ShareMDataIpcReq))
                 {
                     var mDataShareReq = req as ShareMDataIpcReq;
+                    if (!isGranted)
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Error", "SharedMData request denied", "OK");
+                        return;
+                    }
                     encodedRsp = await _authenticator.EncodeShareMdataRespAsync(mDataShareReq, isGranted);
                     formattedRsp = UrlFormat.Format(mDataShareReq?.ShareMDataReq.App.Id, encodedRsp, false);
                 }

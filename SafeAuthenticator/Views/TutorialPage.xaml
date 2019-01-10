@@ -28,7 +28,7 @@
 
                         <!-- Tutorial Page1 -->
                         <StackLayout>
-                            <StackLayout Padding="25, 0, 25, 0"
+                            <StackLayout Padding="25, 25, 25, 0"
                                          VerticalOptions="CenterAndExpand">
 
                                 <Image Source="tutorial0" 
@@ -76,14 +76,13 @@
                                        FontSize="18"
                                        FontAttributes="Bold"
                                        Text=" Authorise your SAFE apps"
-                                       Margin="0, 20"
                                        HorizontalTextAlignment="Center"/>
 
 
                                 <Image Source="tutorial1" 
                                        HorizontalOptions="Center"
                                        Margin="20, 0"
-                                       VerticalOptions="End"
+                                       VerticalOptions="EndAndExpand"
                                        Aspect="AspectFit" />
                             </StackLayout>
 
@@ -142,7 +141,6 @@
                                        FontSize="18"
                                        FontAttributes="Bold"
                                        Text="Manage access to your data"
-                                       Margin="0, 20"
                                        HorizontalTextAlignment="Center"/>
 
 
@@ -150,7 +148,7 @@
                                        Grid.Row="1"
                                        HorizontalOptions="Center"
                                        Margin="20, 0"
-                                       VerticalOptions="End"
+                                       VerticalOptions="EndAndExpand"
                                        Aspect="AspectFit" />
                             </StackLayout>
 
