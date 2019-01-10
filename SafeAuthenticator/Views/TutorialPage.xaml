@@ -33,6 +33,7 @@
 
                                 <Image Source="tutorial0" 
                                        Aspect="AspectFit"
+<<<<<<< HEAD
                                        HorizontalOptions="CenterAndExpand"
                                        VerticalOptions="EndAndExpand"/>
 
@@ -44,6 +45,24 @@
                                        Margin="0, 40, 0, 0"
                                     VerticalOptions="End"/>
 
+=======
+                                       VerticalOptions="CenterAndExpand"/>
+
+                                <Label HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center"
+                                       VerticalOptions="CenterAndExpand"
+                                       FontSize="16">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="The " />
+                                            <Span Text="SAFE Authenticator " 
+                                                  FontAttributes="Bold" 
+                                                  FontSize="16"/>
+                                            <Span Text="enables users to securely authenticate themselves onto the SAFE Network and protects network login credentials from apps" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+>>>>>>> 22cbc137fda3ddcacec68aeaa5175606a2f5d9c0
                             </StackLayout>
 
                             <StackLayout Padding="0,40,0,25"
@@ -70,8 +89,15 @@
                                 <RowDefinition Height="1*" />
                             </Grid.RowDefinitions>
 
+<<<<<<< HEAD
                             <StackLayout Padding="30, 0, 30, 0">
                                 <Label VerticalOptions="EndAndExpand"
+=======
+                            <StackLayout Padding="30, 0"
+                                         Grid.RowSpan="2">
+                                <Label VerticalOptions="EndAndExpand"
+                                       Margin="0, 20" 
+>>>>>>> 22cbc137fda3ddcacec68aeaa5175606a2f5d9c0
                                        HorizontalOptions="CenterAndExpand" 
                                        FontSize="18"
                                        FontAttributes="Bold"
@@ -135,8 +161,15 @@
                                 <RowDefinition Height="1*" />
                             </Grid.RowDefinitions>
 
+<<<<<<< HEAD
                             <StackLayout Padding="30, 0, 30, 0">
                                 <Label VerticalOptions="EndAndExpand"
+=======
+                            <StackLayout Padding="30, 0, 30, 0"
+                                         Grid.RowSpan="2">
+                                <Label VerticalOptions="EndAndExpand"
+                                       Margin="0, 20" 
+>>>>>>> 22cbc137fda3ddcacec68aeaa5175606a2f5d9c0
                                        HorizontalOptions="CenterAndExpand" 
                                        FontSize="18"
                                        FontAttributes="Bold"
