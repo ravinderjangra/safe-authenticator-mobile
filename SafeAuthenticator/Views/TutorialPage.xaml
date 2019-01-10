@@ -14,166 +14,220 @@
 
     <ContentPage.Content>
 
-        <Grid RowSpacing="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="3*" />
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
-            <StackLayout BackgroundColor="{StaticResource LightBackgroundColor}">
-                <cv:CarouselViewControl
+        <StackLayout>
+            <cv:CarouselViewControl
                     ShowArrows="False"
                     ShowIndicators="False"
                     PositionSelectedCommand="{Binding CarouselPageChangeCommand}"
                     Position="{Binding CarouselPagePosition}"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand">
-                    <cv:CarouselViewControl.ItemsSource>
-                        <x:Array Type="{x:Type View}">
+                <cv:CarouselViewControl.ItemsSource>
+                    <x:Array Type="{x:Type View}">
 
-                            <!-- Tutorial Page1 -->
-                            <Grid Padding="30, 0, 30, 0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="4*" />
-                                    <RowDefinition Height="1*" />
-                                </Grid.RowDefinitions>
-
-                                <Image Source="tutorial0"
-                                       Aspect="AspectFit" />
+                        <!-- Tutorial Page1 -->
+                        <Grid RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5*" />
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="2*" />
+                            </Grid.RowDefinitions>
+                            <StackLayout Padding="30, 0, 30, 0"
+                                         Grid.RowSpan="2">
+                                
+                                <Image Source="tutorial0" 
+                                       Aspect="AspectFit"
+                                       VerticalOptions="CenterAndExpand"/>
 
                                 <Label Grid.Row="1"
                                        HorizontalTextAlignment="Center"
                                        VerticalTextAlignment="Center"
+                                       VerticalOptions="CenterAndExpand"
                                        FontSize="16">
                                     <Label.FormattedText>
                                         <FormattedString>
                                             <Span Text="The " />
-                                            <Span Text="SAFE Authenticator " FontAttributes="Bold" FontSize="16"/>
-                                            <Span
-                                                Text="enables users to securely authenticate themselves onto the SAFE Network and protects network login credentials from apps" />
+                                            <Span Text="SAFE Authenticator " 
+                                                  FontAttributes="Bold" 
+                                                  FontSize="16"/>
+                                            <Span Text="enables users to securely authenticate themselves onto the SAFE Network and protects network login credentials from apps" />
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>
-                            </Grid>
+                            </StackLayout>
+
+                            <StackLayout Grid.Row="2"
+                                         Padding="0,0,0,25">
+                                <Button Text="LOGIN"
+                                        Command="{Binding  SecondaryButtonCommand}"
+                                        BackgroundColor="Transparent"
+                                        TextColor="{StaticResource Primary}"
+                                        Margin="25, 0"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="EndAndExpand" />
+
+                                <Button Text="GET STARTED"
+                                        Command="{Binding  PrimaryButtonCommand}"
+                                        Margin="25, 0"
+                                        VerticalOptions="End" />
+                            </StackLayout>
+                        </Grid>
 
 
-                            <!-- Tutorial Page2 -->
-                            <Grid RowSpacing="0"
-                                  Padding="30, 0, 30, 0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*" />
-                                    <RowDefinition Height="3*" />
-                                </Grid.RowDefinitions>
+                        <!-- Tutorial Page2 -->
+                        <Grid RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="5*" />
+                                <RowDefinition Height="2*" />
+                            </Grid.RowDefinitions>
 
-                                <StackLayout Spacing="5"
-                                             VerticalOptions="End"
-                                             Margin="0, 20"
-                                             HorizontalOptions="CenterAndExpand">
-                                    <Label HorizontalTextAlignment="Center"
-                                           Text="Manage authorisation requests"
-                                           FontSize="18"
-                                           FontAttributes="Bold" />
+                            <StackLayout Padding="30, 0, 30, 0"
+                                         Grid.RowSpan="2">
+                                <Label VerticalOptions="CenterAndExpand"
+                                       Margin="0, 20" 
+                                       HorizontalOptions="CenterAndExpand" 
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Manage authorisation requests"
+                                              FontSize="18"
+                                              FontAttributes="Bold" />
+                                            <Span Text="&#10;Review and grant permissions to apps" 
+                                              FontSize="16"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
 
-                                    <Label HorizontalTextAlignment="Center"
-                                           Text="Review and grant permissions to apps"
-                                           FontSize="16" />
-
-                                </StackLayout>
-
-                                <Image Source="tutorial1"
+                                <Image Source="tutorial1" 
                                        Grid.Row="1"
                                        HorizontalOptions="Center"
                                        Margin="20, 0"
-                                       VerticalOptions="End"
+                                       VerticalOptions="EndAndExpand"
                                        Aspect="AspectFit" />
-                            </Grid>
+                            </StackLayout>
+
+                            <StackLayout Grid.Row="2"
+                                         Padding="0,0,0,25">
+
+                                <StackLayout.BackgroundColor>
+                                    <OnPlatform x:TypeArguments="Color">
+                                        <On Platform="iOS" Value="#F1F1F1" />
+                                        <On Platform="Android" Value="White" />
+                                    </OnPlatform>
+                                </StackLayout.BackgroundColor>
+                                
+                                <controls:GradientContentView StartColor="#F1F1F1"
+                                                              EndColor="White">
+                                    <StackLayout BackgroundColor="Transparent"
+                                                 HeightRequest="20"
+                                                 HorizontalOptions="FillAndExpand" />
+
+                                    <controls:GradientContentView.Triggers>
+                                        <DataTrigger TargetType="controls:GradientContentView"
+                                                     Binding="{Binding CarouselPagePosition}"
+                                                     Value="0">
+                                            <Setter Property="Opacity"
+                                                    Value="0" />
+                                        </DataTrigger>
+                                    </controls:GradientContentView.Triggers>
+                                </controls:GradientContentView>
+
+                                <Button Text="SKIP"
+                                        Command="{Binding  SecondaryButtonCommand}"
+                                        BackgroundColor="Transparent"
+                                        TextColor="{StaticResource Primary}"
+                                        Margin="25, 0"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="EndAndExpand" />
+
+                                <Button Text="CONTINUE"
+                                        Command="{Binding  PrimaryButtonCommand}"
+                                        Margin="25, 0"
+                                        VerticalOptions="End" />
+                            </StackLayout>
+                        </Grid>
 
 
-                            <!-- Tutorial Page3 -->
-                            <Grid RowSpacing="0"
-                                  Padding="30, 0, 30, 0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*" />
-                                    <RowDefinition Height="3*" />
-                                </Grid.RowDefinitions>
+                        <!-- Tutorial Page3 -->
+                        <Grid RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="5*" />
+                                <RowDefinition Height="2*" />
+                            </Grid.RowDefinitions>
 
-                                <StackLayout Spacing="5"
-                                             VerticalOptions="End"
-                                             Margin="0, 20"
-                                             HorizontalOptions="CenterAndExpand">
-                                    <Label HorizontalTextAlignment="Center"
-                                           Text="Manage authorisation requests"
-                                           FontSize="18"
-                                           FontAttributes="Bold"
-                                           HorizontalOptions="Center" />
+                            <StackLayout Padding="30, 0, 30, 0"
+                                         Grid.RowSpan="2">
+                                <Label VerticalOptions="CenterAndExpand"
+                                       Margin="0, 20" 
+                                       HorizontalOptions="CenterAndExpand" 
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Manage authorisation requests"
+                                              FontSize="18"
+                                              FontAttributes="Bold" />
+                                            <Span Text="&#10;View all authorised apps and their permissions" 
+                                              FontSize="16"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
 
-                                    <Label HorizontalTextAlignment="Center"
-                                           Text="View all authorised apps and their permissions"
-                                           FontSize="16" />
-                                </StackLayout>
-
-                                <Image Source="tutorial2"
+                                <Image Source="tutorial2" 
                                        Grid.Row="1"
-                                       Margin="20, 0"
                                        HorizontalOptions="Center"
-                                       VerticalOptions="End"
+                                       Margin="20, 0"
+                                       VerticalOptions="EndAndExpand"
                                        Aspect="AspectFit" />
-                            </Grid>
+                            </StackLayout>
 
-                        </x:Array>
-                    </cv:CarouselViewControl.ItemsSource>
-                </cv:CarouselViewControl>
-            </StackLayout>
+                            <StackLayout Grid.Row="2"
+                                         Padding="0,0,0,25">
 
-            <StackLayout Grid.Row="1"
-                         Padding="0,0,0,25">
+                                <StackLayout.BackgroundColor>
+                                    <OnPlatform x:TypeArguments="Color">
+                                        <On Platform="iOS" Value="#F1F1F1" />
+                                        <On Platform="Android" Value="White" />
+                                    </OnPlatform>
+                                </StackLayout.BackgroundColor>
 
-                <StackLayout.BackgroundColor>
-                    <OnPlatform x:TypeArguments="Color">
-                        <On Platform="iOS" Value="#F1F1F1" />
-                        <On Platform="Android" Value="White" />
-                    </OnPlatform>
-                </StackLayout.BackgroundColor>
+                                <controls:GradientContentView StartColor="#F1F1F1"
+                                                              EndColor="White">
+                                    <StackLayout BackgroundColor="Transparent"
+                                                 HeightRequest="20"
+                                                 HorizontalOptions="FillAndExpand" />
 
-                <StackLayout.Triggers>
-                    <DataTrigger TargetType="StackLayout"
-                                 Binding="{Binding CarouselPagePosition}"
-                                 Value="0">
-                        <Setter Property="BackgroundColor"
-                                Value="White" />
-                    </DataTrigger>
-                </StackLayout.Triggers>
+                                    <controls:GradientContentView.Triggers>
+                                        <DataTrigger TargetType="controls:GradientContentView"
+                                                     Binding="{Binding CarouselPagePosition}"
+                                                     Value="0">
+                                            <Setter Property="Opacity"
+                                                    Value="0" />
+                                        </DataTrigger>
+                                    </controls:GradientContentView.Triggers>
+                                </controls:GradientContentView>
 
-                <controls:GradientContentView StartColor="#F1F1F1"
-                                              EndColor="White">
-                    <StackLayout BackgroundColor="Transparent"
-                                 HeightRequest="20"
-                                 HorizontalOptions="FillAndExpand" />
+                                <Button Text="CREATE ACCOUNT"
+                                        Command="{Binding  SecondaryButtonCommand}"
+                                        BackgroundColor="Transparent"
+                                        TextColor="{StaticResource Primary}"
+                                        Margin="25, 0"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="EndAndExpand" />
 
-                    <controls:GradientContentView.Triggers>
-                        <DataTrigger TargetType="controls:GradientContentView"
-                                     Binding="{Binding CarouselPagePosition}"
-                                     Value="0">
-                            <Setter Property="Opacity"
-                                    Value="0" />
-                        </DataTrigger>
-                    </controls:GradientContentView.Triggers>
-                </controls:GradientContentView>
+                                <Button Text="LOGIN"
+                                        Command="{Binding  PrimaryButtonCommand}"
+                                        Margin="25, 0"
+                                        VerticalOptions="End" />
+                            </StackLayout>
+                        </Grid>
 
-                <Button Text="{Binding SecondaryButtonText}"
-                        Command="{Binding  SecondaryButtonCommand}"
-                        BackgroundColor="Transparent"
-                        TextColor="{StaticResource Primary}"
-                        Margin="25, 0"
-                        HorizontalOptions="Center"
-                        VerticalOptions="EndAndExpand" />
-
-                <Button Text="{Binding PrimaryButtonText}"
-                        Command="{Binding  PrimaryButtonCommand}"
-                        Margin="25, 0"
-                        VerticalOptions="End" />
-            </StackLayout>
-
-        </Grid>
-
+                    </x:Array>
+                </cv:CarouselViewControl.ItemsSource>
+            </cv:CarouselViewControl>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
