@@ -54,12 +54,19 @@
                     </MultiTrigger>
                 </StackLayout.Triggers>
 
-                <StackLayout HorizontalOptions="FillAndExpand"
-                             Orientation="Horizontal">
-                    
+                <Grid HorizontalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="35"/>
+                    </Grid.ColumnDefinitions>
+
                     <Label HorizontalOptions="CenterAndExpand"
                            HorizontalTextAlignment="Center"
-                           Margin="20,0,0,0"
+                           Grid.Column="1"
                            FontSize="16">
                         <Label.FormattedText>
                             <FormattedString>
@@ -77,6 +84,7 @@
                     </Label>
 
                     <ImageButton Source="info"
+                                 Grid.Column="2"
                                  HorizontalOptions="EndAndExpand"
                                  HeightRequest="30"
                                  WidthRequest="30"
@@ -85,7 +93,7 @@
                                  x:Name="InfoIcon"
                                  VerticalOptions="Start"
                                  IsVisible="{Binding IsUnregisteredRequest, Converter={StaticResource InverseBoolean}}"/>
-                </StackLayout>
+                </Grid>
 
                 <StackLayout x:Name="AppDetailsStackLayout" VerticalOptions="Start" IsVisible="False" Margin="10,0">
                     <Label FontSize="14"
@@ -149,8 +157,8 @@
                         </MultiTrigger>
                     </StackLayout.Triggers>
                 </StackLayout>
-                
-                    <ListView x:Name="ContainerPermissionListView"
+
+                <ListView x:Name="ContainerPermissionListView"
                           HasUnevenRows="True"
                           SeparatorVisibility="None"
                           VerticalOptions="FillAndExpand"
