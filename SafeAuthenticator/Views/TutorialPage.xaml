@@ -39,8 +39,7 @@
                                        Aspect="AspectFit"
                                        VerticalOptions="CenterAndExpand"/>
 
-                                <Label Grid.Row="1"
-                                       HorizontalTextAlignment="Center"
+                                <Label HorizontalTextAlignment="Center"
                                        VerticalTextAlignment="Center"
                                        VerticalOptions="CenterAndExpand"
                                        FontSize="16">
@@ -82,9 +81,9 @@
                                 <RowDefinition Height="2*" />
                             </Grid.RowDefinitions>
 
-                            <StackLayout Padding="30, 0, 30, 0"
+                            <StackLayout Padding="30, 0"
                                          Grid.RowSpan="2">
-                                <Label VerticalOptions="CenterAndExpand"
+                                <Label VerticalOptions="EndAndExpand"
                                        Margin="0, 20" 
                                        HorizontalOptions="CenterAndExpand" 
                                        HorizontalTextAlignment="Center"
@@ -160,7 +159,7 @@
 
                             <StackLayout Padding="30, 0, 30, 0"
                                          Grid.RowSpan="2">
-                                <Label VerticalOptions="CenterAndExpand"
+                                <Label VerticalOptions="EndAndExpand"
                                        Margin="0, 20" 
                                        HorizontalOptions="CenterAndExpand" 
                                        HorizontalTextAlignment="Center"
