@@ -202,6 +202,10 @@ namespace SafeAuthenticator.ViewModels
                 PopupLayoutHeight = minPopupHeight;
                 PopupState = Constants.Loading;
                 var encodedRsp = await Authenticator.GetEncodedResponseAsync(decodedRequest, response);
+
+                if (response)
+                    MessagingCenter.Send(this, MessengerConstants.RefreshHomePage, decodedRequest);
+
                 await PopupNavigation.Instance.PopAsync();
                 var formattedRsp = UrlFormat.Format(AppId, encodedRsp, false);
                 Debug.WriteLine($"Encoded Rsp to app: {formattedRsp}");

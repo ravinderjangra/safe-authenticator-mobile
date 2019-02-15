@@ -51,11 +51,84 @@ namespace SafeAuthenticator.ViewModels
             Device.BeginInvokeOnMainThread(OnRefreshAccounts);
 
             MessagingCenter.Subscribe<AppInfoViewModel>(this, MessengerConstants.RefreshHomePage, (sender) => { OnRefreshAccounts(); });
+            MessagingCenter.Subscribe<RequestDetailViewModel, IpcReq>(this, MessengerConstants.RefreshHomePage, (sender, decodeResult) =>
+            {
+                var decodedType = decodeResult.GetType();
+
+                // Authentication Request
+                if (decodedType == typeof(AuthIpcReq))
+                {
+                    var ipcReq = (AuthIpcReq)decodeResult;
+                    var app = new RegisteredAppModel(ipcReq.AuthReq.App, ipcReq.AuthReq.Containers);
+                    var isAppContainerRequested = ipcReq.AuthReq.AppContainer;
+                    var appOwnContainer = new ContainerPermissionsModel()
+                    {
+                        ContainerName = Constants.AppOwnContainer,
+                        Access = new PermissionSetModel
+                        {
+                            Read = true,
+                            Insert = true,
+                            Update = true,
+                            Delete = true,
+                            ManagePermissions = true
+                        }
+                    };
+
+                    // Add app to registeredAppList if not present
+                    if (!Apps.Contains(app))
+                    {
+                        // Adding app's own container if present
+                        if (isAppContainerRequested)
+                        {
+                            app.Containers.Add(appOwnContainer);
+                            app.Containers.ReplaceRange(app.Containers.OrderBy(a => a.ContainerName).ToObservableRangeCollection());
+                        }
+                        var registeredApps = Apps;
+                        registeredApps.Add(app);
+                        registeredApps = registeredApps.OrderBy(a => a.AppName).ToObservableRangeCollection();
+                        Apps.ReplaceRange(registeredApps);
+                    }
+                    else
+                    {
+                        // If app already exists in registeredAppList, and app's own container is requested but not previously added
+                        if (isAppContainerRequested)
+                        {
+                            var registeredAppsItem = Apps.FirstOrDefault(a => a.AppId == app.AppId);
+                            var container = registeredAppsItem.Containers.FirstOrDefault(a => a.ContainerName == Constants.AppOwnContainer);
+                            if (container == null)
+                            {
+                                registeredAppsItem.Containers.Add(appOwnContainer);
+                                registeredAppsItem.Containers.ReplaceRange(registeredAppsItem.Containers.OrderBy(a => a.ContainerName).ToObservableRangeCollection());
+                            }
+                        }
+                    }
+                }
+                else if (decodedType == typeof(ContainersIpcReq))
+                {
+                    // Container Request
+                    var ipcReq = (ContainersIpcReq)decodeResult;
+                    var app = new RegisteredAppModel(ipcReq.ContainersReq.App, ipcReq.ContainersReq.Containers);
+
+                    var registeredAppsItem = Apps.FirstOrDefault(a => a.AppId == app.AppId);
+                    foreach (var container in app.Containers)
+                    {
+                        var containersItem = registeredAppsItem.Containers.FirstOrDefault(a => a.ContainerName == container.ContainerName);
+
+                        // If requested container not present add new else update permission set of existing container
+                        if (containersItem == null)
+                            registeredAppsItem.Containers.Add(container);
+                        else
+                            containersItem.Access = container.Access;
+                    }
+                    registeredAppsItem.Containers.ReplaceRange(registeredAppsItem.Containers.OrderBy(a => a.ContainerName).ToObservableRangeCollection());
+                }
+            });
         }
 
         ~HomeViewModel()
         {
             MessagingCenter.Unsubscribe<AppInfoViewModel>(this, MessengerConstants.RefreshHomePage);
+            MessagingCenter.Unsubscribe<RequestDetailViewModel, RegisteredAppModel>(this, MessengerConstants.RefreshHomePage);
         }
 
         private void OnAccountSelected(RegisteredAppModel appModelInfo)
