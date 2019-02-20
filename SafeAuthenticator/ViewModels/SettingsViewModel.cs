@@ -84,16 +84,26 @@ namespace SafeAuthenticator.ViewModels
 
         private async void OnLogout()
         {
-            if (await Application.Current.MainPage.DisplayAlert(
-                "Logout",
-                "Are you sure you want to logout?",
-                "Logout",
-                "Cancel"))
+            try
             {
-                AuthReconnect = false;
-                Preferences.Remove(nameof(AccountStorageInfo));
-                await Authenticator.LogoutAsync();
-                MessagingCenter.Send(this, MessengerConstants.NavLoginPage);
+                if (await Application.Current.MainPage.DisplayAlert(
+                    "Logout",
+                    "Are you sure you want to logout?",
+                    "Logout",
+                    "Cancel"))
+                {
+                    using (NativeProgressDialog.ShowNativeDialog("Logging out"))
+                    {
+                        AuthReconnect = false;
+                        Preferences.Remove(nameof(AccountStorageInfo));
+                        await Authenticator.LogoutAsync();
+                        MessagingCenter.Send(this, MessengerConstants.NavLoginPage);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", $"Log out Failed: {ex.Message}", "OK");
             }
         }
     }
