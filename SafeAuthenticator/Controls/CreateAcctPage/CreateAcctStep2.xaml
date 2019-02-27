@@ -3,21 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:SafeAuthenticator.Controls"
              x:Class="SafeAuthenticator.Controls.CreateAcctStep2"
-             Spacing="15"
              Padding="25,0">
     
     <Label Text="Account Secret"
            Style="{DynamicResource TitleStyle}"/>
 
     <Label Text="Your 'Account Secret' is private and should not be shared with anyone."
-           Margin="0,0,0,20" />
+           Margin="0,10,0,20" />
 
     <controls:MaterialEntry x:Name="SecretEntry"
                             Placeholder="Account secret"
                             IsPassword="True"
                             Text="{Binding AcctSecret}"
-                            ErrorDisplay="None"
-                            Margin="0,50,0,5"
+                            ErrorText="{Binding AcctSecretStrengthErrorMsg}"
+                            Margin="0,30,0,0"
                             ReturnType="Next"
                             NextEntry="{Reference ConfirmSecretEntry}"/>
 
@@ -27,6 +26,5 @@
                             Text="{Binding ConfirmAcctSecret}"
                             ErrorText="{Binding AcctSecretErrorMsg}"
                             ReturnType="Done"
-                            ReturnCommand="{Binding CarouselContinueCommand}" />
-    
+                            ReturnCommand="{Binding CarouselContinueCommand}" />        
 </StackLayout>
