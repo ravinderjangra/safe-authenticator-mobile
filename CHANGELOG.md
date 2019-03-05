@@ -1,5 +1,21 @@
 # safe-authenticator-mobile Change Log
 
+## [0.1.1]
+- Add tutorial page for feature showcase (PR [#49](https://github.com/maidsafe/safe-authenticator-mobile/pull/49)).
+- Add Settings page (PR [#49](https://github.com/maidsafe/safe-authenticator-mobile/pull/49)).
+- Add launch screens for Android and iOS (PR [#49](https://github.com/maidsafe/safe-authenticator-mobile/pull/49)).
+- Use native controls for Android and iOS (PR [#49](https://github.com/maidsafe/safe-authenticator-mobile/pull/49)).
+- Use SafariViewController and Chrome Custom tabs to open the links (PR [#49](https://github.com/maidsafe/safe-authenticator-mobile/pull/49)).
+- Auto resize authorisation popup for different requests (PR [#49](https://github.com/maidsafe/safe-authenticator-mobile/pull/49)).
+- Show first 6 digits of the hash in shared MData request if MData's meta name is empty (PR [#49](https://github.com/maidsafe/safe-authenticator-mobile/pull/49)).
+- Update registered applist manually before sending authentication response (PR [#64](https://github.com/maidsafe/safe-authenticator-mobile/pull/64)). 
+- Handle delay after authentication request popup (PR [#66](https://github.com/maidsafe/safe-authenticator-mobile/pull/66)).
+- Update keyboard return key to move to next entry (PR [#71](https://github.com/maidsafe/safe-authenticator-mobile/pull/71)).
+- Add tap animation for external links in SettingsPage (PR [#77](https://github.com/maidsafe/safe-authenticator-mobile/pull/77)).
+- Display progress dialogs natively for Android and iOS (PR [#79](https://github.com/maidsafe/safe-authenticator-mobile/pull/79)).
+- Display refresh icon in place of account info icon at the time of refresh (PR [#74](https://github.com/maidsafe/safe-authenticator-mobile/pull/74)).
+- Enable scroll when keyboard is displayed (PR [#87](https://github.com/maidsafe/safe-authenticator-mobile/pull/87)).
+
 ## [0.1.0]
 - Add revoke app feature: User has the option to revoke access for an app that they had previously granted access (PR [#17](https://github.com/maidsafe/safe-authenticator-mobile/pull/17)).
 - Add support for container request, share MData request, unregistered app request (PR [#22](https://github.com/maidsafe/safe-authenticator-mobile/pull/22)).
