@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows.Input;
-using Acr.UserDialogs;
 using JetBrains.Annotations;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace SafeAuthenticator.ViewModels
@@ -31,23 +31,34 @@ namespace SafeAuthenticator.ViewModels
 
         private async void OnRevokeAppCommand()
         {
-            try
+            if (await Application.Current.MainPage.DisplayAlert(
+                "Revoke application",
+                $"Are you sure you want to revoke access for {_appModelInfo.AppName}?",
+                "Revoke",
+                "Cancel"))
             {
-                using (UserDialogs.Instance.Loading("Revoking permission"))
+                try
                 {
-                    await Authenticator.RevokeAppAsync(_appModelInfo.AppId);
-                    MessagingCenter.Send(this, MessengerConstants.NavHomePage);
-                    MessagingCenter.Send(this, MessengerConstants.RefreshHomePage);
+                    if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+                    {
+                        throw new Exception("No internet connection");
+                    }
+                    using (NativeProgressDialog.ShowNativeDialog("Revoking application"))
+                    {
+                        await Authenticator.RevokeAppAsync(_appModelInfo.AppId);
+                        MessagingCenter.Send(this, MessengerConstants.NavHomePage);
+                        MessagingCenter.Send(this, MessengerConstants.RefreshHomePage);
+                    }
                 }
-            }
-            catch (FfiException ex)
-            {
-                var errorMessage = Utilities.GetErrorMessage(ex);
-                await Application.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", $"Revoke app Failed: {ex.Message}", "OK");
+                catch (FfiException ex)
+                {
+                    var errorMessage = Utilities.GetErrorMessage(ex);
+                    await Application.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
+                }
+                catch (Exception ex)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", $"Revoke Application Failed: {ex.Message}", "OK");
+                }
             }
         }
     }

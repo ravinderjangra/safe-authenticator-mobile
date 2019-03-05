@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Input;
-using Acr.UserDialogs;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Native;
 using Xamarin.Forms;
@@ -9,52 +8,40 @@ namespace SafeAuthenticator.ViewModels
 {
     internal class LoginViewModel : BaseViewModel
     {
-        private string _acctPassword;
-        private string _acctSecret;
+        private string _accountPassword;
+        private string _accountSecret;
         private bool _isUiEnabled;
 
-        public string AcctPassword
+        public string AccountPassword
         {
-            get => _acctPassword;
+            get => _accountPassword;
             set
             {
-                SetProperty(ref _acctPassword, value);
+                SetProperty(ref _accountPassword, value);
                 ((Command)LoginCommand).ChangeCanExecute();
             }
         }
 
-        public string AcctSecret
+        public string AccountSecret
         {
-            get => _acctSecret;
+            get => _accountSecret;
             set
             {
-                SetProperty(ref _acctSecret, value);
+                SetProperty(ref _accountSecret, value);
                 ((Command)LoginCommand).ChangeCanExecute();
             }
         }
 
-        public ICommand CreateAcctCommand { get; }
+        public ICommand CreateAccountCommand { get; }
 
         public ICommand LoginCommand { get; }
+
+        public ICommand NeedHelpCommand { get; }
 
         public bool IsUiEnabled
         {
             get => _isUiEnabled;
             set => SetProperty(ref _isUiEnabled, value);
-        }
-
-        public bool AuthReconnect
-        {
-            get => Authenticator.AuthReconnect;
-            set
-            {
-                if (Authenticator.AuthReconnect != value)
-                {
-                    Authenticator.AuthReconnect = value;
-                }
-
-                OnPropertyChanged();
-            }
         }
 
         public LoginViewModel()
@@ -69,17 +56,18 @@ namespace SafeAuthenticator.ViewModels
 
             IsUiEnabled = Authenticator.IsLogInitialised;
 
-            CreateAcctCommand = new Command(OnCreateAcct);
-
+            CreateAccountCommand = new Command(OnCreateAcct);
             LoginCommand = new Command(OnLogin, CanExecute);
-
-            AcctSecret = string.Empty;
-            AcctPassword = string.Empty;
+            CreateAccountCommand = new Command(OnCreateAcct);
+            NeedHelpCommand = new Command(() =>
+            {
+                OpeNativeBrowserService.LaunchNativeEmbeddedBrowser(Constants.FaqUrl);
+            });
         }
 
         private bool CanExecute()
         {
-            return !string.IsNullOrWhiteSpace(AcctPassword) && !string.IsNullOrWhiteSpace(AcctSecret);
+            return !string.IsNullOrWhiteSpace(AccountSecret) && !string.IsNullOrWhiteSpace(AccountPassword);
         }
 
         private void OnCreateAcct()
@@ -91,16 +79,16 @@ namespace SafeAuthenticator.ViewModels
         {
             try
             {
-                using (UserDialogs.Instance.Loading("Loading"))
+                using (NativeProgressDialog.ShowNativeDialog("Logging in"))
                 {
-                    await Authenticator.LoginAsync(AcctSecret, AcctPassword);
+                    await Authenticator.LoginAsync(AccountSecret, AccountPassword);
                     MessagingCenter.Send(this, MessengerConstants.NavHomePage);
                 }
             }
             catch (FfiException ex)
             {
                 var errorMessage = Utilities.GetErrorMessage(ex);
-                await Application.Current.MainPage.DisplayAlert("Error", errorMessage, "OK");
+                await Application.Current.MainPage.DisplayAlert("Login", errorMessage, "OK");
             }
             catch (Exception ex)
             {

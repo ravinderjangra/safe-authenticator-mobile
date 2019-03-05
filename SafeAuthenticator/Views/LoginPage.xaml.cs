@@ -13,7 +13,6 @@ namespace SafeAuthenticator.Views
         public LoginPage()
         {
             InitializeComponent();
-
             MessagingCenter.Subscribe<AuthService>(
                 this,
                 MessengerConstants.NavHomePage,
@@ -40,8 +39,6 @@ namespace SafeAuthenticator.Views
                         return;
                     }
 
-                    Debug.WriteLine("LoginPage -> HomePage");
-
                     Navigation.InsertPageBefore(new HomePage(), this);
                     await Navigation.PopAsync();
                 });
@@ -57,7 +54,7 @@ namespace SafeAuthenticator.Views
                         return;
                     }
 
-                    Debug.WriteLine("LoginPage -> CreateAcctPage");
+                    NavigationPage.SetBackButtonTitle(this, "Login");
                     await Navigation.PushAsync(new CreateAcctPage());
                 });
         }
@@ -67,6 +64,16 @@ namespace SafeAuthenticator.Views
             MessagingCenter.Unsubscribe<AuthService>(this, MessengerConstants.NavHomePage);
             MessagingCenter.Unsubscribe<LoginViewModel>(this, MessengerConstants.NavHomePage);
             MessagingCenter.Unsubscribe<LoginViewModel>(this, MessengerConstants.NavCreateAcctPage);
+        }
+
+        private void CustomEntryFocused(object sender, FocusEventArgs e)
+        {
+            ScrollLayout.IsScrollEnabled = true;
+        }
+
+        private void CustomEntryUnfocused(object sender, FocusEventArgs e)
+        {
+            ScrollLayout.IsScrollEnabled = false;
         }
     }
 }

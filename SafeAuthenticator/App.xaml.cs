@@ -11,8 +11,9 @@ namespace SafeAuthenticator
 {
     public partial class App : Application
     {
-        internal const string AppName = "SAFE Authenticator";
         private static volatile bool _isBackgrounded;
+
+        private AuthService Service => DependencyService.Get<AuthService>();
 
         internal static bool IsBackgrounded
         {
@@ -26,6 +27,17 @@ namespace SafeAuthenticator
 
             MessagingCenter.Subscribe<AuthService>(this, MessengerConstants.ResetAppViews, async _ => { await ResetViews(); });
             Current.MainPage = new NavigationPage(NewStartupPage());
+            MessagingCenter.Subscribe<AuthService>(this, MessengerConstants.NavPreviousPage, async _ =>
+            {
+                var navigationStackSize = Current.MainPage.Navigation.NavigationStack.Count - 1;
+                var topNavigationStackPageType = Current.MainPage.Navigation.NavigationStack[navigationStackSize].GetType();
+                if (topNavigationStackPageType == typeof(SettingsPage) ||
+                    topNavigationStackPageType == typeof(AppInfoPage) ||
+                    topNavigationStackPageType == typeof(CreateAcctPage))
+                {
+                    await Current.MainPage.Navigation.PopAsync();
+                }
+            });
         }
 
         internal static bool IsPageValid(Page page)
@@ -42,20 +54,23 @@ namespace SafeAuthenticator
 
         private Page NewStartupPage()
         {
-            return new LoginPage();
+            if (!Current.Properties.ContainsKey(Constants.IsTutorialComplete))
+                return new TutorialPage();
+            else
+                return new LoginPage();
         }
 
         protected override async void OnStart()
         {
             base.OnStart();
-            await DependencyService.Get<AuthService>().CheckAndReconnect();
+            await Service.CheckAndReconnect();
         }
 
         protected override async void OnResume()
         {
             base.OnResume();
             IsBackgrounded = false;
-            await DependencyService.Get<AuthService>().CheckAndReconnect();
+            await Service.CheckAndReconnect();
         }
 
         protected override async void OnSleep()

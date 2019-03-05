@@ -1,13 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using Acr.UserDialogs;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Widget;
+using CarouselView.FormsPlugin.Android;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Services;
 using Xamarin.Forms;
@@ -16,11 +16,12 @@ using Xamarin.Forms.Platform.Android;
 namespace SafeAuthenticator.Droid
 {
     [Activity(
-         Label = "@string/app_name",
-         Theme = "@style/MyTheme",
-         MainLauncher = true,
-         LaunchMode = LaunchMode.SingleTask,
-         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+        Label = "@string/app_name",
+        Theme = "@style/MyTheme",
+        MainLauncher = false,
+        LaunchMode = LaunchMode.SingleTask,
+        ScreenOrientation = ScreenOrientation.Portrait,
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     [IntentFilter(
         new[] { Intent.ActionView },
         Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable },
@@ -89,12 +90,14 @@ namespace SafeAuthenticator.Droid
             AndroidEnvironment.UnhandledExceptionRaiser += AndroidEnvOnUnhandledExceptionRaiser;
 
             base.OnCreate(bundle);
+            Rg.Plugins.Popup.Popup.Init(this, bundle);
+            XamEffects.Droid.Effects.Init();
             Forms.Init(this, bundle);
 
             DisplayCrashReport();
-
-            UserDialogs.Init(this);
+            CarouselViewRenderer.Init();
             LoadApplication(new App());
+            Window.SetSoftInputMode(Android.Views.SoftInput.AdjustResize);
 
             if (Intent?.Data != null)
             {
@@ -102,7 +105,10 @@ namespace SafeAuthenticator.Droid
             }
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        public override void OnRequestPermissionsResult(
+            int requestCode,
+            string[] permissions,
+            [GeneratedEnum] Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -125,7 +131,9 @@ namespace SafeAuthenticator.Droid
             LogUnhandledException(newExc);
         }
 
-        private static void TaskSchedulerOnUnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs exEventArgs)
+        private static void TaskSchedulerOnUnobservedTaskException(
+            object sender,
+            UnobservedTaskExceptionEventArgs exEventArgs)
         {
             var newExc = new Exception("TaskSchedulerOnUnobservedTaskException", exEventArgs.Exception);
             LogUnhandledException(newExc);
