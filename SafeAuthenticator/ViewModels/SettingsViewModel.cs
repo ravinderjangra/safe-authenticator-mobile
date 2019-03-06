@@ -15,6 +15,8 @@ namespace SafeAuthenticator.ViewModels
 
         public ICommand PrivacyInfoCommand { get; }
 
+        public string ApplicationVersion => AppInfo.VersionString;
+
         private string _accountStatus;
 
         public string AccountStorageInfo
@@ -40,7 +42,9 @@ namespace SafeAuthenticator.ViewModels
                 {
                     Authenticator.AuthReconnect = value;
                     if (AuthReconnect)
+                    {
                         OnAutoReconnect();
+                    }
                 }
 
                 OnPropertyChanged();
