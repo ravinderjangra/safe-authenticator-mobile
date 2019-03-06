@@ -3,13 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>Safe&#x2007;Authenticator</string>
+	<string>Safe Authenticator</string>
 	<key>CFBundleName</key>
 	<string>SafeAuthenticator</string>
 	<key>CFBundleIdentifier</key>
 	<string>net.maidsafe.SafeAuthenticator</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -55,5 +53,7 @@
 	<string>Resources/Media.xcassets/AppIcons.appiconset</string>
 	<key>UIMainStoryboardFile</key>
 	<string>LaunchScreen</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.1.1</string>
 </dict>
 </plist>
