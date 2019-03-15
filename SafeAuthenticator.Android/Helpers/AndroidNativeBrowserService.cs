@@ -1,4 +1,6 @@
 ﻿using Android.App;
+using Android.Content;
+using Android.OS;
 using Android.Support.CustomTabs;
 using SafeAuthenticator.Controls;
 using SafeAuthenticator.Droid.Helpers;
@@ -21,12 +23,16 @@ namespace SafeAuthenticator.Droid.Helpers
             }
 
             var mgr = new CustomTabsActivityManager(activity);
-            mgr.CustomTabsServiceConnected += (name, client) =>
+            if (mgr.BindService())
             {
                 mgr.LaunchUrl(url);
-            };
-
-            mgr.BindService();
+            }
+            else
+            {
+                var uri = Android.Net.Uri.Parse(url);
+                var intent = new Intent(Intent.ActionView, uri);
+                activity.StartActivity(intent);
+            }
         }
     }
 }
