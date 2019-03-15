@@ -22,10 +22,14 @@ namespace SafeAuthenticator.Views
             _settingsViewModel = new SettingsViewModel();
             BindingContext = _settingsViewModel;
 
-            AccountStatusImage.Clicked += (s, e) =>
+            var tap = new TapGestureRecognizer() { NumberOfTapsRequired = 1 };
+
+            tap.Tapped += (s, e) =>
             {
                 DisplayAlert("Account Status", "The number of store and modify operations completed on this account.", "OK");
             };
+
+            AccountStatusImage.GestureRecognizers.Add(tap);
 
             MessagingCenter.Subscribe<SettingsViewModel>(
                 this,

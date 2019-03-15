@@ -86,13 +86,18 @@
                         </Label.Triggers>
                     </Label>
 
-                    <ImageButton Grid.Column="2"
+                    <Image Grid.Column="2"
                                  Style="{StaticResource InfoButton}"
                                  x:Name="InfoIcon"
                                  HorizontalOptions="EndAndExpand"
                                  VerticalOptions="Start"
-                                 Command="{Binding InfoButtonCommand}"
-                                 IsVisible="{Binding IsUnregisteredRequest, Converter={StaticResource InverseBoolean}}" />
+                                 IsVisible="{Binding IsUnregisteredRequest, Converter={StaticResource InverseBoolean}}" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1"
+                                              Command="{Binding InfoButtonCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
                 </Grid>
 
                 <Label HorizontalTextAlignment="Center"
