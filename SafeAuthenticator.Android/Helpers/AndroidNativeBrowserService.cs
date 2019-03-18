@@ -22,11 +22,13 @@ namespace SafeAuthenticator.Droid.Helpers
             }
 
             var mgr = new CustomTabsActivityManager(activity);
-            if (mgr.BindService())
+
+            mgr.CustomTabsServiceConnected += (name, client) =>
             {
                 mgr.LaunchUrl(url);
-            }
-            else
+            };
+
+            if (!mgr.BindService())
             {
                 var uri = Android.Net.Uri.Parse(url);
                 var intent = new Intent(Intent.ActionView, uri);
