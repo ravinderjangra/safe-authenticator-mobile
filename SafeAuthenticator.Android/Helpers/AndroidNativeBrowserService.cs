@@ -1,6 +1,5 @@
 ﻿using Android.App;
 using Android.Content;
-using Android.OS;
 using Android.Support.CustomTabs;
 using SafeAuthenticator.Controls;
 using SafeAuthenticator.Droid.Helpers;

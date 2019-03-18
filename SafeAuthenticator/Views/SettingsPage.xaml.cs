@@ -1,5 +1,7 @@
-﻿using SafeAuthenticator.Helpers;
+﻿using System;
+using SafeAuthenticator.Helpers;
 using SafeAuthenticator.ViewModels;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -21,6 +23,12 @@ namespace SafeAuthenticator.Views
             InitializeComponent();
             _settingsViewModel = new SettingsViewModel();
             BindingContext = _settingsViewModel;
+
+            if (DeviceInfo.Platform == DeviceInfo.Platforms.Android &&
+                 DeviceInfo.Version < Version.Parse("4.4"))
+            {
+                AutoReconnectLayout.IsVisible = false;
+            }
 
             var tap = new TapGestureRecognizer() { NumberOfTapsRequired = 1 };
 

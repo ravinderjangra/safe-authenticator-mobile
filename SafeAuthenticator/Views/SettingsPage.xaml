@@ -53,7 +53,7 @@
                                LineBreakMode="TailTruncation" />
                     </StackLayout>
 
-                    <Grid>
+                    <Grid x:Name="AutoReconnectLayout">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>

@@ -113,7 +113,6 @@ namespace SafeAuthenticator.ViewModels
                 {
                     using (NativeProgressDialog.ShowNativeDialog("Logging out"))
                     {
-                        AuthReconnect = false;
                         Preferences.Remove(nameof(AccountStorageInfo));
                         await Authenticator.LogoutAsync();
                         MessagingCenter.Send(this, MessengerConstants.NavLoginPage);
