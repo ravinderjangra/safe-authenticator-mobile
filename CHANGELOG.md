@@ -1,5 +1,10 @@
 # safe-authenticator-mobile Change Log
 
+## [0.1.2]
+- Add fallback option when opening hyperlinks using ChromeCustomTabs (PR [#123](https://github.com/maidsafe/safe-authenticator-mobile/pull/123)).
+- Hide auto-reconnect option if API level < 19 (PR [#123](https://github.com/maidsafe/safe-authenticator-mobile/pull/123)). 
+- Use an Image a with tap gesture instead of ImageButton (PR [#123](https://github.com/maidsafe/safe-authenticator-mobile/pull/123)).
+
 ## [0.1.1]
 - Add tutorial page for feature showcase (PR [#49](https://github.com/maidsafe/safe-authenticator-mobile/pull/49)).
 - Add Settings page (PR [#49](https://github.com/maidsafe/safe-authenticator-mobile/pull/49)).
