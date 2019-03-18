@@ -1,5 +1,7 @@
-﻿using SafeAuthenticator.Helpers;
+﻿using System;
+using SafeAuthenticator.Helpers;
 using SafeAuthenticator.ViewModels;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,10 +24,20 @@ namespace SafeAuthenticator.Views
             _settingsViewModel = new SettingsViewModel();
             BindingContext = _settingsViewModel;
 
-            AccountStatusImage.Clicked += (s, e) =>
+            if (DeviceInfo.Platform == DeviceInfo.Platforms.Android &&
+                 DeviceInfo.Version < Version.Parse("4.4"))
+            {
+                AutoReconnectLayout.IsVisible = false;
+            }
+
+            var tap = new TapGestureRecognizer() { NumberOfTapsRequired = 1 };
+
+            tap.Tapped += (s, e) =>
             {
                 DisplayAlert("Account Status", "The number of store and modify operations completed on this account.", "OK");
             };
+
+            AccountStatusImage.GestureRecognizers.Add(tap);
 
             MessagingCenter.Subscribe<SettingsViewModel>(
                 this,

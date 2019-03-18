@@ -34,14 +34,14 @@
             <!-- SIZES -->
             <OnPlatform x:Key="ButtonHeightRequest"
                         x:TypeArguments="x:Double"
-                        Android="40" 
+                        Android="40"
                         iOS="45" />
 
             <OnPlatform x:Key="EntryHeightRequest"
                         x:TypeArguments="x:Double"
                         Android="40"
                         iOS="40" />
-            
+
             <OnPlatform x:Key="SmallSize"
                         x:TypeArguments="x:Double"
                         Android="12"
@@ -63,8 +63,8 @@
                         iOS="20" />
 
             <OnPlatform x:Key="DefaultPlaceholderColor"
-                        x:TypeArguments="Color"         
-                        Android="{StaticResource DefaultAndroidPlaceholderColor}" 
+                        x:TypeArguments="Color"
+                        Android="{StaticResource DefaultAndroidPlaceholderColor}"
                         iOS="{StaticResource DefaultiOSPlaceholderColor}" />
 
             <!-- STYLES -->

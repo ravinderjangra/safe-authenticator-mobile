@@ -286,7 +286,11 @@ namespace SafeAuthenticator.Services
             await Task.Run(() =>
             {
                 FreeState();
-                CredentialCache.Delete();
+                if (AuthReconnect)
+                {
+                    CredentialCache.Delete();
+                    AuthReconnect = false;
+                }
             });
         }
 
