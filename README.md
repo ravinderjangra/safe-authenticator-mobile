@@ -43,11 +43,17 @@ If building on Visual Studio 2017, you will need the following SDKs and workload
 - Xcode 10+
 
 ### Supported platforms
-- Android 4.1+ (armeabi-v7a, x86_64)
+- Android 4.2+ (armeabi-v7a, x86_64)
 - iOS 8+ (ARM64, x64)
 
 ### Screenshot
-<img src="https://i.imgur.com/ctuMXbh.png" width="250" height="350"> <img src="https://i.imgur.com/1403il6.png" width="250" height="350">
+<img alt="Tutorial" src="/Screenshots/Tutorial.png?raw=true" width="300"/>  <img alt="Login" src="/Screenshots/Login.png?raw=true" width="300"/>
+
+<img alt="CreateAccount1" src="/Screenshots/CreateAccount1.png?raw=true" width="300"/>  <img alt="CreateAccount2" src="/Screenshots/CreateAccount2.png?raw=true" width="300"/>
+
+<img alt="Home" src="/Screenshots/Home.png?raw=true" width="300"/>  <img alt="RequestDetail" src="/Screenshots/RequestDetail.png?raw=true" width="300"/>
+
+<img alt="Settings" src="/Screenshots/Settings.png?raw=true" width="300"/>
 
 ## Further help
 Get your developer related questions clarified on [SAFE Dev Forum](https://forum.safedev.org/). If you're looking to share any ideas or thoughts on the SAFE Network you can reach out on [SAFE Network Forum](https://safenetforum.org/)
