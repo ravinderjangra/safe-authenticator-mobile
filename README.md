@@ -2,7 +2,7 @@
 
 The SAFE Authenticator acts as a gateway to the [SAFE Network](https://safenetwork.tech/) by enabling users to create an account & authenticate themselves onto the SAFE Network. It helps users ensure they have full control over the permissions they grant to SAFE apps.
 
-**Maintainer:** Krishna Kumar (krishna.kumar@maidsafe.net)
+**Maintainer:** Ravinder Jangra (ravinder.jangra@maidsafe.net)
 
 ## Build Status
 
