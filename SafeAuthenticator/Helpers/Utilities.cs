@@ -123,7 +123,20 @@ namespace SafeAuthenticator.Helpers
                 return "Public Names";
             }
 
-            return $"{containerName.Substring(1, 1).ToUpper()}{containerName.Substring(2)}";
+            var formattedText = $"{containerName.Substring(1, 1).ToUpper()}{containerName.Substring(2)}";
+
+            switch (formattedText)
+            {
+                case "Documents":
+                case "Downloads":
+                case "Music":
+                case "Pictures":
+                case "Videos":
+                case "Public":
+                    return formattedText;
+                default:
+                    throw new Exception($"Invalid container {formattedText}");
+            }
         }
 
         #region Encoding Extensions
