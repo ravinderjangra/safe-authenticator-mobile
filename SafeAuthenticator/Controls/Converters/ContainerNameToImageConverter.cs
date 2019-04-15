@@ -9,6 +9,12 @@ namespace SafeAuthenticator.Controls.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var text = value.ToString();
+
+            if (text.EndsWith("Container"))
+            {
+                return "appcontainer";
+            }
+
             switch (text)
             {
                 case "Documents":
@@ -25,8 +31,6 @@ namespace SafeAuthenticator.Controls.Converters
                     return "publicContainer";
                 case "Public Names":
                     return "publicNames";
-                case "App's own Container":
-                    return "appcontainer";
                 default:
                     throw new Exception();
             }

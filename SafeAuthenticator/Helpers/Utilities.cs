@@ -5,7 +5,10 @@ using System.Text;
 using Hexasoft.Zxcvbn;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
+using SafeAuthenticator.ViewModels;
+using SafeAuthenticator.Views;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace SafeAuthenticator.Helpers
 {
@@ -111,11 +114,17 @@ namespace SafeAuthenticator.Helpers
             return colors[appNameLength % colors.Count];
         }
 
-        internal static string FormatContainerName(string containerName)
+        internal static string FormatContainerName(string containerName, string reqId)
         {
             if (containerName.StartsWith("apps/"))
             {
-                return "App's own Container";
+                var appId = containerName.Substring(5);
+                if (reqId == appId)
+                {
+                    return "App's own Container";
+                }
+                var appName = GetAppNameFromId(appId);
+                return $"{appName} Container";
             }
 
             if (containerName == "_publicNames")
@@ -124,6 +133,23 @@ namespace SafeAuthenticator.Helpers
             }
 
             return $"{containerName.Substring(1, 1).ToUpper()}{containerName.Substring(2)}";
+        }
+
+        internal static string GetAppNameFromId(string appId)
+        {
+            var homePage = Application.Current.MainPage.Navigation.NavigationStack.Where(p => p is HomePage).ToList().First();
+            var homePageViewModel = (HomeViewModel)homePage.BindingContext;
+            var registeredApps = homePageViewModel.Apps;
+            var registeredAppsItem = registeredApps.FirstOrDefault(a => a.AppId == appId);
+
+            if (registeredAppsItem != null)
+            {
+                return registeredAppsItem.AppName;
+            }
+            else
+            {
+                return appId;
+            }
         }
 
         #region Encoding Extensions
