@@ -16,9 +16,7 @@ namespace SafeAuthenticator.Droid.Helpers
             {
                 var aUri = Android.Net.Uri.Parse(uri.ToString());
                 var intent = new Intent(Intent.ActionView, aUri);
-#pragma warning disable CS0618 // Type or member is obsolete
-                Xamarin.Forms.Forms.Context.StartActivity(intent);
-#pragma warning restore CS0618 // Type or member is obsolete
+                MainActivity.AppContext.StartActivity(intent);
                 result = true;
             }
             catch (ActivityNotFoundException)

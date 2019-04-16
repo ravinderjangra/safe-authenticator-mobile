@@ -142,6 +142,9 @@
     <PackageReference Include="Microsoft.Bcl.Build">
       <Version>1.0.21</Version>
     </PackageReference>
+    <PackageReference Include="Plugin.CurrentActivity">
+      <Version>2.1.0.4</Version>
+    </PackageReference>
     <PackageReference Include="Rg.Plugins.Popup">
       <Version>1.1.5.180</Version>
     </PackageReference>
