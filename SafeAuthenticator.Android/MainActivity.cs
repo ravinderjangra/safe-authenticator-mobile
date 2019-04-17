@@ -31,8 +31,6 @@ namespace SafeAuthenticator.Droid
     // ReSharper disable once UnusedMember.Global
     public class MainActivity : FormsAppCompatActivity
     {
-        public static Context AppContext => CrossCurrentActivity.Current.AppContext;
-
         private static string LogFolderPath => DependencyService.Get<IFileOps>().ConfigFilesPath;
 
         private AuthService Authenticator => DependencyService.Get<AuthService>();

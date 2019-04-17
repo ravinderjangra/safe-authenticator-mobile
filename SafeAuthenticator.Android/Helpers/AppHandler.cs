@@ -2,6 +2,7 @@
 using Android.Content;
 using SafeAuthenticator.Droid.Helpers;
 using SafeAuthenticator.Services;
+using Activity = Plugin.CurrentActivity.CrossCurrentActivity;
 
 [assembly: Xamarin.Forms.Dependency(typeof(AppHandler))]
 namespace SafeAuthenticator.Droid.Helpers
@@ -14,9 +15,9 @@ namespace SafeAuthenticator.Droid.Helpers
 
             try
             {
-                var aUri = Android.Net.Uri.Parse(uri.ToString());
-                var intent = new Intent(Intent.ActionView, aUri);
-                MainActivity.AppContext.StartActivity(intent);
+                var parsedUri = Android.Net.Uri.Parse(uri);
+                var intent = new Intent(Intent.ActionView, parsedUri);
+                Activity.Current.AppContext.StartActivity(intent);
                 result = true;
             }
             catch (ActivityNotFoundException)
