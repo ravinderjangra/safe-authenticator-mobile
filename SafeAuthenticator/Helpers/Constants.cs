@@ -17,6 +17,11 @@
         internal const string PicturesContainer = "_pictures";
         internal const string VideosContainer = "_videos";
 
+        // ContainerImage
+        internal const string PublicContainerImage = "PublicContainer";
+        internal const string PublicNamesContainerImage = "PublicNames";
+        internal const string AppContainerImage = "AppContainer";
+
         // FormattedContainerName
         internal const string AppOwnFormattedContainer = "App's own Container";
         internal const string PublicNamesFormattedContainer = "Public Names";

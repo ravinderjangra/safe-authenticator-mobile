@@ -152,7 +152,7 @@ namespace SafeAuthenticator.ViewModels
             {
                 Containers.Add(new ContainerPermissionsModel()
                 {
-                    ContainerName = "App's own Container",
+                    ContainerName = Constants.AppOwnFormattedContainer,
                     Access = new PermissionSetModel
                     {
                         Read = true,

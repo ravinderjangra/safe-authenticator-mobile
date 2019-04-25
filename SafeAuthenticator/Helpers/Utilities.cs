@@ -139,6 +139,21 @@ namespace SafeAuthenticator.Helpers
             }
         }
 
+        internal static string FormatContainerNameToImage(string containerName)
+        {
+            switch (containerName)
+            {
+                case Constants.PublicFormattedContainer:
+                    return Constants.PublicContainerImage;
+                case Constants.PublicNamesFormattedContainer:
+                    return Constants.PublicNamesContainerImage;
+                case Constants.AppOwnFormattedContainer:
+                    return Constants.AppContainerImage;
+                default:
+                    return containerName;
+            }
+        }
+
         #region Encoding Extensions
 
         public static string ToUtfString(this List<byte> input)
