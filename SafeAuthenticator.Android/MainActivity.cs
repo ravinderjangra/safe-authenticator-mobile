@@ -8,6 +8,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Widget;
 using CarouselView.FormsPlugin.Android;
+using Plugin.CurrentActivity;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Services;
 using Xamarin.Forms;
@@ -82,6 +83,7 @@ namespace SafeAuthenticator.Droid
         protected override void OnCreate(Bundle bundle)
         {
             Xamarin.Essentials.Platform.Init(this, bundle);
+            CrossCurrentActivity.Current.Init(this, bundle);
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 

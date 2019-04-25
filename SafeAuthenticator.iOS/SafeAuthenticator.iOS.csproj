@@ -159,6 +159,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Extensions\ColorExtension.cs" />
+    <Compile Include="Helpers\AppHandler.cs" />
     <Compile Include="Helpers\AppleNativeBrowserService.cs" />
     <Compile Include="Helpers\AppleNativeProgressDialogService.cs" />
     <Compile Include="Helpers\BorderlessEntryRenderer.cs" />
