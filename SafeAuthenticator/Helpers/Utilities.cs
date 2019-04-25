@@ -40,21 +40,21 @@ namespace SafeAuthenticator.Helpers
 
             var result = _estimator.EstimateStrength(data);
             strengthIndicator.Guesses = Math.Log(result.Guesses) / Math.Log(10);
-            if (strengthIndicator.Guesses < Constants.AccStrengthVeryWeak)
+            if (strengthIndicator.Guesses < Constants.StrengthScoreVeryWeak)
             {
-                strengthIndicator.Strength = "VERY_WEAK";
+                strengthIndicator.Strength = Constants.StrengthVeryWeak;
             }
-            else if (strengthIndicator.Guesses < Constants.AccStrengthWeak)
+            else if (strengthIndicator.Guesses < Constants.StrengthScoreWeak)
             {
-                strengthIndicator.Strength = "WEAK";
+                strengthIndicator.Strength = Constants.StrengthWeak;
             }
-            else if (strengthIndicator.Guesses < Constants.AccStrengthSomeWhatSecure)
+            else if (strengthIndicator.Guesses < Constants.StrengthScoreSomeWhatSecure)
             {
-                strengthIndicator.Strength = "SOMEWHAT_SECURE";
+                strengthIndicator.Strength = Constants.StrengthSomewhatSecure;
             }
-            else if (strengthIndicator.Guesses >= Constants.AccStrengthSomeWhatSecure)
+            else if (strengthIndicator.Guesses >= Constants.StrengthScoreSomeWhatSecure)
             {
-                strengthIndicator.Strength = "SECURE";
+                strengthIndicator.Strength = Constants.StrengthSecure;
             }
 
             strengthIndicator.Percentage = Math.Round(Math.Min((strengthIndicator.Guesses / 16) * 100, 100));

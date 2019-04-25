@@ -3,9 +3,15 @@
     internal static class Constants
     {
         // StringStrength
-        internal const int AccStrengthVeryWeak = 4;
-        internal const int AccStrengthWeak = 8;
-        internal const int AccStrengthSomeWhatSecure = 10;
+        internal const string StrengthVeryWeak = "VERY_WEAK";
+        internal const string StrengthWeak = "WEAK";
+        internal const string StrengthSomewhatSecure = "SOMEWHAT_SECURE";
+        internal const string StrengthSecure = "SECURE";
+
+        // StringStrength
+        internal const int StrengthScoreVeryWeak = 4;
+        internal const int StrengthScoreWeak = 8;
+        internal const int StrengthScoreSomeWhatSecure = 10;
 
         // ContainerName
         internal const string AppContainer = "apps/";
