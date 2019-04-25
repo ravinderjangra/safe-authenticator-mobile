@@ -7,9 +7,28 @@
         internal const int AccStrengthWeak = 8;
         internal const int AccStrengthSomeWhatSecure = 10;
 
+        // ContainerName
+        internal const string AppContainer = "apps/";
+        internal const string PublicNamesContainer = "_publicNames";
+        internal const string PublicContainer = "_public";
+        internal const string DocumentsContainer = "_documents";
+        internal const string DownloadsContainer = "_downloads";
+        internal const string MusicContainer = "_music";
+        internal const string PicturesContainer = "_pictures";
+        internal const string VideosContainer = "_videos";
+
+        // FormattedContainerName
+        internal const string AppOwnFormattedContainer = "App's own Container";
+        internal const string PublicNamesFormattedContainer = "Public Names";
+        internal const string PublicFormattedContainer = "Public";
+        internal const string DocumentsFormattedContainer = "Documents";
+        internal const string DownloadsFormattedContainer = "Downloads";
+        internal const string MusicFormattedContainer = "Music";
+        internal const string PicturesFormattedContainer = "Pictures";
+        internal const string VideosFormattedContainer = "Videos";
+
         internal static readonly string AppName = "SAFE Authenticator";
         internal static readonly string IsTutorialComplete = "IsTutorialComplete";
-        internal static readonly string AppOwnContainer = "App's own Container";
 
         // Authentication PopupState
         internal static readonly string None = "None";
