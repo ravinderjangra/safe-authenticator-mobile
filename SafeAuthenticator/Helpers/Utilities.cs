@@ -66,29 +66,29 @@ namespace SafeAuthenticator.Helpers
             var current = Connectivity.NetworkAccess;
             if (current != NetworkAccess.Internet)
             {
-                return "No internet connection";
+                return Constants.NoInternetMessage;
             }
 
             switch (error.ErrorCode)
             {
-                case -2000:
-                    return "Could not connect to the SAFE Network";
-                case -11:
-                    return "Try updating your IP on invite.maidsafe.net";
-                case -101:
-                    return "Account does not exist";
-                case -3:
-                    return "Incorrect password";
-                case -102:
-                    return "Account already exists";
-                case -116:
-                    return "Invalid invitation token";
-                case -117:
-                    return "Invitation already claimed";
-                case -206:
-                    return "SharedMData request denied";
-                case -113:
-                    return "Insufficient account balance";
+                case Constants.UnexpectedError:
+                    return Constants.CouldNotConnect;
+                case Constants.RoutingInterfaceError:
+                    return Constants.UpdateIp;
+                case Constants.NoSuchAccountError:
+                    return Constants.AccountNotPresent;
+                case Constants.SymmetricDecipherFailureError:
+                    return Constants.IncorrectPassword;
+                case Constants.AccountExistsError:
+                    return Constants.AccountAlreadyExists;
+                case Constants.InvalidInvitationError:
+                    return Constants.InvalidInvitationToken;
+                case Constants.InvitationAlreadyClaimedError:
+                    return Constants.InvitationAlreadyClaimed;
+                case Constants.SharedMDataDeniedError:
+                    return Constants.SharedMDataRequestDenied;
+                case Constants.LowBalanceError:
+                    return Constants.InsufficientAccountBalance;
                 default:
                     return error.Message;
             }
