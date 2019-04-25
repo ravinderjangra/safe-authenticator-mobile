@@ -113,17 +113,30 @@ namespace SafeAuthenticator.Helpers
 
         internal static string FormatContainerName(string containerName)
         {
-            if (containerName.StartsWith("apps/"))
+            if (containerName.StartsWith(Constants.AppContainer))
             {
-                return "App's own Container";
+                return Constants.AppOwnFormattedContainer;
             }
 
-            if (containerName == "_publicNames")
+            if (containerName == Constants.PublicNamesContainer)
             {
-                return "Public Names";
+                return Constants.PublicNamesFormattedContainer;
             }
 
-            return $"{containerName.Substring(1, 1).ToUpper()}{containerName.Substring(2)}";
+            var formattedText = $"{containerName.Substring(1, 1).ToUpper()}{containerName.Substring(2)}";
+
+            switch (formattedText)
+            {
+                case Constants.DocumentsFormattedContainer:
+                case Constants.DownloadsFormattedContainer:
+                case Constants.MusicFormattedContainer:
+                case Constants.PicturesFormattedContainer:
+                case Constants.VideosFormattedContainer:
+                case Constants.PublicFormattedContainer:
+                    return formattedText;
+                default:
+                    throw new Exception($"An invalid container {formattedText} has been requested");
+            }
         }
 
         #region Encoding Extensions

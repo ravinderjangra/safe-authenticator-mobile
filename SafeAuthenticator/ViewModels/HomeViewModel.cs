@@ -64,7 +64,7 @@ namespace SafeAuthenticator.ViewModels
                     var isAppContainerRequested = ipcReq.AuthReq.AppContainer;
                     var appOwnContainer = new ContainerPermissionsModel()
                     {
-                        ContainerName = Constants.AppOwnContainer,
+                        ContainerName = Constants.AppOwnFormattedContainer,
                         Access = new PermissionSetModel
                         {
                             Read = true,
@@ -95,7 +95,7 @@ namespace SafeAuthenticator.ViewModels
                         if (isAppContainerRequested)
                         {
                             var registeredAppsItem = Apps.FirstOrDefault(a => a.AppId == app.AppId);
-                            var container = registeredAppsItem.Containers.FirstOrDefault(a => a.ContainerName == Constants.AppOwnContainer);
+                            var container = registeredAppsItem.Containers.FirstOrDefault(a => a.ContainerName == Constants.AppOwnFormattedContainer);
                             if (container == null)
                             {
                                 registeredAppsItem.Containers.Add(appOwnContainer);
