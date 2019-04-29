@@ -37,6 +37,12 @@ namespace SafeAuthenticator.Services
             private set => SetProperty(ref _isLogInitialised, value);
         }
 
+        internal bool IsRevocationComplete
+        {
+            get => Preferences.Get(Constants.IsRevocationComplete, true);
+            set => Preferences.Set(Constants.IsRevocationComplete, value);
+        }
+
         private CredentialCacheService CredentialCache { get; }
 
         internal bool AuthReconnect
@@ -279,6 +285,11 @@ namespace SafeAuthenticator.Services
             _authenticator = await Authenticator.LoginAsync(location, password);
             _secret = location;
             _password = password;
+        }
+
+        internal async Task FlushAppRevocationQueueAsync()
+        {
+            await _authenticator.AuthFlushAppRevocationQueueAsync();
         }
 
         internal async Task LogoutAsync()

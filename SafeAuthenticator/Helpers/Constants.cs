@@ -62,6 +62,7 @@
 
         internal const string AppName = "SAFE Authenticator";
         internal const string IsTutorialComplete = "IsTutorialComplete";
+        internal const string IsRevocationComplete = "IsRevocationComplete";
         internal const string NoInternetMessage = "No internet connection";
 
         // Authentication PopupState
