@@ -77,6 +77,7 @@
     </Compile>
     <Compile Include="Helpers\AndroidNativeBrowserService.cs" />
     <Compile Include="Helpers\AndroidNativeProgressDialogService.cs" />
+    <Compile Include="Helpers\AppHandler.cs" />
     <Compile Include="Helpers\EntryMoveNextEffect.cs" />
     <Compile Include="Helpers\FileOps.cs" />
     <Compile Include="Helpers\FontExtensions.cs" />
@@ -140,6 +141,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Bcl.Build">
       <Version>1.0.21</Version>
+    </PackageReference>
+    <PackageReference Include="Plugin.CurrentActivity">
+      <Version>2.1.0.4</Version>
     </PackageReference>
     <PackageReference Include="Rg.Plugins.Popup">
       <Version>1.1.5.180</Version>
@@ -208,13 +212,6 @@
   <Import Project="$(MSBuildThisFileDirectory)..\CodeStyles.targets" />
   <ItemGroup>
     <Content Include="..\stylecop.json" Link="stylecop.json" />
-    <AndroidResource Include="Resources\drawable\music.png" />
-    <AndroidResource Include="Resources\drawable\documents.png" />
-    <AndroidResource Include="Resources\drawable\downloads.png" />
-    <AndroidResource Include="Resources\drawable\pictures.png" />
-    <AndroidResource Include="Resources\drawable\publicNames.png" />
-    <AndroidResource Include="Resources\drawable\videos.png" />
-    <AndroidResource Include="Resources\drawable\publicContainer.png" />
     <AndroidResource Include="Resources\drawable\MData.png" />
     <AndroidResource Include="Resources\drawable\tutorial2.png" />
     <AndroidResource Include="Resources\drawable\tutorial1.png" />
@@ -230,9 +227,16 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\authLogo.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\authLogo.png" />
     <AndroidResource Include="Resources\drawable\info.png" />
-    <AndroidResource Include="Resources\drawable\appcontainer.png" />
     <AndroidResource Include="Resources\drawable\tutorial0.png" />
     <AndroidResource Include="Resources\drawable\clipboardPaste.png" />
+    <AndroidResource Include="Resources\drawable\PublicContainer.png" />
+    <AndroidResource Include="Resources\drawable\PublicNames.png" />
+    <AndroidResource Include="Resources\drawable\Videos.png" />
+    <AndroidResource Include="Resources\drawable\AppContainer.png" />
+    <AndroidResource Include="Resources\drawable\Documents.png" />
+    <AndroidResource Include="Resources\drawable\Downloads.png" />
+    <AndroidResource Include="Resources\drawable\Music.png" />
+    <AndroidResource Include="Resources\drawable\Pictures.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="CheckNativeLibs" BeforeTargets="PrepareForBuild">

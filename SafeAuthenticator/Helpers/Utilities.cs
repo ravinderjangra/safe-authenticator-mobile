@@ -43,21 +43,21 @@ namespace SafeAuthenticator.Helpers
 
             var result = _estimator.EstimateStrength(data);
             strengthIndicator.Guesses = Math.Log(result.Guesses) / Math.Log(10);
-            if (strengthIndicator.Guesses < Constants.AccStrengthVeryWeak)
+            if (strengthIndicator.Guesses < Constants.StrengthScoreVeryWeak)
             {
-                strengthIndicator.Strength = "VERY_WEAK";
+                strengthIndicator.Strength = Constants.StrengthVeryWeak;
             }
-            else if (strengthIndicator.Guesses < Constants.AccStrengthWeak)
+            else if (strengthIndicator.Guesses < Constants.StrengthScoreWeak)
             {
-                strengthIndicator.Strength = "WEAK";
+                strengthIndicator.Strength = Constants.StrengthWeak;
             }
-            else if (strengthIndicator.Guesses < Constants.AccStrengthSomeWhatSecure)
+            else if (strengthIndicator.Guesses < Constants.StrengthScoreSomeWhatSecure)
             {
-                strengthIndicator.Strength = "SOMEWHAT_SECURE";
+                strengthIndicator.Strength = Constants.StrengthSomewhatSecure;
             }
-            else if (strengthIndicator.Guesses >= Constants.AccStrengthSomeWhatSecure)
+            else if (strengthIndicator.Guesses >= Constants.StrengthScoreSomeWhatSecure)
             {
-                strengthIndicator.Strength = "SECURE";
+                strengthIndicator.Strength = Constants.StrengthSecure;
             }
 
             strengthIndicator.Percentage = Math.Round(Math.Min((strengthIndicator.Guesses / 16) * 100, 100));
@@ -69,29 +69,29 @@ namespace SafeAuthenticator.Helpers
             var current = Connectivity.NetworkAccess;
             if (current != NetworkAccess.Internet)
             {
-                return "No internet connection";
+                return Constants.NoInternetMessage;
             }
 
             switch (error.ErrorCode)
             {
-                case -2000:
-                    return "Could not connect to the SAFE Network";
-                case -11:
-                    return "Try updating your IP on invite.maidsafe.net";
-                case -101:
-                    return "Account does not exist";
-                case -3:
-                    return "Incorrect password";
-                case -102:
-                    return "Account already exists";
-                case -116:
-                    return "Invalid invitation token";
-                case -117:
-                    return "Invitation already claimed";
-                case -206:
-                    return "SharedMData request denied";
-                case -113:
-                    return "Insufficient account balance";
+                case Constants.UnexpectedError:
+                    return Constants.CouldNotConnect;
+                case Constants.RoutingInterfaceError:
+                    return Constants.UpdateIp;
+                case Constants.NoSuchAccountError:
+                    return Constants.AccountNotPresent;
+                case Constants.SymmetricDecipherFailureError:
+                    return Constants.IncorrectPassword;
+                case Constants.AccountExistsError:
+                    return Constants.AccountAlreadyExists;
+                case Constants.InvalidInvitationError:
+                    return Constants.InvalidInvitationToken;
+                case Constants.InvitationAlreadyClaimedError:
+                    return Constants.InvitationAlreadyClaimed;
+                case Constants.SharedMDataDeniedError:
+                    return Constants.SharedMDataRequestDenied;
+                case Constants.LowBalanceError:
+                    return Constants.InsufficientAccountBalance;
                 default:
                     return error.Message;
             }
@@ -116,23 +116,54 @@ namespace SafeAuthenticator.Helpers
 
         internal static string FormatContainerName(string containerName, string reqId)
         {
-            if (containerName.StartsWith("apps/"))
+            if (containerName.StartsWith(Constants.AppContainer))
             {
                 var appId = containerName.Substring(5);
                 if (reqId == appId)
                 {
-                    return "App's own Container";
+                    return Constants.AppOwnFormattedContainer;
                 }
                 var appName = GetAppNameFromId(appId);
                 return $"{appName} Container";
             }
 
-            if (containerName == "_publicNames")
+            if (containerName == Constants.PublicNamesContainer)
             {
-                return "Public Names";
+                return Constants.PublicNamesFormattedContainer;
             }
 
-            return $"{containerName.Substring(1, 1).ToUpper()}{containerName.Substring(2)}";
+            var formattedText = $"{containerName.Substring(1, 1).ToUpper()}{containerName.Substring(2)}";
+
+            switch (formattedText)
+            {
+                case Constants.DocumentsFormattedContainer:
+                case Constants.DownloadsFormattedContainer:
+                case Constants.MusicFormattedContainer:
+                case Constants.PicturesFormattedContainer:
+                case Constants.VideosFormattedContainer:
+                case Constants.PublicFormattedContainer:
+                    return formattedText;
+                default:
+                    throw new Exception($"An invalid container {formattedText} has been requested");
+            }
+        }
+
+        internal static string FormatContainerNameToImage(string containerName)
+        {
+            if (containerName.EndsWith("Container"))
+            {
+                return Constants.AppContainerImage;
+            }
+
+            switch (containerName)
+            {
+                case Constants.PublicFormattedContainer:
+                    return Constants.PublicContainerImage;
+                case Constants.PublicNamesFormattedContainer:
+                    return Constants.PublicNamesContainerImage;
+                default:
+                    return containerName;
+            }
         }
 
         internal static string GetAppNameFromId(string appId)

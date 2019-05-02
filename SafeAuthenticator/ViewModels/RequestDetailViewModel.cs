@@ -6,6 +6,7 @@ using Rg.Plugins.Popup.Services;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
+using SafeAuthenticator.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -152,7 +153,7 @@ namespace SafeAuthenticator.ViewModels
             {
                 Containers.Add(new ContainerPermissionsModel()
                 {
-                    ContainerName = "App's own Container",
+                    ContainerName = Constants.AppOwnFormattedContainer,
                     Access = new PermissionSetModel
                     {
                         Read = true,
@@ -230,17 +231,23 @@ namespace SafeAuthenticator.ViewModels
 
                 if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                 {
-                    throw new Exception("No internet connection");
+                    throw new Exception(Constants.NoInternetMessage);
                 }
                 var encodedRsp = await Authenticator.GetEncodedResponseAsync(decodedRequest, response);
 
                 if (response)
                     MessagingCenter.Send(this, MessengerConstants.RefreshHomePage, decodedRequest);
 
-                await PopupNavigation.Instance.PopAsync();
-                var formattedRsp = UrlFormat.Format(AppId ?? UrlFormat.GetAppId(encodedRequest), encodedRsp, false);
+                var appId = AppId ?? UrlFormat.GetAppId(encodedRequest);
+                var formattedRsp = UrlFormat.Format(appId, encodedRsp, false);
                 Debug.WriteLine($"Encoded Rsp to app: {formattedRsp}");
-                Device.BeginInvokeOnMainThread(() => { Device.OpenUri(new Uri(formattedRsp)); });
+
+                var appLaunched = await DependencyService.Get<IAppHandler>().LaunchApp(formattedRsp);
+                if (!appLaunched)
+                {
+                    throw new Exception($"An app with the ID {appId} was not found");
+                }
+                await PopupNavigation.Instance.PopAsync();
             }
             catch (FfiException ex)
             {
