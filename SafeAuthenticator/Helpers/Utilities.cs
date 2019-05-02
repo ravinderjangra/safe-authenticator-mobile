@@ -5,16 +5,14 @@ using System.Text;
 using Hexasoft.Zxcvbn;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
-using SafeAuthenticator.ViewModels;
-using SafeAuthenticator.Views;
 using Xamarin.Essentials;
-using Xamarin.Forms;
 
 namespace SafeAuthenticator.Helpers
 {
     internal static class Utilities
     {
         private static ZxcvbnEstimator _estimator;
+        private static Dictionary<string, string> containerNameList;
 
         internal static ObservableRangeCollection<T> ToObservableRangeCollection<T>(this IEnumerable<T> source)
         {
@@ -92,6 +90,12 @@ namespace SafeAuthenticator.Helpers
                     return Constants.SharedMDataRequestDenied;
                 case Constants.LowBalanceError:
                     return Constants.InsufficientAccountBalance;
+                case Constants.NoSuchContainerError:
+                    var firstIndex = error.Message.IndexOf("\'") + 1;
+                    var lastIndex = error.Message.LastIndexOf("'") - 1;
+                    var containerNameLength = lastIndex - firstIndex;
+                    return string.Format(Constants.InvalidContainer, error.Message.Substring(firstIndex, containerNameLength)
+                        .Replace(Constants.AppContainer, string.Empty));
                 default:
                     return error.Message;
             }
@@ -118,12 +122,12 @@ namespace SafeAuthenticator.Helpers
         {
             if (containerName.StartsWith(Constants.AppContainer))
             {
-                var appId = containerName.Substring(5);
+                var appId = containerName.Replace(Constants.AppContainer, string.Empty);
                 if (reqId == appId)
                 {
                     return Constants.AppOwnFormattedContainer;
                 }
-                var appName = GetAppNameFromId(appId);
+                var appName = GetAppNameFromId(appId) ?? appId;
                 return $"{appName} Container";
             }
 
@@ -144,7 +148,7 @@ namespace SafeAuthenticator.Helpers
                 case Constants.PublicFormattedContainer:
                     return formattedText;
                 default:
-                    throw new Exception($"An invalid container {formattedText} has been requested");
+                    throw new Exception(string.Format(Constants.InvalidContainer, formattedText));
             }
         }
 
@@ -168,19 +172,9 @@ namespace SafeAuthenticator.Helpers
 
         internal static string GetAppNameFromId(string appId)
         {
-            var homePage = Application.Current.MainPage.Navigation.NavigationStack.Where(p => p is HomePage).ToList().First();
-            var homePageViewModel = (HomeViewModel)homePage.BindingContext;
-            var registeredApps = homePageViewModel.Apps;
-            var registeredAppsItem = registeredApps.FirstOrDefault(a => a.AppId == appId);
+            var appContainerName = $"{Constants.AppContainer}{appId}";
 
-            if (registeredAppsItem != null)
-            {
-                return registeredAppsItem.AppName;
-            }
-            else
-            {
-                return appId;
-            }
+            return containerNameList.ContainsKey(appContainerName) ? containerNameList[appContainerName] : null;
         }
 
         #region Encoding Extensions
@@ -229,5 +223,16 @@ namespace SafeAuthenticator.Helpers
         }
 
         #endregion
+
+        public static void UpdateAppContainerNameList(string appId, string appName)
+        {
+            if (containerNameList == null)
+                containerNameList = new Dictionary<string, string>();
+
+            var appContainerName = $"{Constants.AppContainer}{appId}";
+
+            if (!containerNameList.ContainsKey(appContainerName))
+                containerNameList.Add(appContainerName, appName);
+        }
     }
 }
