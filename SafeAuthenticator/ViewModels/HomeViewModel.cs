@@ -149,7 +149,7 @@ namespace SafeAuthenticator.ViewModels
                 IsRefreshing = true;
                 if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                 {
-                    throw new Exception("No internet connection");
+                    throw new Exception(Constants.NoInternetMessage);
                 }
                 var registeredApps = await Authenticator.GetRegisteredAppsAsync();
                 registeredApps = registeredApps.OrderBy(a => a.AppName).ToList();

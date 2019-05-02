@@ -153,7 +153,7 @@ namespace SafeAuthenticator.ViewModels
             {
                 Containers.Add(new ContainerPermissionsModel()
                 {
-                    ContainerName = "App's own Container",
+                    ContainerName = Constants.AppOwnFormattedContainer,
                     Access = new PermissionSetModel
                     {
                         Read = true,
@@ -231,7 +231,7 @@ namespace SafeAuthenticator.ViewModels
 
                 if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                 {
-                    throw new Exception("No internet connection");
+                    throw new Exception(Constants.NoInternetMessage);
                 }
                 var encodedRsp = await Authenticator.GetEncodedResponseAsync(decodedRequest, response);
 
