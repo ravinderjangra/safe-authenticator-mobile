@@ -146,7 +146,7 @@ namespace SafeAuthenticator.ViewModels
                         Delete = x.Access.Delete,
                         ManagePermissions = x.Access.ManagePermissions
                     },
-                    ContainerName = Utilities.FormatContainerName(x.ContName)
+                    ContainerName = Utilities.FormatContainerName(x.ContName, AppInfo.Id)
                 }).ToObservableRangeCollection();
 
             if (_authReq.AuthReq.AppContainer)
@@ -182,7 +182,7 @@ namespace SafeAuthenticator.ViewModels
                         Delete = x.Access.Delete,
                         ManagePermissions = x.Access.ManagePermissions
                     },
-                    ContainerName = Utilities.FormatContainerName(x.ContName)
+                    ContainerName = Utilities.FormatContainerName(x.ContName, AppInfo.Id)
                 }).ToObservableRangeCollection();
 
             Containers = Containers.OrderBy(c => c.ContainerName).ToObservableRangeCollection();

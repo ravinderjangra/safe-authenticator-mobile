@@ -12,6 +12,7 @@ namespace SafeAuthenticator.Helpers
     internal static class Utilities
     {
         private static ZxcvbnEstimator _estimator;
+        private static Dictionary<string, string> containerNameList;
 
         internal static ObservableRangeCollection<T> ToObservableRangeCollection<T>(this IEnumerable<T> source)
         {
@@ -89,6 +90,12 @@ namespace SafeAuthenticator.Helpers
                     return Constants.SharedMDataRequestDenied;
                 case Constants.LowBalanceError:
                     return Constants.InsufficientAccountBalance;
+                case Constants.NoSuchContainerError:
+                    var firstIndex = error.Message.IndexOf("\'") + 1;
+                    var lastIndex = error.Message.LastIndexOf("'") - 1;
+                    var containerNameLength = lastIndex - firstIndex;
+                    return string.Format(Constants.InvalidContainer, error.Message.Substring(firstIndex, containerNameLength)
+                        .Replace(Constants.AppContainer, string.Empty));
                 default:
                     return error.Message;
             }
@@ -111,11 +118,17 @@ namespace SafeAuthenticator.Helpers
             return colors[appNameLength % colors.Count];
         }
 
-        internal static string FormatContainerName(string containerName)
+        internal static string FormatContainerName(string containerName, string reqId)
         {
             if (containerName.StartsWith(Constants.AppContainer))
             {
-                return Constants.AppOwnFormattedContainer;
+                var appId = containerName.Replace(Constants.AppContainer, string.Empty);
+                if (reqId == appId)
+                {
+                    return Constants.AppOwnFormattedContainer;
+                }
+                var appName = GetAppNameFromId(appId) ?? appId;
+                return $"{appName} Container";
             }
 
             if (containerName == Constants.PublicNamesContainer)
@@ -135,23 +148,33 @@ namespace SafeAuthenticator.Helpers
                 case Constants.PublicFormattedContainer:
                     return formattedText;
                 default:
-                    throw new Exception($"An invalid container {formattedText} has been requested");
+                    throw new Exception(string.Format(Constants.InvalidContainer, formattedText));
             }
         }
 
         internal static string FormatContainerNameToImage(string containerName)
         {
+            if (containerName.EndsWith("Container"))
+            {
+                return Constants.AppContainerImage;
+            }
+
             switch (containerName)
             {
                 case Constants.PublicFormattedContainer:
                     return Constants.PublicContainerImage;
                 case Constants.PublicNamesFormattedContainer:
                     return Constants.PublicNamesContainerImage;
-                case Constants.AppOwnFormattedContainer:
-                    return Constants.AppContainerImage;
                 default:
                     return containerName;
             }
+        }
+
+        internal static string GetAppNameFromId(string appId)
+        {
+            var appContainerName = $"{Constants.AppContainer}{appId}";
+
+            return containerNameList.ContainsKey(appContainerName) ? containerNameList[appContainerName] : null;
         }
 
         #region Encoding Extensions
@@ -200,5 +223,16 @@ namespace SafeAuthenticator.Helpers
         }
 
         #endregion
+
+        public static void UpdateAppContainerNameList(string appId, string appName)
+        {
+            if (containerNameList == null)
+                containerNameList = new Dictionary<string, string>();
+
+            var appContainerName = $"{Constants.AppContainer}{appId}";
+
+            if (!containerNameList.ContainsKey(appContainerName))
+                containerNameList.Add(appContainerName, appName);
+        }
     }
 }
