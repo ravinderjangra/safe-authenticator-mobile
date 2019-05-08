@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using SafeAuthenticator.Helpers;
 using SafeAuthenticator.Models;
 using SafeAuthenticator.Native;
+using SafeAuthenticator.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -45,7 +46,9 @@ namespace SafeAuthenticator.ViewModels
                     }
                     using (NativeProgressDialog.ShowNativeDialog("Revoking application"))
                     {
+                        Authenticator.IsRevocationComplete = false;
                         await Authenticator.RevokeAppAsync(_appModelInfo.AppId);
+                        Authenticator.IsRevocationComplete = true;
                         MessagingCenter.Send(this, MessengerConstants.NavHomePage);
                         MessagingCenter.Send(this, MessengerConstants.RefreshHomePage);
                     }
