@@ -23,6 +23,7 @@
         internal const int InvitationAlreadyClaimedError = -117;
         internal const int SharedMDataDeniedError = -206;
         internal const int LowBalanceError = -113;
+        internal const int NoSuchContainerError = -1015;
 
         // ErrorCodeMessage
         internal const string CouldNotConnect = "Could not connect to the SAFE Network";
@@ -34,6 +35,7 @@
         internal const string InvitationAlreadyClaimed = "Invitation already claimed";
         internal const string SharedMDataRequestDenied = "SharedMData request denied";
         internal const string InsufficientAccountBalance = "Insufficient account balance";
+        internal const string InvalidContainer = "An invalid container '{0}' has been requested";
 
         // ContainerName
         internal const string AppContainer = "apps/";

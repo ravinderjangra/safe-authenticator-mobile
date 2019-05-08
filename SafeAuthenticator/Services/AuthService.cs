@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -169,6 +170,10 @@ namespace SafeAuthenticator.Services
         internal async Task<List<RegisteredAppModel>> GetRegisteredAppsAsync()
         {
             var appList = await _authenticator.AuthRegisteredAppsAsync();
+            foreach (var app in appList)
+            {
+                Utilities.UpdateAppContainerNameList(app.AppInfo.Id, app.AppInfo.Name);
+            }
             return appList.Select(app => new RegisteredAppModel(app.AppInfo, app.Containers)).ToList();
         }
 

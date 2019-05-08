@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -48,11 +49,11 @@ namespace SafeAuthenticator.ViewModels
         {
             IsRefreshing = false;
             Apps = new ObservableRangeCollection<RegisteredAppModel>();
-            RefreshAccountsCommand = new Command(OnRefreshAccounts);
+            RefreshAccountsCommand = new Command(async () => await OnRefreshAccounts());
             SettingsCommand = new Command(OnSettings);
-            Device.BeginInvokeOnMainThread(OnRefreshAccounts);
+            Device.BeginInvokeOnMainThread(async () => await OnRefreshAccounts());
 
-            MessagingCenter.Subscribe<AppInfoViewModel>(this, MessengerConstants.RefreshHomePage, (sender) => { OnRefreshAccounts(); });
+            MessagingCenter.Subscribe<AppInfoViewModel>(this, MessengerConstants.RefreshHomePage, async (sender) => { await OnRefreshAccounts(); });
             MessagingCenter.Subscribe<RequestDetailViewModel, IpcReq>(this, MessengerConstants.RefreshHomePage, (sender, decodeResult) =>
             {
                 var decodedType = decodeResult.GetType();
@@ -143,7 +144,7 @@ namespace SafeAuthenticator.ViewModels
             MessagingCenter.Send(this, MessengerConstants.NavSettingsPage);
         }
 
-        private async void OnRefreshAccounts()
+        private async Task OnRefreshAccounts()
         {
             try
             {
