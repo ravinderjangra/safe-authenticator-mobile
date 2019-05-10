@@ -148,7 +148,7 @@ namespace SafeAuthenticator.Helpers
                 case Constants.PublicFormattedContainer:
                     return formattedText;
                 default:
-                    throw new Exception(string.Format(Constants.InvalidContainer, formattedText));
+                    throw new Exception(string.Format(Constants.InvalidContainer, containerName));
             }
         }
 
