@@ -92,7 +92,7 @@ namespace SafeAuthenticator.Helpers
                     return Constants.InsufficientAccountBalance;
                 case Constants.NoSuchContainerError:
                     var firstIndex = error.Message.IndexOf("\'") + 1;
-                    var lastIndex = error.Message.LastIndexOf("'") - 1;
+                    var lastIndex = error.Message.LastIndexOf("'");
                     var containerNameLength = lastIndex - firstIndex;
                     return string.Format(Constants.InvalidContainer, error.Message.Substring(firstIndex, containerNameLength)
                         .Replace(Constants.AppContainer, string.Empty));
