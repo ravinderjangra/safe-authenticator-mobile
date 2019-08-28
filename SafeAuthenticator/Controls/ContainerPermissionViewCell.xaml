@@ -5,46 +5,36 @@
           x:Class="SafeAuthenticator.Controls.ContainerPermissionViewCell"
           IsEnabled="False">
 
-    <Grid Padding="0"
-          Margin="0,15,0,0"
-          VerticalOptions="CenterAndExpand"
-          RowSpacing="10"
-          ColumnSpacing="10">
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="9*" />
-        </Grid.ColumnDefinitions>
+    <StackLayout Padding="5, 0"
+                 Orientation="Horizontal"
+                 Spacing="20"
+                 Margin="0, 5, 0, 0">
 
         <Image Source="{Binding ContainerImage}"
                HeightRequest="25"
                WidthRequest="25"
                VerticalOptions="Center"
-               HorizontalOptions="Center"
-               Grid.RowSpan="2" />
+               HorizontalOptions="Start" />
 
         <StackLayout VerticalOptions="CenterAndExpand"
-                     Grid.Column="1"
-                     Grid.Row="0"
+                     HorizontalOptions="FillAndExpand"
                      Spacing="3">
-            <Label Text="{Binding ContainerName}"
-                   TextColor="{StaticResource BlackColor}"
-                   FontSize="{StaticResource MediumSize}" />
-            <Label Text="{Binding Access, Converter={StaticResource FormatContainerPermissionsConverter}}"
-                   TextColor="{StaticResource GreySmokeMediumColor}"
-                   FontSize="{StaticResource SmallSize}" />
+
+            <StackLayout VerticalOptions="CenterAndExpand"
+                         Padding="0, 10">
+                <Label Text="{Binding ContainerName}"
+                       TextColor="{StaticResource BlackColor}"
+                       FontSize="{StaticResource MediumSize}" />
+
+                <Label Text="{Binding Access, Converter={StaticResource FormatContainerPermissionsConverter}}"
+                       TextColor="{StaticResource GreySmokeMediumColor}"
+                       FontSize="{StaticResource SmallSize}" />
+            </StackLayout>
+
+            <BoxView BackgroundColor="{StaticResource GreySmokeLightColor}"
+                     VerticalOptions="End"
+                     HorizontalOptions="FillAndExpand"
+                     HeightRequest="0.5" />
         </StackLayout>
-
-        <BoxView BackgroundColor="{StaticResource GreySmokeLightColor}"
-                 Margin="0,5,0,0"
-                 Grid.Row="1"
-                 Grid.Column="1"
-                 VerticalOptions="End"
-                 HeightRequest="0.5" />
-    </Grid>
-
+    </StackLayout>
 </ViewCell>
