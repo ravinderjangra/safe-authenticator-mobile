@@ -14,7 +14,7 @@ The SAFE Authenticator acts as a gateway to the [SAFE Network](https://safenetwo
 
 1. [Overview](#Overview)
 2. [Features](#Features)
-3. [User Guid](#User-Guide)
+3. [User Guide](#User-Guide)
 4. [Development](#Development)
     * [Project Structure](#Project-structure)
     * [Interfacing with SCL](#Interfacing-with-Safe-Client-Libs)
@@ -64,7 +64,7 @@ The app contains .NET wrapper for [safe_authenticator](https://github.com/maidsa
 
 ### Installation
 
-The latest version of the Authenticator app can be downloaded using following links and QR code for the Android and iOS devices.
+The latest version of the Authenticator app can be downloaded using following links and QR code for Android and iOS devices.
 
 |Platform|OS & Architecture |Downlaod Link| QR Code|
 |-|-|-|-|
