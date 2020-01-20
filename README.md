@@ -14,7 +14,7 @@ The SAFE Authenticator acts as a gateway to the [SAFE Network](https://safenetwo
 
 1. [Overview](#Overview)
 2. [Features](#Features)
-3. [Supported platforms](#Documentation)
+3. [User Guid](#User-Guide)
 4. [Development](#Development)
     * [Project Structure](#Project-structure)
     * [Interfacing with SCL](#Interfacing-with-Safe-Client-Libs)
@@ -58,16 +58,26 @@ The app contains .NET wrapper for [safe_authenticator](https://github.com/maidsa
 
 * **User can revoke app access:** User has the option to revoke access for an app that they have granted access to previously.
 
+* **Select vault for the connection:** User can connect to the different vaults by choosing different vault connection info file from the settings.
+
+## User Guide
+
+### Installation
+
+The latest version of the Authenticator app can be downloaded using following links and QR code for the Android and iOS devices.
+
+|Platform|OS & Architecture |Downlaod Link| QR Code|
+|-|-|-|-|
+|Android| 5.0+ (armeabi-v7a, x86_64) | [AppCenter](https://appcenter.ms/orgs/MaidSafe-Apps/apps/Safe-Authenticator-Mobile/distribute/distribution-groups/Community%20Release/releases), [GitHub](https://github.com/maidsafe/safe-authenticator-mobile/releases/latest) | <img src="docs/AppCenter-QR/android.png"  width="100" alt="Android-QR" /> |
+|iOS    | iOS 11+ (ARM64, x64)       | [AppCenter](https://appcenter.ms/orgs/MaidSafe-Apps/apps/Safe-Mobile-Authenticator/distribute/distribution-groups/Authenticator%20iOS/releases) | <img src="docs/AppCenter-QR/ios.png"  width="100" alt="iOS-QR" /> |
+
+_**Note:** We use Azure App Center to distribute iOS builds. Please register [here](https://forms.gle/Svp7PU6dcf4ywmu19) so we can add you in our testing group so you can download and install the app._
+
 ### Screenshots
 
-<img alt="Tutorial" src="/Screenshots/Tutorial.png?raw=true" width="250"/>  <img alt="Login" src="/Screenshots/Login.png?raw=true" width="250"/> <img alt="Create Account" src="/Screenshots/CreateAccount1.png?raw=true" width="250"/>
+<img alt="Tutorial" src="docs/Screenshots/Tutorial.png?raw=true" width="250"/>  <img alt="Login" src="docs/Screenshots/Login.png?raw=true" width="250"/> <img alt="Create Account" src="docs/Screenshots/CreateAccount1.png?raw=true" width="250"/>
 
-<img alt="Home" src="/Screenshots/Home.png?raw=true" width="250"/>  <img alt="Request Details" src="/Screenshots/RequestDetail.png?raw=true" width="250"/> <img alt="Settings" src="/Screenshots/Settings.png?raw=true" width="250"/>
-
-## Supported platforms
-
-* Android 5.0+ (armeabi-v7a, x86_64)
-* iOS 11+ (ARM64, x64)
+<img alt="Home" src="docs/Screenshots/Home.png?raw=true" width="250"/>  <img alt="Request Details" src="docs/Screenshots/RequestDetail.png?raw=true" width="250"/> <img alt="Settings" src="docs/Screenshots/Settings.png?raw=true" width="250"/>
 
 ## Development
 
