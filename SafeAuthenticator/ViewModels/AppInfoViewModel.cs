@@ -8,6 +8,7 @@
 // Software.
 
 using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using JetBrains.Annotations;
 using SafeAuthenticator.Helpers;
@@ -46,30 +47,29 @@ namespace SafeAuthenticator.ViewModels
         }
 
         [PublicAPI]
-        public ICommand RevokeAppCommand { get; }
+        public ICommand RevokeAppCommand { get; private set; }
 
         public AppInfoViewModel(RegisteredAppModel appModelInfo)
         {
             AppModelInfo = appModelInfo;
 
             if (AppModelInfo.AppPermissions.GetBalance)
-                TestCoinPermissions += "Check balance ,";
+                TestCoinPermissions += "Check balance, ";
 
             if (AppModelInfo.AppPermissions.TransferCoins)
                 TestCoinPermissions += "Transfer coins";
 
             if (!string.IsNullOrEmpty(TestCoinPermissions))
                 ShowTestCoinPermissions = true;
-            else
-                return;
 
-            if (TestCoinPermissions.EndsWith(",", StringComparison.OrdinalIgnoreCase))
-                TestCoinPermissions = TestCoinPermissions.TrimEnd(',');
+            if (!string.IsNullOrEmpty(TestCoinPermissions) &&
+                TestCoinPermissions.EndsWith(", ", StringComparison.OrdinalIgnoreCase))
+                TestCoinPermissions = TestCoinPermissions.TrimEnd(',', ' ');
 
-            RevokeAppCommand = new Command(OnRevokeAppCommand);
+            RevokeAppCommand = new Command(async () => await OnRevokeAppCommand());
         }
 
-        private async void OnRevokeAppCommand()
+        private async Task OnRevokeAppCommand()
         {
             if (await Application.Current.MainPage.DisplayAlert(
                 "Revoke application",
