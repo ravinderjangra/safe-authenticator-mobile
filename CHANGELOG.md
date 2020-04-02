@@ -1,5 +1,11 @@
 # safe-authenticator-mobile Change Log
 
+## [0.3.0]
+
+* Added option to download and use MaidSafe hosted shared section connection info file.
+* Added support for the single section network.
+* Update native libs to latest scl [#62969a6](https://github.com/maidsafe/safe_client_libs/commit/62969a61bda71a688c51799a5238cdf78e199d93).
+
 ## [0.2.1]
 
 * Updated `choose a vault` page for better user experience.
